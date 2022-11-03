@@ -28,11 +28,11 @@
                 </div>
                 <hr>
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a href="#" class="nav-link"><b>Dashboard</b></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><b>My Profile</b></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><b>Orders</b></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><b>Wishlist</b></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><b>Logout</b></a></li>
+                    <li class="nav-item"><router-link to="/dashboard" class="nav-link"><b>Dashboard</b></router-link></li>
+                    <li class="nav-item"><router-link to="my-account" class="nav-link"><b>My Profile</b></router-link></li>
+                    <li class="nav-item"><router-link to="/orders" class="nav-link"><b>Orders</b></router-link></li>
+                    <li class="nav-item"><router-link to="/wishlist" class="nav-link"><b>Wishlist</b></router-link></li>
+                    <li class="nav-item"><router-link to="#" class="nav-link"><b>Logout</b></router-link></li>
                 </ul>
                 </div>
             </div>

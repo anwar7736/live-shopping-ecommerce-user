@@ -37,6 +37,8 @@ const routes = [
         component:Profile,
         meta: {
             title : 'My Account',
+            auth: true,
+          
         },
     }, 
     {
@@ -51,6 +53,7 @@ const routes = [
         component:WishList,
         meta: {
             title : 'Wishlist',
+            
         },
     }, 
     {
@@ -65,6 +68,7 @@ const routes = [
         component:Dashboard,
         meta: {
             title : 'User Dashboard',
+            
         },
     }, 
     {
@@ -121,7 +125,6 @@ const routes = [
         path: '/contact-us', 
         component:ContactUs, 
         meta: {
-            guest: true,
             title : 'Contact Us',
         },
     },
@@ -129,7 +132,6 @@ const routes = [
         path: '/about-us', 
         component:AboutUs, 
         meta: {
-            guest: true,
             title : 'About Us',
         },
     },
@@ -137,15 +139,14 @@ const routes = [
         path: '/login-register', 
         component:LoginRegister, 
         meta: {
+            title: 'Login or Register',
             guest: true,
-            title : 'Login or Register',
         },
     },
     {
         path: '/change-password', 
         component:ChangePassword,
         meta: {
-            auth: true,
             title : 'Change Password',
         },
     },
@@ -153,7 +154,6 @@ const routes = [
         path: '/forget-password', 
         component:ForgetPassword, 
         meta: {
-            guest: true,
             title : 'Forget Password',
         },
     },
@@ -161,7 +161,6 @@ const routes = [
         path: '/email-verify', 
         component:EmailVerify, 
         meta: {
-            guest: true,
             title : 'Email Verify',
         },
     },
@@ -181,11 +180,11 @@ const router = new createRouter({
 
 const auth_status = store.getters.GET_AUTH_STATUS;
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
     console.log(to,from);
     if (to.meta.auth && !auth_status) {
         return {
-          path: '/login',
+          path: '/login-register',
         }
     }
     else if (to.meta.guest && auth_status) {
@@ -193,8 +192,7 @@ router.beforeEach((to, from, next) => {
           path: '/',
         }
       }
-      else next();
-      document.title = `Live-Shopping - ${to.meta.title}`
+      document.title = `${to.meta.title} - Live-Shopping`
 
   });
 

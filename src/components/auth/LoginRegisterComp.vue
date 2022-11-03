@@ -6,20 +6,28 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12 signup-form pb-4" id="signup-form" v-if="register">
                         <h4 class="title">Register</h4>
-                        <form class="mt-4">
+                        <form class="mt-4" method="post" @submit.prevent="UserRegister">
                           <div class="mb-3">
                             <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="username" aria-describedby="usernamehelp">
+                            <input type="text" class="form-control" id="username" aria-describedby="usernamehelp" v-model="registerForm.username">
                             <div id="usernamehelp" class="form-text">We'll never share your email with anyone else.</div>
+                            <span v-if="errors.username" class="text-danger">{{errors.username[0]}}</span>
                           </div>
                           <div class="mb-3">
                             <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="email" aria-describedby="emailhelp">
+                            <input type="text" class="form-control" id="email" aria-describedby="emailhelp" v-model="registerForm.email">
                             <div id="emailhelp" class="form-text">We'll never share your email with anyone else.</div>
+                            <span v-if="errors.email" class="text-danger">{{errors.email[0]}}</span>
                           </div>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="password" aria-describedby="passwordhelp">
+                            <input type="password" class="form-control" id="password" aria-describedby="passwordhelp" v-model="registerForm.password">
+                            <div id="passwordhelp" class="form-text">We'll never share your email with anyone else.</div>
+                            <span v-if="errors.password" class="text-danger">{{errors.password[0]}}</span>
+                          </div>
+                          <div class="mb-3">
+                            <label for="password" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="password" aria-describedby="passwordhelp" v-model="registerForm.password_confirmation">
                             <div id="passwordhelp" class="form-text">We'll never share your email with anyone else.</div>
                           </div>
                           <p>
@@ -36,15 +44,22 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-12 signup-form login-form pb-4" id="login-form" v-if="login">
                         <h4 class="title">Login</h4>
-                        <form class="mt-4">
+                        <div class="alert alert-danger" role="alert" v-if="errors.invalid">
+                          {{errors.invalid}}
+                        </div>
+                        <form class="mt-4" method="post" @submit.prevent="UserLogin">
                           <div class="mb-3">
                             <label for="username2" class="form-label">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="username2">
+                            <input type="text" class="form-control" id="username2" v-model="loginForm.username">
+                            <span v-if="errors.username" class="text-danger">{{errors.username[0]}}</span>
                           </div>
+                         
                           <div class="mb-3">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="password">
+                            <input type="text" class="form-control" id="password" v-model="loginForm.password">
+                            <span v-if="errors.password" class="text-danger">{{errors.password[0]}}</span>
                           </div>
+                          
                          <div class="d-flex justify-content-between pt-2 pb-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="">
@@ -78,6 +93,17 @@ export default {
         return {
             login: false,
             register: true,
+            loginForm: {
+              username: '',
+              password: '',
+            },
+            registerForm: {
+              username: '',
+              email: '',
+              password: '',
+              password_confirmation: '',
+            },
+            errors: {},
         }
     },
     methods: {
@@ -86,14 +112,40 @@ export default {
            {
                 this.login = false;
                 this.register = true;
+                this.errors = {};
            }
           else
            {
                 this.login = true;
                 this.register = false;
+                this.errors = {};
            }
-        }
-    }
+        },
+        
+        UserLogin()
+        {
+          this.$store.dispatch('LOGIN', this.loginForm)
+          .then(res=>{
+            console.log(res.data);
+            this.$router.push('/');
+          })
+          .catch(err=>{
+            this.errors = err.response.data.errors;
+          })
+        },
+        UserRegister()
+        {
+          this.$store.dispatch('REGISTER', this.registerForm)
+          .then(res=>{
+            console.log(res.data);
+            this.$router.push('/');
+          })
+          .catch(err=>{
+            this.errors = err.response.data.errors;
+          })
+        },
+    },
+
 }
 </script>
 <style scoped>

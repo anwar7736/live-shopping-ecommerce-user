@@ -100,29 +100,34 @@
                     <div class="col-lg-6 col-md-12 col-12 contact-form">
                         <h6>INFORMATION ABOUT US</h6>
                         <h3>CONTACT US FOR ANY QUESTIONS</h3>
-                        <form class="mt-5">
+                        <form class="mt-5" @submit.prevent="SendMessage">
                           <div class="row">
                             <div class="mb-3 col-lg-6 col-md-6 col-12 text-muted">
                                 <label for="name">Your Name</label>
-                                <input type="text" class="form-control" id="name">
+                                <input type="text" class="form-control" id="name" v-model="contactForm.customer_name">
+                                <span v-if="errors.customer_name" class="text-danger">{{errors.customer_name[0]}}</span>
                             </div>
                             <div class="mb-3 col-lg-6 col-md-6 col-12 text-muted">
-                                <label for="email">Your Name</label>
-                                <input type="email" class="form-control" id="email">
+                                <label for="email">Your Email</label>
+                                <input type="email" class="form-control" id="email" v-model="contactForm.customer_email">
+                                <span v-if="errors.customer_email" class="text-danger">{{errors.customer_email[0]}}</span>
                             </div>
                             <div class="mb-3 col-lg-6 col-md-6 col-12 text-muted">
                                 <label for="phone">Your Phone</label>
-                                <input type="text" class="form-control" id="phone">
+                                <input type="text" class="form-control" id="phone" v-model="contactForm.customer_phone">
+                                <span v-if="errors.customer_phone" class="text-danger">{{errors.customer_phone[0]}}</span>
                             </div>
                             <div class="mb-3 col-lg-6 col-md-6 col-12 text-muted">
                                 <label for="subject">Subject</label>
-                                <input type="text" class="form-control" id="subject">
+                                <input type="text" class="form-control" id="subject" v-model="contactForm.message_title">
+                                <span v-if="errors.message_title" class="text-danger">{{errors.message_title[0]}}</span>
                             </div>
                             
                           </div>
                           <div class="mb-3 col-12 text-muted">
                             <label for="message">Your Message</label>
-                            <textarea name="" id="message" rows="5" class="form-control col-12"></textarea>
+                            <textarea name="" id="message" rows="5" class="form-control col-12" v-model="contactForm.message_body"></textarea>
+                            <span v-if="errors.message_body" class="text-danger">{{errors.message_body[0]}}</span>
                             </div>
                           <button type="submit" class="btn btn-secondary">Send Your Message</button>
                         </form>
@@ -134,8 +139,39 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return {
+        contactForm: {
+            customer_name: '',
+            customer_email: '',
+            customer_phone: '',
+            message_title: '',
+            message_body: '',
+        },
+        errors: {},
+        }
+    },
+    methods: {
+        SendMessage()
+        {
+            this.$store.dispatch('SENDMESSAGE', this.contactForm)
+            .then(res=>{
+                alert(res.message);
+                this.contactForm = {
+                    customer_name: '',
+                    customer_email: '',
+                    customer_phone: '',
+                    message_title: '',
+                    message_body: '',
+                }; 
+            })
+            .catch(err=>{
+                this.errors = err.response.data.errors;
+            });
+        }
+    }
 }
+
 </script>
 <style lang="">
     
