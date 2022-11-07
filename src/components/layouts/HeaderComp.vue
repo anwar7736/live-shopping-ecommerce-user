@@ -57,12 +57,12 @@
                         <li class="cart d-none d-md-none d-lg-block">
                             <router-link to="/cart-list">
                                 <span class="menu-cart-icon"><i class="fas fa-shopping-cart"></i></span>
-                                <span><span>0</span> items</span>
+                                <span><span>{{cartItemCount}}</span> items</span>
                             </router-link>
                         </li>
                         <li class="cart-sm d-block d-md-block d-lg-none">
-                            <router-link to="/bag-item-list">
-                                <i class="fas fa-shopping-bag"></i><span class="badge badge-pill">1</span>
+                            <router-link to="/cart-list">
+                                <i class="fas fa-shopping-bag"></i><span class="badge badge-pill">{{cartItemCount}}</span>
                             </router-link>
                         </li>
                     </ul>
@@ -79,29 +79,8 @@
                             <!-- dropdown  -->
                             <div class="search-cat-dp-hover">
                                 <ul>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Polo Shirt</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Shirt</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Panjabi</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Blazer</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Flash Sale</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Pants</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Shoes</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="#" class="nav-link">Watches</router-link>
+                                    <li class="nav-item" v-for="cat in categories" :key="cat.id">
+                                        <router-link to="#" class="nav-link">{{cat.name}}</router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -116,35 +95,10 @@
                                     <!-- dropdown  -->
                                         <div class="search-cat-dp">
                                             <ul>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Blazer</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Flash Sale</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Panjabi</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Pants</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Polo Shirt</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Shirt</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Shoes</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#"> class="nav-link"T-Shirt</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Voucher Card</router-link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <router-link to="#" class="nav-link">Watches</router-link>
+                                                <li class="nav-item" v-for="cat in categories" :key="cat.id">
+                                                    <router-link to="#" class="nav-link">
+                                                        {{cat.name}}
+                                                    </router-link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -175,11 +129,11 @@
                                 </div>  
                             </div>
                             <ul class="navbar-nav m-menu-dp">
-                                <li class="nav-item m-menu-active"><router-link to="#" class="nav-link">Home</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Shop</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Flash Sell</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">About Us</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Contact Us</router-link></li>
+                                <li class="nav-item m-menu-active"><router-link to="/" class="nav-link">Home</router-link></li>
+                                <li class="nav-item"><router-link to="/shop" class="nav-link">Shop</router-link></li>
+                                <li class="nav-item"><router-link to="/flash-sell" class="nav-link">Flash Sell</router-link></li>
+                                <li class="nav-item"><router-link to="/about-us" class="nav-link">About Us</router-link></li>
+                                <li class="nav-item"><router-link to="/contact-us" class="nav-link">Contact Us</router-link></li>
                             </ul>
                             <ul class="navbar-nav m-cat-dp" style="display: none;">
                                 <li class="nav-item m-cat-active"><router-link to="#" class="nav-link">Polo shirt</router-link></li>
@@ -217,27 +171,27 @@
                                 <router-link to="/" class="nav-link active">Home</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="shop.html" class="nav-link">Shop</router-link>
+                                <router-link to="/shop" class="nav-link">Shop</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="#" class="nav-link">Flash Sell</router-link>
+                                <router-link to="/flash-sell" class="nav-link">Flash Sell</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="#" class="nav-link">About Us</router-link>
+                                <router-link to="/about-us" class="nav-link">About Us</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="#" class="nav-link">Contact Us</router-link>
+                                <router-link to="/contact-us" class="nav-link">Contact Us</router-link>
                             </li>
                         </ul>
                     </li>
                     <li class="cart d-none d-md-none d-lg-block">
-                        <router-link to="#">
+                        <router-link to="/cart-list">
                             <span class="menu-cart-icon"><i class="fas fa-shopping-cart"></i></span>
-                            <span><span>0</span> items</span>
+                            <span><span>{{cartItemCount}}</span> items</span>
                         </router-link>
                     </li>
                     <li class="cart-sm d-block d-md-block d-lg-none">
-                        <router-link to="#">
+                        <router-link to="/cart-list">
                             <i class="fas fa-shopping-bag"></i><span class="badge badge-pill">1</span>
                         </router-link>
                     </li>
@@ -250,7 +204,9 @@
 export default {
     data(){
         return {
-           
+           hover: "search-cat-dp-hover",
+           cat: "search-cat-dp",
+           categories : {},
         }
     },
     methods: {
@@ -268,13 +224,28 @@ export default {
                 });
             }
         },
-        
+
+       
     },
     computed: {
         loggedStatus()
         {
             return this.$store.getters.GET_AUTH_STATUS;
+        },
+        cartItemCount()
+        {
+            return this.$store.getters.Total_Cart_Items;
         }
+    },
+    created()
+    {
+        this.$store.dispatch("CATEGORY_LIST")
+        .then(res=>{
+            this.categories = res.categories;
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     }
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
     <div>
-        <HomeMain></HomeMain>
-        <SummerTrendy></SummerTrendy>
-        <BestDeal></BestDeal>
-        <ExportQuality></ExportQuality>
-        <PremiumExports></PremiumExports>
-        <DealOfTheDay></DealOfTheDay>
+        <HomeMain :products="homeslider"></HomeMain>
+        <SummerTrendy :products="summertrendy"></SummerTrendy>
+        <BestDeal :products="bestdeal"></BestDeal>
+        <ExportQuality :products="exportquality"></ExportQuality>
+        <PremiumExports :products="premiumexports"></PremiumExports>
+        <DealOfTheDay :products="dealsoftheday"></DealOfTheDay>
         <br/><br/>
     </div>
 </template>
@@ -19,7 +19,12 @@ import DealOfTheDay from './DealOfTheDay';
 export default {
     data(){
         return {
-            
+            homeslider: {},
+            summertrendy: {},
+            bestdeal: {},
+            exportquality: {},
+            premiumexports: {},
+            dealsoftheday: {},
         }
     },
     components: {
@@ -29,7 +34,38 @@ export default {
         ExportQuality,
         PremiumExports,
         DealOfTheDay,
-
+    },
+    created(){
+        this.$store.dispatch("HomeSlider")
+        .then(res=>{
+            this.homeslider = res;
+        })
+        this.$store.dispatch("SummerTrendy")
+        .then(res=>{
+            this.summertrendy = res;
+            
+        })
+        this.$store.dispatch("BestDeal")
+        .then(res=>{
+            this.bestdeal = res;
+        })
+        this.$store.dispatch("ExportQuality")
+        .then(res=>{
+            this.exportquality = res;
+        })
+        this.$store.dispatch("PremiumExports")
+        .then(res=>{
+            this.premiumexports = res;
+            console.log(res);
+        });
+        this.$store.dispatch("DealsOfTheDay")
+        .then(res=>{
+            this.dealsoftheday = res;
+           
+        })
+    },
+    mounted()
+    {
 
     }
     

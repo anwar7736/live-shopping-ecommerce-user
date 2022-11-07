@@ -6,11 +6,7 @@ export const auth =  {
     state: {
         auth_status: false,
         auth_token: '',
-        auth_user_info: {
-            name: '',
-            email: '',
-            avatar: '',
-        }
+        auth_user_info: {}
     },
     getters: {
         GET_AUTH_STATUS(state)
@@ -67,27 +63,38 @@ export const auth =  {
                     reject(err);
                 })
             });
-        }
+        },
+        PROFILE(context, profileData)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.post("/update-profile", profileData)
+                .then(res=>{
+                    resolve(res.data);
+                    context.commit("UPDATE_AUTH_INFO", res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },
     },
     mutations: {
         SET_AUTH_INFO(state, data)
         {
             state.auth_status = true;
             state.auth_token = data.access_token;
-            state.auth_user_info.name = data.user.first_name + " " + data.user.last_name;
-            state.auth_user_info.email = data.user.email;
+            state.auth_user_info = data.user;
         },
         SET_AUTH_LOGOUT(state)
         {
             state.auth_status = false;
             state.auth_token = '';
-            state.auth_user_info = {
-                name: '',
-                email: '',
-                avatar: '',
-            };
-
-
+            state.auth_user_info = {};
+        },
+        UPDATE_AUTH_INFO(state, data)
+        {
+            state.auth_user_info = data.user;
         }
+
     }
 };

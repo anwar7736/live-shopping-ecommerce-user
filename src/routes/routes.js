@@ -52,7 +52,7 @@ const routes = [
         path: '/wishlist', 
         component:WishList,
         meta: {
-            title : 'Wishlist',
+            title: 'Wishlist',
             
         },
     }, 
@@ -191,7 +191,7 @@ router.beforeEach((to, from) => {
         return {
           path: '/',
         }
-      }
+    }
       document.title = `${to.meta.title} - Live-Shopping`
 
   });

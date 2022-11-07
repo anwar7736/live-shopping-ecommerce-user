@@ -1,8 +1,7 @@
 <template>
     <div>
-                        <!-- Main content start  -->
-                        <section>
-            
+     <!-- Main content start  -->
+        <section>
             <div class="container-fluid">
                 <div id="cover-slide" class="carousel slide carousel-fade " data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -12,20 +11,21 @@
                         </button>
                       </div>
                     <div class="carousel-inner carousel-main">
-                      <div class="carousel-item active slide">
+                      <div class="carousel-item active slide" v-for="product in products" :key="product.id">
                         <div class="slide-img-1 slide-img" style="background-image: url(assets/images/others/slider1_polo.png);">
+                            <h3></h3>
                             <img src="assets/images/others/MENS-POLO-COLLECTION.png" alt="Slider">
                             <button>Buy Now</button>
                         </div>
                       </div>
-                      <div class="carousel-item slide">
+                      <!-- <div class="carousel-item slide">
                         <div class="slide-img-2 slide-img row" style="background-image: url(assets/images/others/slider2_polo_womens.png);">
                             <div class="col-lg-5 col-md-8 col-12 text-center">
                                 <img src="assets/images/others/make-statement.png" alt="Slider" class="2">
                                 <button>Click Here</button>
                             </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                     <!-- <button class="carousel-control-prev" type="button" data-bs-target="#cover-slide" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -107,7 +107,7 @@
 </template>
 <script>
 export default {
-    
+    props: ['products'],
 }
 </script>
 <style>

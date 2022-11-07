@@ -8,18 +8,9 @@
                         <div class="category mb-3 sidebar-box">
                             <h5 class="text-cap">Product Categories</h5>
                             <ul>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">Blazer</a></li>
-                                <li><a href="#">Fb set</a></li>
-                                <li><a href="#">Flash Sale</a></li>
-                                <li><a href="#">Panjabi</a></li>
-                                <li><a href="#">Polo Shirt</a></li>
-                                <li><a href="#">Shirt</a></li>
-                                <li><a href="#">Shoes</a></li>
-                                <li><a href="#">Sweat Shirt</a></li>
-                                <li><a href="#">T-Shirt</a></li>
-                                <li><a href="#">Vaucher Card</a></li>
-                                <li><a href="#">Watches</a></li>
+                                <li  v-for="cat in categories" :key="cat.id">
+                                    <a href="#" @click.prevent="categoryFilter(cat.id)">{{cat.name}}</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="price-range sidebar-box mb-4">
@@ -146,7 +137,7 @@
                         <div class="filter-nav d-flex justify-content-between align-items-center border border-muted border-end-0 border-top-0 border-start-0">
                             <nav aria-label="breadcrumb" class="pt-2">
                                 <ol class="breadcrumb">
-                                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                  <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
                                   <li class="breadcrumb-item active" aria-current="page">Shop</li>
                                 </ol>
                               </nav>
@@ -285,15 +276,15 @@
                             </div>
                         </div>
                         <div class="all-products row deal-day-row">
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
+                            <div class="col-lg-3 col-md-3 col-6 product p-2" v-for="product in products" :key="product.id">
                                 <div class="discount-tag">
                                     -48%
                                 </div>
                                 
                                 <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
+                                    <router-link to="/product-details">
+                                        <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
+                                    </router-link>
                                     <div class="options-pannel2">
                                         <ul>
                                             <li class="d-lg-block d-md-block d-none" title="compare">
@@ -317,14 +308,14 @@
                                 
                                 <div class="product-details text-center pt-2 ps-2">
 
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
+                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product}}</a>
                                     <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
+                                        <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                                     </div>
                                     <p class="product-details-p" style="display: none;">
                                         Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
                                     </p>
-                                    <a href="#">
+                                    <a href="#" @click.prevent="AddToCart(product)">
                                         <div class="button m-auto text-light">
                                             <p><b>
                                                 BUY NOW
@@ -337,737 +328,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-6 product p-2">
-                                <div class="discount-tag">
-                                    -48%
-                                </div>
-                                
-                                <div class="images">
-                                    <a href="product.html">
-                                        <img src="assets/images/products/2.jpg" alt="Image" class="main-image">
-                                    </a>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" >
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                    <div class="price">
-                                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                                    </p>
-                                    <a href="#">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                           
-                            
-                            
                         </div>
                     </div>
                 </div>
@@ -1077,8 +337,50 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            categories: {},
+            products: {},
+        }
+    },
+    methods: {
+        categoryFilter(id)
+        {
+            this.$store.dispatch("ProductFilterByCategory", id)
+            .then(res=>{
+                this.products = res;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        AddToCart(item)
+        {
+            this.$store.dispatch("AddToCart", item);
+        }
+    },
+    created()
+    {
+        this.$store.dispatch("CATEGORY_LIST")
+        .then(res=>{
+            this.categories = res.categories;
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+        
+        this.$store.dispatch("ShopProductList")
+        .then(res=>{
+            this.products = res;
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+    }
 }
+
 </script>
 <style lang="">
     

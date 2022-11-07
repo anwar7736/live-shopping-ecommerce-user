@@ -35,14 +35,14 @@
                             </div>
                             <div class="tab-container" id="tab5con">
                                     <div class="owl-carousel cat-carousel product-items">
-                                        <div class="product p-2">
+                                        <div class="product p-2" v-for="hot in products.hot" :key="hot.id">
                                             <div class="discount-tag">
                                                 -48%
                                             </div>
                                             <div class="images">
-                                                <a href="#">
+                                                <router-link to="/product-details">
                                                     <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
+                                                </router-link>
                                             </div>
                                             <div class="options-pannel">
                                                 <ul>
@@ -64,11 +64,11 @@
                                                 </ul>
                                             </div>
                                             <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
+                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product}}</a>
                                                 <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
+                                                    <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
                                                 </div>
-                                                <a href="#">
+                                                <a href="#" @click.prevent="AddToCart(hot)">
                                                     <div class="button m-auto text-light">
                                                         <p><b>
                                                             BUY NOW
@@ -82,210 +82,18 @@
                                             </div>
                                             
                                         </div>
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        
-                                        
                                     </div>
                             </div>
                             <div class="tab-container" id="tab6con">
                                     <div class="owl-carousel cat-carousel product-items">
-                                        <div class="product p-2">
+                                        <div class="product p-2" v-for="prod in products.new" :key="prod.id">
                                             <div class="discount-tag">
                                                 -48%
                                             </div>
                                             <div class="images">
-                                                <a href="#">
+                                                <router-link to="/product-details">
                                                     <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
+                                                </router-link>
                                             </div>
                                             <div class="options-pannel">
                                                 <ul>
@@ -307,11 +115,11 @@
                                                 </ul>
                                             </div>
                                             <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
+                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product}}</a>
                                                 <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
+                                                    <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>
                                                 </div>
-                                                <a href="#">
+                                                <a href="#" @click.prevent="AddToCart(prod)">
                                                     <div class="button m-auto text-light">
                                                         <p><b>
                                                             BUY NOW
@@ -325,196 +133,6 @@
                                             </div>
                                             
                                         </div>
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="product p-2">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <a href="#">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </a>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">Exclusive Mens Polo Shirts</a>
-                                                <div class="price">
-                                                    <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                                                </div>
-                                                <a href="#">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                        
                                         
                                     </div>
                             </div>
@@ -528,7 +146,13 @@
 </template>
 <script>
 export default {
-    
+    props: ['products'],
+    methods: {
+        AddToCart(item)
+        {
+            this.$store.dispatch("AddToCart", item);
+        }
+    },
 }
 </script>
 <style>

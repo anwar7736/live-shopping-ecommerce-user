@@ -18,7 +18,7 @@
                         </div>
                         <p class="name mt-2 text-muted">
                             <b>
-                                Sontos Sharma
+                                {{user_info.first_name}} {{user_info.last_name}}
                             </b>
                         </p>
                     </div>
@@ -53,9 +53,9 @@
                                     <img src="assets/images/products/1.jpg" alt="profile image">
                                 </div>
                                 <div class="profile-primary-details">
-                                    <h5 class="text-muted"><b>Sontos Sharma</b></h5>
+                                    <h5 class="text-muted"><b>{{user_info.first_name}} {{user_info.last_name}}</b></h5>
                                     <div class="varified text-primary">[<span>Verifed</span>]</div>
-                                    <p>Joined liveshopping.com on 21 jun 2022</p>
+                                    <p>Joined liveshopping.com on {{user_info.created_at}}</p>
                                 </div>
                             </div>
                             <hr>
@@ -69,22 +69,22 @@
                                                     <tr>
                                                         <th scope="col" class="text-muted">E-mail</th>
                                                         <td>:</td>
-                                                        <td scope="col">sontosroy78@gmail.com</td>
+                                                        <td scope="col">{{user_info.email}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="col" class="text-muted">Alternative E-mail</th>
                                                         <td>:</td>
-                                                        <td scope="col">None</td>
+                                                        <td scope="col">{{user_info.alt_number}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="col" class="text-muted">Phone Number</th>
                                                         <td>:</td>
-                                                        <td scope="col">01310000000</td>
+                                                        <td scope="col">{{user_info.contact_number}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="col" class="text-muted">Telephone Number</th>
                                                         <td>:</td>
-                                                        <td scope="col">+880-2-6-2651256</td>
+                                                        <td scope="col">{{user_info.contact_no}}</td>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -100,22 +100,22 @@
                                                     <tr>
                                                         <th scope="col" class="text-muted">Street/Village</th>
                                                         <td>:</td>
-                                                        <td scope="col">Road#6, House#72, Shekhertek</td>
+                                                        <td scope="col">{{user_info.current_address}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="col" class="text-muted">Thana/Upzilla</th>
                                                         <td>:</td>
-                                                        <td scope="col">Mohammadpur</td>
+                                                        <td scope="col">{{user_info.custom_field_2}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="col" class="text-muted">District</th>
                                                         <td>:</td>
-                                                        <td scope="col">Dhaka</td>
+                                                        <td scope="col">{{user_info.custom_field_3}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="col" class="text-muted">Country</th>
                                                         <td>:</td>
-                                                        <td scope="col">Bangladesh</td>
+                                                        <td scope="col">{{user_info.custom_field_4}}</td>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -127,45 +127,45 @@
                                     <h4 class="text-muted">
                                         Update Your Information
                                     </h4>
-                                    <form action="">
+                                    <form method="post" @submit.prevent="updateProfile">
                                         <div class="row">
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="first_name" placeholder="First Name" value="Sontos">
+                                                <input type="text" class="form-control" name="first_name" placeholder="First Name" v-model="user_info.first_name">
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="Sharma">
+                                                <input type="text" class="form-control" name="last_name" placeholder="Last Name" v-model="user_info.last_name">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" disabled class="form-control" name="email" placeholder="E-mail" value="sontosroy78@gmail.com">
+                                                <input type="text" disabled class="form-control" name="email" placeholder="E-mail" v-model="user_info.email">
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="alternative_email" placeholder="Alternative Email" value="">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="0131000000">
-                                            </div>
-                                            <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="tel_number" placeholder="Telephone Number" value="+8802254542">
+                                                <input type="text" class="form-control" name="alternative_email" placeholder="Alternative Email" v-model="user_info.alt_number">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="village" placeholder="Street/Village" value="Road#6, House#72, Shekhertek">
+                                                <input type="text" class="form-control" name="phone" placeholder="Phone Number" v-model="user_info.contact_number">
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="upzilla" placeholder="Thana/Upzilla" value="Mohammadpur">
+                                                <input type="text" class="form-control" name="tel_number" placeholder="Telephone Number" v-model="user_info.contact_no">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="village" placeholder="District/State" value="Dhaka">
+                                                <input type="text" class="form-control" name="village" placeholder="Street/Village" v-model="user_info.current_address">
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-6 col-12">
-                                                <input type="text" class="form-control" name="country" placeholder="Country" value="Bangladesh">
+                                                <input type="text" class="form-control" name="upzilla" placeholder="Thana/Upzilla" v-model="user_info.custom_field_2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-lg-6 col-md-6 col-12">
+                                                <input type="text" class="form-control" name="village" placeholder="District/State" v-model="user_info.custom_field_3">
+                                            </div>
+                                            <div class="mb-3 col-lg-6 col-md-6 col-12">
+                                                <input type="text" class="form-control" name="country" placeholder="Country" v-model="user_info.custom_field_4">
                                             </div>
                                         </div>
                                         
@@ -191,7 +191,29 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return {
+            user_info: {
+
+            },
+            errors: {},
+        }
+    },
+    methods: {
+        updateProfile()
+        {
+            this.$store.dispatch("PROFILE", this.user_info)
+            .then(res=>{
+                alert(res.message);
+            })
+            .catch(err=>{
+                this.errors = err.response.data.errors;
+            })
+        }
+    },
+    created(){
+       this.user_info = this.$store.getters.GET_AUTH_USER_INFO;  
+    }
 }
 </script>
 <style lang="">

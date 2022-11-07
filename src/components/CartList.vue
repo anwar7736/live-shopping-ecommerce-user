@@ -18,10 +18,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="border border-muted border-end-0 border-top-0 border-start-0">
+                                    <tr class="border border-muted border-end-0 border-top-0 border-start-0" v-for="item in cartItems" :key="item.id">
                                         <td>
                                                 <div class="remove">
-                                                    <button class="btn">
+                                                    <button class="btn" @click="removeItem(item.id)">
                                                         <i class="fas fa-times"></i>
                                                     </button>
                                                 </div>
@@ -34,22 +34,22 @@
                                         <td>
                                             <div class="product-name">
                                                 <a href="product.html" class="text-decoration-none text-dark">
-                                                    China Luxury Polo Shirt
+                                                    {{item.product}}
                                                 </a>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="product-price" data-title="Price">
-                                                <p class="text-muted"><del>999৳</del> <span>250৳</span></p>
+                                                <p class="text-muted"><del>{{item.sell_price_inc_tax}}৳</del> <span>{{item.default_sell_price}}৳</span></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="cart-quantiy" data-title="Quantity">
                                                 <div class="quantity-buy">
                                                     <div class="quantity">
-                                                        <button class="cart-qty-minus" id="dec" type="button" value="-">-</button>
-                                                        <input type="text" name="qty" id="qty" maxlength="12" value="1" class="input-text qty" style="margin:4px;"/>
-                                                        <button class="cart-qty-plus" type="button" id="inc" value="+">+</button>
+                                                        <button class="cart-qty-minus" id="dec" type="button" value="-" @click="decreaseQty(item.id)">-</button>
+                                                        <input type="text" name="qty" id="qty" maxlength="12" v-model="item.quantity" readonly class="input-text qty" style="margin:4px;"/>
+                                                        <button class="cart-qty-plus" type="button" id="inc" value="+" @click="increaseQty(item.id)">+</button>
                                                         
                                                     </div>
                                                 </div>
@@ -58,7 +58,7 @@
                                         <td>
                                             <div class="subtotal" title="subtotal">
                                                 <p class="main-color">
-                                                    500 ৳
+                                                    {{item.quantity * item.default_sell_price}}৳
                                                 </p>
                                             </div>
                                         </td>
@@ -106,7 +106,30 @@
 </template>
 <script>
 export default {
-    
+    computed: {
+        cartItems()
+        {
+            return this.$store.getters.Get_Cart_Items;
+        }
+    },
+    methods: {
+        increaseQty(id)
+        {
+            this.$store.dispatch("IncreaseQty", id);
+        },
+        decreaseQty(id)
+        {
+            this.$store.dispatch("DecreaseQty", id);
+        },
+        updateQty(item)
+        {
+            this.$store.dispatch("UpdateQty", item);
+        },
+        removeItem(id)
+        {
+            this.$store.dispatch("RemoveItem", id);
+        }
+    }
 }
 </script>
 <style lang="">

@@ -423,8 +423,12 @@ body {
                 display: none;
                 transition: display 0.3s ease;
                 z-index: 9999;
+                max-height: 300px;
+                overflow: hidden;
+                overflow-y: auto;
                
               }
+              
               .search-cat-dp-hover ul{
                 padding: 0;
                 background: white;
@@ -448,7 +452,20 @@ body {
                 padding-left: 20px;
                 font-family: hind-bold;
               }
-
+              .search-cat-dp-hover ul::-webkit-scrollbar {
+                width: 5px;
+              }
+              .search-cat-dp-hover ul::-webkit-scrollbar-track {
+                background: #e6e6e6; 
+              }
+              .search-cat-dp-hover ul::-webkit-scrollbar-thumb {
+                background: rgb(177, 177, 177); 
+                  border-radius:10px;
+              }
+              .search-cat-dp-hover ul::-webkit-scrollbar-thumb:hover {
+                
+                background: rgb(133, 133, 133); 
+              } 
     /* search bar end  */
 
 /* header end  */

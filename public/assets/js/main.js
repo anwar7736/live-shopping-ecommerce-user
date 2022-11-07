@@ -8,6 +8,7 @@
 //   }
 //   prevScrollpos = currentScrollPos;
 // }
+
 $(document).ready(function () {
   $(".menu-toggler").click(function () {
     $(".mobile-sidebar").css("left", "0");
