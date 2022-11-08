@@ -15,7 +15,7 @@
                             <div class="options-pannel2">
                                 <ul>
                                     <li class="d-lg-block d-md-block d-none" title="compare">
-                                        <a href="#" class="compare" >
+                                        <a href="#" class="compare" @click.prevent="addToCompareList(product)">
                                             <i class="fas fa-random"></i>
                                         </a>
                                     </li>
@@ -64,13 +64,12 @@
     </div>
 </template>
 <script>
+import mixins from '../Mixins';
 export default {
+    mixins: [mixins],
     props: ['products'],
     methods: {
-        AddToCart(item)
-        {
-            this.$store.dispatch("AddToCart", item);
-        }
+
     },
 }
 </script>

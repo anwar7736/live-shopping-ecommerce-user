@@ -46,7 +46,7 @@
                                             <div class="options-pannel">
                                                 <ul>
                                                     <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
+                                                        <a href="#" class="compare" @click.prevent="addToCompareList(hot)">
                                                             <i class="fas fa-random"></i>
                                                         </a>
                                                     </li>
@@ -97,7 +97,7 @@
                                             <div class="options-pannel">
                                                 <ul>
                                                     <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
+                                                        <a href="#" class="compare" @click.prevent="addToCompareList(prod)">
                                                             <i class="fas fa-random"></i>
                                                         </a>
                                                     </li>
@@ -142,14 +142,24 @@
     </div>
 </template>
 <script>
+import mixins from '../Mixins';
 export default {  
-    props: ['products'],
-    methods: {
-        AddToCart(item)
-        {
-            this.$store.dispatch("AddToCart", item);
+    mixins: [mixins],
+    data(){
+        return {
+            products: [],
         }
     },
+    methods: {
+
+    },
+    created(){
+        this.$store.dispatch("SummerTrendy")
+        .then(res=>{
+            this.products = res;
+            
+        })
+    }
 }
 </script>
 <style>

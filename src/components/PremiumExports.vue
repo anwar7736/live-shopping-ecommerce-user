@@ -43,7 +43,17 @@
 </template>
 <script>
 export default {
-    props: ['products'],
+    data(){
+        return {
+            products: [],
+        }
+    },
+    created(){
+        this.$store.dispatch("PremiumExports")
+        .then(res=>{
+            this.products = res;
+        });
+    }
 }
 </script>
 <style>

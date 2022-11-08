@@ -12,7 +12,7 @@
                         </ul>
                         <div class="topbar-right">
                             <ul class="topbar-right me-1 mb-0">
-                                <li><router-link to="/compare-products" class="top-r-link"><i class="fas fa-random"></i><span class="badge badge-pill">1</span> <span class="compare">Compare</span></router-link></li>
+                                <li><router-link to="/compare-products" class="top-r-link"><i class="fas fa-random"></i><span class="badge badge-pill">{{compareItemCount}}</span> <span class="compare">Compare</span></router-link></li>
                                 <li><router-link to="/wishlist" class="top-r-link"><i class="far fa-heart"></i><span class="badge badge-pill">1</span> <span class="compare">Wishlist</span></router-link></li>
                                 <li v-if="!loggedStatus"><router-link to="/login-register" class="top-r-link" >Login/Register</router-link></li>
                                 <li v-if="loggedStatus"><a href="#" class="top-r-link" @click.prevent="logout">Logout</a></li>
@@ -192,7 +192,7 @@
                     </li>
                     <li class="cart-sm d-block d-md-block d-lg-none">
                         <router-link to="/cart-list">
-                            <i class="fas fa-shopping-bag"></i><span class="badge badge-pill">1</span>
+                            <i class="fas fa-shopping-bag"></i><span class="badge badge-pill">{{cartItemCount}}</span>
                         </router-link>
                     </li>
                 </ul>
@@ -201,6 +201,7 @@
     </div>
 </template>
 <script>
+import toastr from 'toastr';
 export default {
     data(){
         return {
@@ -218,6 +219,7 @@ export default {
                 .then(res=>{
                     console.log(res);
                     this.$router.push('/');
+                    toastr.success('Logout success');
                 })
                 .catch(err=>{
                     console.log(err);
@@ -235,7 +237,11 @@ export default {
         cartItemCount()
         {
             return this.$store.getters.Total_Cart_Items;
-        }
+        },
+        compareItemCount()
+        {
+            return this.$store.getters.Total_Compare_Items;
+        },
     },
     created()
     {

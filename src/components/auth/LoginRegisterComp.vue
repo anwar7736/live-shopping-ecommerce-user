@@ -127,7 +127,13 @@ export default {
           this.$store.dispatch('LOGIN', this.loginForm)
           .then(res=>{
             console.log(res.data);
-            this.$router.push('/');
+            const redirect_path = localStorage.getItem("redirect_path");
+            if(redirect_path != null)
+            {
+              this.$router.push(redirect_path);
+              localStorage.removeItem("redirect_path");
+            }
+            else this.$router.push('/');
           })
           .catch(err=>{
             this.errors = err.response.data.errors;
@@ -138,7 +144,13 @@ export default {
           this.$store.dispatch('REGISTER', this.registerForm)
           .then(res=>{
             console.log(res.data);
-            this.$router.push('/');
+            const redirect_path = localStorage.getItem("redirect_path");
+            if(redirect_path != null)
+            {
+              this.$router.push(redirect_path);
+              localStorage.removeItem("redirect_path");
+            }
+            else this.$router.push('/');
           })
           .catch(err=>{
             this.errors = err.response.data.errors;

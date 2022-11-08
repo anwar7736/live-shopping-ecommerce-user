@@ -138,6 +138,7 @@
     </div>
 </template>
 <script>
+import toastr from 'toastr';
 export default {
     data(){
         return {
@@ -156,7 +157,8 @@ export default {
         {
             this.$store.dispatch('SENDMESSAGE', this.contactForm)
             .then(res=>{
-                alert(res.message);
+                console.log(res);
+                toastr.success('Your message has been sent!');
                 this.contactForm = {
                     customer_name: '',
                     customer_email: '',

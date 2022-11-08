@@ -5,56 +5,35 @@
 <section>
     <div class="container mt-5 mb-5">
         <h4><b>Compare Products</b></h4>
+        <div v-if="compareItems.length < 1">
+            <center>
+                <h5 class="text-danger"><i class="fa fa-random"></i> No Item found in your compare list</h5>
+            </center>
+        </div>
         <div class="row compare-row">
-            <div class="col-lg-6 col-md-6 compare-item">
+            <div class="col-lg-6 col-md-6 compare-item" v-for="item in compareItems" :key="item.id">
                 <div class="text-center m-2">
-                    <button class="text-center btn btn-sm"><i class="fas fa-times"></i> Remove</button>
+                    <button class="text-center btn btn-sm" @click="removeCompareItem(item.id)"><i class="fas fa-times"></i> Remove</button>
                 </div>
                 <a href="product.html" class="text-decoration-none">
                     <img src="assets/images/products/1.jpg" alt="" >
                     <div class="nav-link text-dark p-1">
-                        <b>China Style Men's T-Shirt</b>
+                        <b>{{item.product}}</b>
                     </div>
                     </a>
                     <div class="price">
-                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
+                        <del class="text-muted">{{item.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.default_sell_price}}৳</span>
                     </div>
                     <div class="quantity-buy p-1 ps-0">
                         
-                        <button class="btn">Buy</button>
+                        <button class="btn" @click="AddToCart(item)">Buy</button>
                     </div>
-                    <p>
-                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                    </p>
+                    <p v-html="item.description"></p>
                     <p>Contact us at any time:</p>
                     <p>+8801 403 111 999</p>
-                    <p>SKU: 0630</p>
-                    <p>In Stock</p>
-            </div>
-            <div class="col-lg-6 col-md-6 compare-item">
-                <div class="text-center m-2">
-                    <button class="text-center btn btn-sm"><i class="fas fa-times"></i> Remove</button>
-                </div>
-                <a href="product.html" class="text-decoration-none">
-                    <img src="assets/images/products/1.jpg" alt="" >
-                    <div class="nav-link text-dark p-1">
-                        <b>China Style Men's T-Shirt</b>
-                    </div>
-                    </a>
-                    <div class="price">
-                        <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
-                    </div>
-                    <div class="quantity-buy p-1 ps-0">
-                        
-                        <button class="btn">Buy</button>
-                    </div>
-                    <p>
-                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
-                    </p>
-                    <p>Contact us at any time:</p>
-                    <p>+8801 403 111 999</p>
-                    <p>SKU: 0630</p>
-                    <p>In Stock</p>
+                    <p>SKU: {{item.sku}}</p>
+                    <p v-if="item.enable_stock == 1">In Stock</p>
+                    <p v-else class="text-danger">Out of Stock</p>
             </div>
         </div>
         
@@ -63,8 +42,18 @@
     </div>
 </template>
 <script>
+import mixins from '../Mixins';
 export default {
-    
+    mixins: [mixins],
+    computed: {
+        compareItems()
+        {
+            return this.$store.getters.Get_Compare_Items;
+        }
+    },
+    methods: {
+
+    }
 }
 </script>
 <style lang="">

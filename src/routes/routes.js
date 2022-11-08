@@ -37,7 +37,7 @@ const routes = [
         component:Profile,
         meta: {
             title : 'My Account',
-            auth: true,
+            
           
         },
     }, 
@@ -140,7 +140,6 @@ const routes = [
         component:LoginRegister, 
         meta: {
             title: 'Login or Register',
-            guest: true,
         },
     },
     {

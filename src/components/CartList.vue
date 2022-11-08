@@ -18,6 +18,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr v-if="cartItems.length < 1">
+                                        <td colspan="6">
+                                            <div class="mt-5">
+                                                <center>
+                                                    <h4 class="text-danger"><i class="fa fa-shopping-cart"></i> No item found in your cart list</h4>
+                                                </center>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     <tr class="border border-muted border-end-0 border-top-0 border-start-0" v-for="item in cartItems" :key="item.id">
                                         <td>
                                                 <div class="remove">
@@ -33,9 +42,9 @@
                                         </td>
                                         <td>
                                             <div class="product-name">
-                                                <a href="product.html" class="text-decoration-none text-dark">
+                                                <router-link to="/product-details" class="text-decoration-none text-dark">
                                                     {{item.product}}
-                                                </a>
+                                                </router-link>
                                             </div>
                                         </td>
                                         <td>
@@ -82,18 +91,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>China Luxury Polo Shirt  × 5</td>
-                                            <td class="text-end">4,450.00৳</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Men's Stylish leather Crafting Shoe  × 1</td>
-                                            <td class="text-end">4,450.00৳</td>
+                                        <tr v-if="cartItems.length < 1">
+                                        <td colspan="6">
+                                            <div class="mt-2">
+                                                <center>
+                                                    <h6 class="text-danger"><i class="fa fa-shopping-cart"></i> Your cart is empty!</h6>
+                                                </center>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        <tr v-for="item in cartItems" :key="item.id">
+                                            <td>{{item.product}}  × {{item.quantity}}</td>
+                                            <td class="text-end"> {{item.quantity * item.default_sell_price}}৳</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <a href="#" class="btn text-center d-block">
-                                    <button class="text-cap">Proceed to Checkout <span><i class="fas fa-arrow-right"></i></span></button>
+                                    <button class="text-cap" data-bs-toggle="modal" data-bs-target="#buy-to-cart">Proceed to Checkout <span><i class="fas fa-arrow-right"></i></span></button>
                                 </a>
                             </div>
                             
@@ -105,7 +119,10 @@
     </div>
 </template>
 <script>
+import toastr from 'toastr';
+import mixins from '../Mixins';
 export default {
+    mixins: [mixins],
     computed: {
         cartItems()
         {
@@ -113,21 +130,22 @@ export default {
         }
     },
     methods: {
-        increaseQty(id)
+        checkout()
         {
-            this.$store.dispatch("IncreaseQty", id);
-        },
-        decreaseQty(id)
-        {
-            this.$store.dispatch("DecreaseQty", id);
-        },
-        updateQty(item)
-        {
-            this.$store.dispatch("UpdateQty", item);
-        },
-        removeItem(id)
-        {
-            this.$store.dispatch("RemoveItem", id);
+            const auth = this.$store.getters.GET_AUTH_STATUS;
+            if(!auth)
+            {
+                toastr.error('Your are not logged in');
+                localStorage.setItem("redirect_path", "/cart-list");
+                this.$router.push('/login-register');
+            }
+            else if(this.$store.getters.Total_Cart_Items < 1)
+            {
+                toastr.error('No item found in your cart list');
+            }
+            else{
+                toastr.success('Now you can place your order');
+            }
         }
     }
 }

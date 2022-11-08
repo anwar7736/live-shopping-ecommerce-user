@@ -10,7 +10,7 @@
                         <div class="options-pannel2">
                             <ul>
                                 <li class="d-lg-block d-md-block d-none" title="compare">
-                                    <a href="#" class="compare" >
+                                    <a href="#" class="compare" @click.prevent="addToCompareList(sale)">
                                         <i class="fas fa-random"></i>
                                     </a>
                                 </li>
@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li title="Add To Wishlist">
-                                    <a href="#" class="compare">
+                                    <a href="#" class="compare" @click.prevent="AddToWishList(product)">
                                         <i class="far fa-heart"></i>
                                     </a>
                                 </li>
@@ -56,18 +56,16 @@
     </div>
 </template>
 <script>
+import mixins from '../Mixins';
 export default {
+    mixins: [mixins],
     data(){
         return{
             flashSell: {},
         }
     },
     methods: {
-        AddToCart(item)
-        {
-            this.$store.dispatch("AddToCart", item);
-            this.$toastr.success('Product added to cart');
-        }
+
     },
     created()
     {

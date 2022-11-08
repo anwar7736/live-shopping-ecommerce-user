@@ -46,7 +46,7 @@
                                             <div class="options-pannel">
                                                 <ul>
                                                     <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
+                                                        <a href="#" class="compare" @click.prevent="addToCompareList(hot)">
                                                             <i class="fas fa-random"></i>
                                                         </a>
                                                     </li>
@@ -56,7 +56,7 @@
                                                         </a>
                                                     </li>
                                                     <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
+                                                        <a href="#" class="compare" @click.prevent="AddToWishList(hot)">
                                                             <i class="far fa-heart"></i>
                                                         </a>
                                                     </li>
@@ -98,7 +98,7 @@
                                             <div class="options-pannel">
                                                 <ul>
                                                     <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" >
+                                                        <a href="#" class="compare" @click.prevent="addToCompareList(prod)">
                                                             <i class="fas fa-random"></i>
                                                         </a>
                                                     </li>
@@ -108,7 +108,7 @@
                                                         </a>
                                                     </li>
                                                     <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
+                                                        <a href="#" class="compare" @click.prevent="AddToWishList(prod)">
                                                             <i class="far fa-heart"></i>
                                                         </a>
                                                     </li>
@@ -145,14 +145,24 @@
     </div>
 </template>
 <script>
+import mixins from '../Mixins';
 export default {
-    props: ['products'],
-    methods: {
-        AddToCart(item)
-        {
-            this.$store.dispatch("AddToCart", item);
+    mixins: [mixins],
+    data(){
+        return{
+            products: [],
         }
     },
+    methods: {
+
+    },
+    created(){
+        
+        this.$store.dispatch("BestDeal")
+        .then(res=>{
+            this.products = res;
+        })
+    }
 }
 </script>
 <style>
