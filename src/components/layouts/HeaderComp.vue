@@ -14,8 +14,8 @@
                             <ul class="topbar-right me-1 mb-0">
                                 <li><router-link to="/compare-products" class="top-r-link"><i class="fas fa-random"></i><span class="badge badge-pill">{{compareItemCount}}</span> <span class="compare">Compare</span></router-link></li>
                                 <li><router-link to="/wishlist" class="top-r-link"><i class="far fa-heart"></i><span class="badge badge-pill">1</span> <span class="compare">Wishlist</span></router-link></li>
-                                <li v-if="!loggedStatus"><router-link to="/login-register" class="top-r-link" >Login/Register</router-link></li>
-                                <li v-if="loggedStatus"><a href="#" class="top-r-link" @click.prevent="logout">Logout</a></li>
+                                <li v-if="!loggedStatus"><router-link to="/login-register" class="top-r-link d-none" >Login/Register</router-link></li>
+                                <li v-if="loggedStatus"><a href="#" class="top-r-link d-none" @click.prevent="logout">Logout</a></li>
                             </ul>
                         </div>
                      </div>

@@ -15,19 +15,19 @@
                                     </a>
                                 </li>
                                 <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(sale)">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </li>
                                 <li title="Add To Wishlist">
-                                    <a href="#" class="compare" @click.prevent="AddToWishList(product)">
+                                    <a href="#" class="compare" @click.prevent="AddToWishList(sale)">
                                         <i class="far fa-heart"></i>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="images">
-                            <router-link to="/product-details">
+                            <router-link :to="'/product-details?id='+ sale.id">
                                 <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
                             </router-link>
                         </div>
@@ -48,6 +48,9 @@
                                 
                             </div>
                             </a>
+
+                            <!--Quickview Modal-->
+                            <quickView :product="product_info"></quickView>
                         </div>
                     </div>               
                  </div>
@@ -57,15 +60,23 @@
 </template>
 <script>
 import mixins from '../Mixins';
+import quickView from './layouts/QuickViewModal';
 export default {
     mixins: [mixins],
     data(){
         return{
             flashSell: {},
+            product_info : {},
         }
     },
     methods: {
-
+        productInfo(info)
+        {
+            this.product_info = info;
+        }
+    },
+    components: {
+        quickView,
     },
     created()
     {

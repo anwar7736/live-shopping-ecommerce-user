@@ -40,19 +40,18 @@
                     <div class="modal-product-details col-lg-7 col-md-6 col-12 pt-3">
                         <nav aria-label="breadcrumb" class="pt-0">
                             <ol class="breadcrumb">
-                              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                              <li class="breadcrumb-item"><a href="shop.html">Category Name</a></li>
-                              <li class="breadcrumb-item active" aria-current="page">Product Name</li>
+                              <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+                              <li class="breadcrumb-item"><a href="#">{{product.category}}</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">{{product.product}}</li>
                             </ol>
                           </nav>
                         <a href="product.html" class="text-decoration-none text-dark">
-                            <h3>Fashionable Men’s Polo Shirt</h3>
+                            <h3>{{product.product}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
+                            <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                         </h6>
-                        <p class="text-sm">
-                            Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
+                        <p class="text-sm" v-html="product.description">
                         </p>
                         <p class="text-sm pt-4">
                             Contact us at any time:
@@ -63,17 +62,17 @@
                         <div class="quantity-buy d-flex">
                             <div class="quantity">
                                 <button class="cart-qty-minus" id="dec" type="button" value="-">-</button>
-                                <input type="text" name="qty" id="qty"  maxlength="12" value="0" class="input-text qty" />
+                                <input type="text" name="qty" id="qty"  minlength="1" value="1" class="input-text qty" />
                                 <button class="cart-qty-plus" type="button" id="inc" value="+">+</button>
                                 
                             </div>
-                            <button class="btn">Buy</button>
+                            <button class="btn" @click="AddToCart(product)">Buy</button>
                         </div>
                         <div class="products-options mt-4 d-lg-flex">
-                            <a href="#" class="text-decoration-none text-dark me-3">
+                            <a href="#" class="text-decoration-none text-dark me-3" @click.prevent="addToCompareList(product)">
                                 <b><i class="fas fa-random"></i> Compare</b>
                             </a>
-                            <a href="#" class="text-decoration-none text-dark me-3">
+                            <a href="#" class="text-decoration-none text-dark me-3" @click.prevent="AddToWishList(product)">
                                 <b><i class="far fa-heart"></i> Add to Wishlist</b>
                             </a>
                             <a href="#" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#size-guide">
@@ -81,8 +80,8 @@
                             </a>
                         </div>
                         <hr/>
-                        <p><b>SKU:</b> 0613</p>
-                        <p><b>Category: </b> Polo Shirt</p>
+                        <p><b>SKU:</b> {{product.sku}}</p>
+                        <p><b>Category: </b> {{product.category}}</p>
                         <p><b>Tags: </b>  polo shirt, Sky Blue</p>
                         <p><b>Share: </b> 
                             <a href="#" class="text-dark text-sm p-2 text-decoration-none">
@@ -803,8 +802,28 @@
 </div>
 </template>
 <script>
+import mixins from '../Mixins';
 export default {
-    
+    mixins: [mixins],
+    data()
+    {
+        return {
+            product : {},
+        }
+    },
+    created()
+    {
+        let product_id = this.$route.query.id;
+        this.$store.dispatch("ProductFilterById", product_id)
+        .then(res=>{
+            console.log(res);
+            this.product = res;
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+    }
 }
 </script>
 <style lang="">

@@ -282,7 +282,7 @@
                                 </div>
                                 
                                 <div class="images">
-                                    <router-link to="/product-details">
+                                    <router-link :to="'/product-details?id='+ product.id">
                                         <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
                                     </router-link>
                                     <div class="options-pannel2">
@@ -293,7 +293,7 @@
                                                 </a>
                                             </li>
                                             <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
+                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(product)">
                                                     <i class="fas fa-search"></i>
                                                 </a>
                                             </li>
@@ -315,6 +315,9 @@
                                     <p class="product-details-p" style="display: none;">
                                         Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
                                     </p>
+                                    <!--Quickview Modal-->
+                                    <quickView :product="product_info"></quickView>
+                                    
                                     <a href="#" @click.prevent="AddToCart(product)">
                                         <div class="button m-auto text-light">
                                             <p><b>
@@ -326,24 +329,31 @@
                                         
                                         </div>
                                     </a>
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+           
         </section>
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
+import quickView from './layouts/QuickViewModal';
 export default {
     mixins: [mixins],
     data(){
         return{
             categories: {},
             products: {},
+            product_info : {},
         }
+    },
+    components: {
+        quickView,
     },
     methods: {
         categoryFilter(id)
@@ -355,6 +365,10 @@ export default {
             .catch(err=>{
                 console.log(err);
             })
+        },
+        productInfo(info)
+        {
+            this.product_info = info;
         }
     },
     created()
@@ -375,7 +389,8 @@ export default {
             console.log(err);
         })
 
-    }
+    },
+
 }
 
 </script>

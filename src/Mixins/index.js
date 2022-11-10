@@ -39,5 +39,6 @@ export default{
             store.dispatch("RemoveItem", id);
             toastr.error('Item remove from cart list');
         },
+        
     }
 }

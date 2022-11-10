@@ -111,6 +111,18 @@ export const product =  {
                     reject(err);
                 })
             });
+        }, 
+        ProductFilterById(context, id)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/product_filter_by_id/" + id)
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
         },
     },
 };

@@ -116,13 +116,19 @@
                 </div>
             </div>
         </section>
+        <checkout :cartItems="cartItems"></checkout>
     </div>
 </template>
 <script>
-import toastr from 'toastr';
+// import toastr from 'toastr';
 import mixins from '../Mixins';
+import checkout from './layouts/CheckoutModal';
+
 export default {
     mixins: [mixins],
+    components: {
+        checkout
+    },
     computed: {
         cartItems()
         {
@@ -130,23 +136,20 @@ export default {
         }
     },
     methods: {
-        checkout()
-        {
-            const auth = this.$store.getters.GET_AUTH_STATUS;
-            if(!auth)
-            {
-                toastr.error('Your are not logged in');
-                localStorage.setItem("redirect_path", "/cart-list");
-                this.$router.push('/login-register');
-            }
-            else if(this.$store.getters.Total_Cart_Items < 1)
-            {
-                toastr.error('No item found in your cart list');
-            }
-            else{
-                toastr.success('Now you can place your order');
-            }
-        }
+        // checkout()
+        // {
+        //     const auth = this.$store.getters.GET_AUTH_STATUS;
+        //     if(!auth)
+        //     {
+        //         toastr.error('Your are not logged in');
+        //         localStorage.setItem("redirect_path", "/cart-list");
+        //         this.$router.push('/login-register');
+        //     }
+        //     if(this.$store.getters.Total_Cart_Items < 1)
+        //     {
+        //         toastr.error('No item found in your cart list');
+        //     }
+        // }
     }
 }
 </script>

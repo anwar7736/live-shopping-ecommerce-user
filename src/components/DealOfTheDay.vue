@@ -20,7 +20,7 @@
                                         </a>
                                     </li>
                                     <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" >
+                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(product)">
                                             <i class="fas fa-search"></i>
                                         </a>
                                     </li>
@@ -32,7 +32,7 @@
                                 </ul>
                             </div>
                             <div class="images">
-                                <router-link to="/product-details">
+                                <router-link :to="'/product-details?id='+ product.id">
                                     <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
                                   </router-link>
                             </div>
@@ -53,6 +53,8 @@
                                     
                                 </div>
                                 </a>
+                                <!--Quickview Modal-->
+                                <quickView :product="product_info"></quickView>
                             </div>
                         </div>
                         
@@ -65,11 +67,23 @@
 </template>
 <script>
 import mixins from '../Mixins';
+import quickView from './layouts/QuickViewModal';
 export default {
     mixins: [mixins],
     props: ['products'],
+    data(){
+        return{
+            product_info : {},
+        }
+    },
     methods: {
-
+        productInfo(info)
+        {
+            this.product_info = info;
+        }
+    },
+    components: {
+        quickView,
     },
 }
 </script>

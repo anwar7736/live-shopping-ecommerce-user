@@ -19,24 +19,39 @@ export const cart =  {
     actions: {
         AddToCart(context, item)
         {
-            context.commit("AddToCart", item)
+            context.commit("AddToCart", item);
         },
         IncreaseQty(context, id)
         {
-            context.commit("IncreaseQty", id)
+            context.commit("IncreaseQty", id);
         },
         DecreaseQty(context, id)
         {
-            context.commit("DecreaseQty", id)
+            context.commit("DecreaseQty", id);
         },
         UpdateQty(context, item)
         {
-            context.commit("UpdateQty", item)
+            context.commit("UpdateQty", item);
         },
         RemoveItem(context, id)
         {
-            context.commit("RemoveItem", id)
+            context.commit("RemoveItem", id);
         },
+
+        Checkout(context, customerData)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.post("/checkout", {customer: customerData, items: context.state.cartItems})
+                .then(res=>{
+                    resolve(res.data);
+                    context.commit("Checkout");
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+          
+        }
     },
     mutations: {
         AddToCart(state, item)
@@ -80,5 +95,10 @@ export const cart =  {
             let index = cartItems.findIndex(data=> data.id == id);
             cartItems.splice(index, 1);
         },
+
+        Checkout(state)
+        {
+            state.cartItems = [];
+        }
     }
 };

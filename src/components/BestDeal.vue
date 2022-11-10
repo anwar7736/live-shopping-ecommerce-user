@@ -39,7 +39,7 @@
                                                 -48%
                                             </div>
                                             <div class="images">
-                                                <router-link to="/product-details">
+                                                <router-link :to="'/product-details?id='+ hot.id">
                                                     <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
                                                 </router-link>
                                             </div>
@@ -91,7 +91,7 @@
                                                 -48%
                                             </div>
                                             <div class="images">
-                                                <router-link to="/product-details">
+                                                <router-link :to="'/product-details?id='+ prod.id">
                                                     <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
                                                 </router-link>
                                             </div>
