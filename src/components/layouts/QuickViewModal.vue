@@ -34,17 +34,16 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <a href="product.html" class="btn col-12">View Details</a>
+                        <router-link :to="'/product-details?id='+ product.id" class="btn col-12">View Details</router-link>
                     </div>
                     <div class="modal-product-details col-6 pt-3">
                         <a href="product.html" class="text-decoration-none text-dark">
                             <h3>{{product.product}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <del class="text-muted">850.00৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">750.00৳</span>
+                            <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                         </h6>
-                        <p class="text-sm">
-                            Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
+                        <p class="text-sm" v-html="product.description">
                         </p>
                         <p class="text-sm pt-4">
                             Contact us at any time:
@@ -55,15 +54,15 @@
                         <div class="quantity-buy d-flex">
                             <div class="quantity">
                                 <button class="cart-qty-minus" id="dec" type="button" value="-">-</button>
-                                <input type="text" name="qty" id="qty" maxlength="12" value="0" class="input-text qty" />
+                                <input type="text" name="qty" id="qty" maxlength="12" value="1" class="input-text qty" />
                                 <button class="cart-qty-plus" type="button" id="inc" value="+">+</button>
                                 
                             </div>
-                            <button class="btn">Buy</button>
+                            <button class="btn" @click="AddToCart(product)">Buy</button>
                         </div>
                         <hr>
-                        <p><b>SKU:</b> 0613</p>
-                        <p><b>Category: </b> Polo Shirt</p>
+                        <p><b>SKU:</b> {{product.sku}}</p>
+                        <p><b>Category: </b> {{product.category}}</p>
                         <p><b>Tags: </b>  polo shirt, Sky Blue</p>
                         <p><b>Share: </b> 
                             <a href="#" class="text-dark text-sm p-2 text-decoration-none">
@@ -98,6 +97,7 @@ import mixins from '../../Mixins';
 export default {
     props: ['product'],
     mixins: [mixins],
+
 
 }
 </script>

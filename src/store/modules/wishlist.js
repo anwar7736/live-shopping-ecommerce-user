@@ -8,13 +8,13 @@ export const wishlist =  {
         wishlistItems: [],
     },
     getters: {
-        Get_Compare_Items(state)
+        Get_Wishlist_Items(state)
         {
-            return state.compareItems;
+            return state.wishlistItems;
         },
-        Total_Compare_Items(state)
+        Total_Wishlist_Items(state)
         {
-            return state.compareItems.length;
+            return state.wishlistItems.length;
         },
     },
     actions: {
@@ -30,21 +30,22 @@ export const wishlist =  {
     mutations: {
         AddToWishList(state, item)
         {
-            let compareItems = state.compareItems;
-            let bool = compareItems.some(data=> data.id == item.id);
+            let wishlistItems = state.wishlistItems;
+            let bool = wishlistItems.some(data=> data.id == item.id);
             if(bool)
             {
-                toastr.error('Item already added to compare list');
+                toastr.error('Item already added to wishlist');
             }
             else{
-                compareItems.push({...item});
+                wishlistItems.push({...item});
+                toastr.success('Item added to wishlist');
             }
         },
         RemoveWishListItem(state, id)
         {
-            let compareItems = state.compareItems;
-            let index = compareItems.findIndex(data=> data.id == id);
-            compareItems.splice(index, 1);
+            let wishlistItems = state.wishlistItems;
+            let index = wishlistItems.findIndex(data=> data.id == id);
+            wishlistItems.splice(index, 1);
         },
     }
 };

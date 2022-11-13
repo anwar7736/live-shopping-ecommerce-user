@@ -13,7 +13,7 @@
                         <div class="topbar-right">
                             <ul class="topbar-right me-1 mb-0">
                                 <li><router-link to="/compare-products" class="top-r-link"><i class="fas fa-random"></i><span class="badge badge-pill">{{compareItemCount}}</span> <span class="compare">Compare</span></router-link></li>
-                                <li><router-link to="/wishlist" class="top-r-link"><i class="far fa-heart"></i><span class="badge badge-pill">1</span> <span class="compare">Wishlist</span></router-link></li>
+                                <li><router-link to="/wishlist" class="top-r-link"><i class="far fa-heart"></i><span class="badge badge-pill">{{wishlistItemCount}}</span> <span class="compare">Wishlist</span></router-link></li>
                                 <li v-if="!loggedStatus"><router-link to="/login-register" class="top-r-link d-none" >Login/Register</router-link></li>
                                 <li v-if="loggedStatus"><a href="#" class="top-r-link d-none" @click.prevent="logout">Logout</a></li>
                             </ul>
@@ -241,6 +241,10 @@ export default {
         compareItemCount()
         {
             return this.$store.getters.Total_Compare_Items;
+        }, 
+        wishlistItemCount()
+        {
+            return this.$store.getters.Total_Wishlist_Items;
         },
     },
     created()

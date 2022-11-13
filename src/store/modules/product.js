@@ -124,5 +124,29 @@ export const product =  {
                 })
             });
         },
+        productSortByType(context, type)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/product_sort_by_type/" + type)
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },
+        productFilterByPrice(context, data)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/product_filter_by_price/" + data.from + "/" + data.to)
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },
     },
 };

@@ -4,8 +4,8 @@ export default{
     methods: {
         AddToWishList(item)
         {
-            //store.dispatch("AddToWishList", item);
-            toastr.success('Item added to wishlist ' +item.id);
+            store.dispatch("AddToWishList", item)
+           
         },
         AddToCart(item)
         {
@@ -15,12 +15,16 @@ export default{
         addToCompareList(item)
         {
             store.dispatch("AddToCompareList", item);
-            toastr.success('Item added to compare list');
         },
         removeCompareItem(id)
         {
             store.dispatch("RemoveCompareItem", id);
             toastr.error('Item remove from compare list');
+        }, 
+        removeWishlistItem(id)
+        {
+            store.dispatch("RemoveWishListItem", id);
+            toastr.error('Item remove from wishlist');
         },
         increaseQty(id)
         {
@@ -39,6 +43,7 @@ export default{
             store.dispatch("RemoveItem", id);
             toastr.error('Item remove from cart list');
         },
+
         
     }
 }

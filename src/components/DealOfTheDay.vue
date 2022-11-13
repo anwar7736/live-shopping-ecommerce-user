@@ -25,7 +25,7 @@
                                         </a>
                                     </li>
                                     <li title="Add To Wishlist">
-                                        <a href="#" class="compare">
+                                        <a href="#" class="compare" @click.prevent="AddToWishList(product)">
                                             <i class="far fa-heart"></i>
                                         </a>
                                     </li>
@@ -42,7 +42,7 @@
                                 <div class="price">
                                     <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                                 </div>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product)">
+                                <a href="#" @click.prevent="AddToCart(product)">
                                     <div class="button m-auto text-light">
                                         <p><b>
                                             BUY NOW

@@ -26,7 +26,7 @@
                         <div class="col-lg-9 col-md-12 col-12 global-carousel-owl-col">
                             
                             <div class="owl-tab-type d-flex tabs">
-                                <div class="btn " id="tab5">
+                                <div class="btn active" id="tab5">
                                     <i class="fas fa-fire"></i> Hot
                                 </div>
                                 <div class="btn" id="tab6">
@@ -57,7 +57,7 @@
                                                         </a>
                                                     </li>
                                                     <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
+                                                        <a href="#" class="compare" @click.prevent="AddToWishList(hot)">
                                                             <i class="far fa-heart"></i>
                                                         </a>
                                                     </li>
@@ -108,7 +108,7 @@
                                                         </a>
                                                     </li>
                                                     <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
+                                                        <a href="#" class="compare" @click.prevent="AddToWishList(prod)">
                                                             <i class="far fa-heart"></i>
                                                         </a>
                                                     </li>

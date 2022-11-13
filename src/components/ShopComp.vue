@@ -18,19 +18,20 @@
                                 <fieldset class="filter-price">
                                  
                                   <div class="price-field">
-                                    <input type="range"  min="0" max="2500" value="0" id="lower">
-                                    <input type="range" min="0" max="2500" value="2500" id="upper">
+                                    <input @change="rangeChange"  type="range"  min="0" max="2500"  id="lower" v-model="rangeFrom">
+                                    <input @change="rangeChange"  type="range" min="0" max="2500" id="upper" v-model="rangeTo">
+                                     
                                   </div>
                                    <div class="price-wrap">
                                     <span class="price-title">FILTER</span>
                                     <div class="price-wrap-1">
                                       <input id="one" value="">
-                                      <label for="one"><b>৳</b></label>
+                                      <label for="one"><b>{{rangeFrom}}৳</b></label>
                                     </div>
                                     <div class="price-wrap_line">-</div>
                                     <div class="price-wrap-2">
                                       <input id="two" value="">
-                                      <label for="two"><b>৳</b></label>
+                                      <label for="two"><b>{{rangeTo}}৳</b></label>
                                     </div>
                                   </div>
                                 </fieldset> 
@@ -170,41 +171,41 @@
                                 </a>
                             </nav>
                         </div>
-                        <div class="filter-dropdown">
+                        <div class="filter-dropdown active">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12 sort-by pb-3">
                                     <h5>Sort By</h5>
-                                    <a href="#" class="nav-link text-dark pt-2 active">
+                                    <a @click.prevent="productSortByType('popularity')" href="#" class="nav-link text-dark pt-2 active">
                                         Popularity
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productSortByType('average_rating')" href="#" class="nav-link text-dark pt-2">
                                         Average rating
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productSortByType('newness')" href="#" class="nav-link text-dark pt-2">
                                         Newness
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productSortByType('low_to_high')" href="#" class="nav-link text-dark pt-2">
                                         Price: Low to High
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productSortByType('high_to_low')" href="#" class="nav-link text-dark pt-2">
                                         Price: Hight to Low
                                     </a>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-12 price-filter pb-3">
                                     <h5>Price Filter</h5>
-                                    <a href="#" class="nav-link text-dark pt-2 active">
+                                    <a @click.prevent="productFilterByPrice()" href="#" class="nav-link text-dark pt-2 active">
                                         All
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilterByPrice(0, 6250)" href="#" class="nav-link text-dark pt-2">
                                         0.00৳  - 6,250.00৳ 
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilterByPrice(6250, 12500)" href="#" class="nav-link text-dark pt-2">
                                         6,250.00৳  - 12,500.00৳ 
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilterByPrice(12500, 18750)" href="#" class="nav-link text-dark pt-2">
                                         12,500.00৳  - 18,750.00৳ 
                                     </a>
-                                    <a href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilterByPrice(18750, 25000)" href="#" class="nav-link text-dark pt-2">
                                         18,750.00৳  - 25,000.00৳ 
                                     </a>
                                 </div>
@@ -312,8 +313,7 @@
                                     <div class="price">
                                         <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                                     </div>
-                                    <p class="product-details-p" style="display: none;">
-                                        Live Shopping is one of the fastest-growing trendy fashion lifestyle brands in Bangladesh. We have just started! We aimed to serve our customers with international products at a competitive price range. We deliver premium quality and 100% QC pass products. Live Shopping means Exact Shopping
+                                    <p class="product-details-p" style="display: none;" v-html="product.description">
                                     </p>
                                     <!--Quickview Modal-->
                                     <quickView :product="product_info"></quickView>
@@ -350,6 +350,8 @@ export default {
             categories: {},
             products: {},
             product_info : {},
+            rangeFrom: 0,
+            rangeTo: 2500,
         }
     },
     components: {
@@ -369,6 +371,32 @@ export default {
         productInfo(info)
         {
             this.product_info = info;
+        },
+
+        productSortByType(type)
+        {
+            this.$store.dispatch("productSortByType", type)
+            .then(res=>{
+                this.products = res;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+        
+        productFilterByPrice(from = '', to = '')
+        {
+            this.$store.dispatch("productFilterByPrice",{from, to})
+            .then(res=>{
+                this.products = res;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+        rangeChange()
+        {
+            this.productFilterByPrice(this.rangeFrom,this.rangeTo);
         }
     },
     created()

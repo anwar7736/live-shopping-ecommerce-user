@@ -56,7 +56,7 @@
                                                         </a>
                                                     </li>
                                                     <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
+                                                        <a href="#" class="compare" @click.prevent="AddToWishList(hot)">
                                                             <i class="far fa-heart"></i>
                                                         </a>
                                                     </li>
@@ -107,7 +107,7 @@
                                                         </a>
                                                     </li>
                                                     <li title="Add To Wishlist">
-                                                        <a href="#" class="compare">
+                                                        <a href="#" class="compare" @click.prevent="AddToWishList(prod)">
                                                             <i class="far fa-heart"></i>
                                                         </a>
                                                     </li>

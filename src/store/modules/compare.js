@@ -38,6 +38,7 @@ export const compare =  {
             }
             else{
                 compareItems.push({...item});
+                toastr.success('Item added to compare list');
             }
         },
         RemoveCompareItem(state, id)

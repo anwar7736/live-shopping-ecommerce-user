@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-lg-3 col-md-12 col-12">
                     <div class="footer-menu-col mt-5">
-                        <form action="">
+                        <form action="javascript: void(0)" >
                             <div class="input-group d-flex">
                                 <input type="text" placeholder="Search....">
                                 <button class="text-center p-1"><i class="fas fa-arrow-right"></i></button>

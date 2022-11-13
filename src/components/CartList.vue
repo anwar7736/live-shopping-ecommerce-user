@@ -92,14 +92,14 @@
                                     </thead>
                                     <tbody>
                                         <tr v-if="cartItems.length < 1">
-                                        <td colspan="6">
-                                            <div class="mt-2">
-                                                <center>
-                                                    <h6 class="text-danger"><i class="fa fa-shopping-cart"></i> Your cart is empty!</h6>
-                                                </center>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            <td colspan="6">
+                                                <div class="mt-2">
+                                                    <center>
+                                                        <h6 class="text-danger"><i class="fa fa-shopping-cart"></i> Your cart is empty!</h6>
+                                                    </center>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         <tr v-for="item in cartItems" :key="item.id">
                                             <td>{{item.product}}  × {{item.quantity}}</td>
                                             <td class="text-end"> {{item.quantity * item.default_sell_price}}৳</td>
