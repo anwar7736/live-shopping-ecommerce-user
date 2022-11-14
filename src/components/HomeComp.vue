@@ -1,11 +1,11 @@
 <template>
     <div>
-        <HomeMain :products="homeslider"></HomeMain>
+        <HomeMain :sliders="homeslider"></HomeMain>
         <SummerTrendy ></SummerTrendy>
         <BestDeal></BestDeal>
         <ExportQuality></ExportQuality>
         <PremiumExports></PremiumExports>
-        <DealOfTheDay :products="dealsoftheday"></DealOfTheDay>
+        <DealOfTheDay></DealOfTheDay>
         <br/><br/>
     </div>
 </template>
@@ -41,11 +41,7 @@ export default {
             this.homeslider = res;
         })
         
-        this.$store.dispatch("DealsOfTheDay")
-        .then(res=>{
-            this.dealsoftheday = res;
-           
-        })
+        
     },
     mounted()
     {

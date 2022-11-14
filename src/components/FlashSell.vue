@@ -28,7 +28,7 @@
                         </div>
                         <div class="images">
                             <router-link :to="'/product-details?id='+ sale.id">
-                                <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
+                                <img :src="sale.image_url" @error="sale.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
                             </router-link>
                         </div>
                         

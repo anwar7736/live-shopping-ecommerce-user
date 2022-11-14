@@ -284,7 +284,7 @@
                                 
                                 <div class="images">
                                     <router-link :to="'/product-details?id='+ product.id">
-                                        <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
+                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
                                     </router-link>
                                     <div class="options-pannel2">
                                         <ul>

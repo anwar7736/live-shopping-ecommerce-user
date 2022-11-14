@@ -16,13 +16,13 @@
                         <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active">
-                                    <img src="assets/images/products/1.jpg" alt="Products" class="col-12">
+                                    <img :src="product.image_url" alt="Image" class="col-12"/> 
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="assets/images/products/1.jpg" alt="Products" class="col-12">
+                                    <img :src="product.image_url" alt="Image" class="col-12"/> 
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="assets/images/products/1.jpg" alt="Products" class="col-12">
+                                    <img :src="product.image_url" alt="Image" class="col-12"/> 
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="prev">

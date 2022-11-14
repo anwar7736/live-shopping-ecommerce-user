@@ -14,13 +14,13 @@
                             
                                 <div class="carousel-inner" role="listbox">
                                     <a href="assets/images/gift-card/1000tk.jpg" class="carousel-item active">
-                                        <img src="assets/images/products/1.jpg" class="w-100 d-block" alt="Third slide">
+                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/> 
                                     </a>
                                     <a href="assets/images/gift-card/2000tk.jpg" class="carousel-item">
-                                        <img src="assets/images/products/1.jpg" class="w-100 d-block" alt="Third slide">
+                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
                                     </a>
                                     <a href="assets/images/gift-card/200tk.jpg" class="carousel-item">
-                                        <img src="assets/images/products/1.jpg" class="w-100 d-block" alt="Third slide">
+                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
                                     </a>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#product-single" data-bs-slide="prev">

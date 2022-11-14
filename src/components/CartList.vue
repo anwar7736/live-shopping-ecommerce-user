@@ -37,7 +37,8 @@
                                         </td>
                                         <td>
                                             <div class="thambnail">
-                                                <img src="assets/images/products/1.jpg" alt="" width="80">
+                                               
+                                                <img :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80" /> 
                                             </div>
                                         </td>
                                         <td>

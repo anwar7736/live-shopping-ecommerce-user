@@ -23,135 +23,148 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-12 col-12 global-carousel-owl-col">
-                            
-                            <div class="owl-tab-type d-flex tabs">
-                                <div class="btn active" id="tab1" >
-                                    <i class="fas fa-fire"></i> Hot
+                                             
+                        <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#summer_hot" type="button" role="tab" aria-controls="home" aria-selected="true">HOT</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#summer_new" type="button" role="tab" aria-controls="profile" aria-selected="false">NEW ARRIVAL</button>
+                        </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="summer_hot" role="tabpanel" aria-labelledby="home-tab">
+                               <div class="row row deal-day-row">
+                                <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="hot in products.hot" :key="hot.id">
+                                <div class="discount-tag">
+                                 -48%
                                 </div>
-                                <div class="btn" id="tab2" >
-                                    NEW ARRIVAL
+                        <div class="options-pannel2">
+                            <ul>
+                                <li class="d-lg-block d-md-block d-none" title="compare">
+                                    <a href="#" class="compare" @click.prevent="addToCompareList(hot)">
+                                        <i class="fas fa-random"></i>
+                                    </a>
+                                </li>
+                                <li title="Quick View" class="d-lg-block d-md-block d-none">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(hot)">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                </li>
+                                <li title="Add To Wishlist">
+                                    <a href="#" class="compare" @click.prevent="AddToWishList(hot)">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="images">
+                            <router-link :to="'/product-details?id='+ hot.id">
+                                <img :src="hot.image_url" @error="hot.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
+                            </router-link>
+                        </div>
+                        
+                        <div class="product-details text-center pt-2">
+                            <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product}}</a>
+                            <div class="price">
+                                <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
+                            </div>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
+                                <div class="button m-auto text-light">
+                                    <p><b>
+                                        BUY NOW
+                                    </b></p>
+                                    <span>
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </span>
+                                
+                            </div>
+                            </a>
+                            </div>
+                                </div>               
+                               </div>
+                            </div>
+                            <div class="tab-pane fade row" id="summer_new" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row row deal-day-row">
+                                    <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="prod in products.new" :key="prod.id">
+                                <div class="discount-tag">
+                                 -48%
                                 </div>
-                            </div>                              
-                            <div class="tab-container" id="tab1con" >
-                                    <div class="owl-carousel cat-carousel product-items">
-                                        <div class="product p-2" v-for="hot in products.hot" :key="hot.id">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <router-link :to="'/product-details?id='+ hot.id" >
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </router-link>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" @click.prevent="addToCompareList(hot)">
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare" @click.prevent="AddToWishList(hot)">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product}}</a>
-                                                <div class="price">
-                                                    <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
-                                                </div>
-                                                <a href="#" @click.prevent="AddToCart(hot)">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                        </div>                          
-                                    </div>
+                        <div class="options-pannel2">
+                            <ul>
+                                <li class="d-lg-block d-md-block d-none" title="compare">
+                                    <a href="#" class="compare" @click.prevent="addToCompareList(prod)">
+                                        <i class="fas fa-random"></i>
+                                    </a>
+                                </li>
+                                <li title="Quick View" class="d-lg-block d-md-block d-none">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(prod)">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                </li>
+                                <li title="Add To Wishlist">
+                                    <a href="#" class="compare" @click.prevent="AddToWishList(prod)">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="images">
+                            <router-link :to="'/product-details?id='+ prod.id">
+                                <img :src="prod.image_url" @error="prod.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
+                            </router-link>
+                        </div>
+                        
+                        <div class="product-details text-center pt-2">
+                            <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product}}</a>
+                            <div class="price">
+                                <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>
                             </div>
-                            <div class="tab-container" id="tab2con">
-                                    <div class="owl-carousel cat-carousel product-items">
-                                        <div class="product p-2" v-for="prod in products.new" :key="prod.id">
-                                            <div class="discount-tag">
-                                                -48%
-                                            </div>
-                                            <div class="images">
-                                                <router-link :to="'/product-details?id='+ prod.id">
-                                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
-                                                </router-link>
-                                            </div>
-                                            <div class="options-pannel">
-                                                <ul>
-                                                    <li class="d-lg-block d-md-block d-none" title="Compare">
-                                                        <a href="#" class="compare" @click.prevent="addToCompareList(prod)">
-                                                            <i class="fas fa-random"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-lg-block d-md-block d-none" title="Quick View">
-                                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li title="Add To Wishlist">
-                                                        <a href="#" class="compare" @click.prevent="AddToWishList(prod)">
-                                                            <i class="far fa-heart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-details text-center pt-2">
-                                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product}}</a>
-                                                <div class="price">
-                                                    <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>
-                                                </div>
-                                                <a href="#" @click.prevent="AddToCart(prod)">
-                                                    <div class="button m-auto text-light">
-                                                        <p><b>
-                                                            BUY NOW
-                                                        </b></p>
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
+                                <div class="button m-auto text-light">
+                                    <p><b>
+                                        BUY NOW
+                                    </b></p>
+                                    <span>
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </span>
+                                
                             </div>
+                            </a>
+                            </div>
+                                </div>    
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--Quickview Modal-->
+            <quickView :product="product_info"></quickView>
         </section>
         <!-- SUMMER TRENDY section end  -->
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
+import quickView from './layouts/QuickViewModal';
 export default {  
+    components: {
+        quickView,
+    },
     mixins: [mixins],
     data(){
         return {
             products: [],
+            product_info: {},
         }
     },
     methods: {
-
+        productInfo(info)
+        {
+            this.product_info = info;
+        },
     },
     created(){
         this.$store.dispatch("SummerTrendy")

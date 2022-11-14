@@ -11,10 +11,10 @@
                         </button>
                       </div>
                     <div class="carousel-inner carousel-main">
-                      <div class="carousel-item active slide" v-for="product in products" :key="product.id">
-                        <div class="slide-img-1 slide-img" style="background-image: url(assets/images/others/slider1_polo.png);">
+                      <div class="carousel-item active slide" v-for="slider in sliders" :key="slider.id">
+                        <div class="slide-img-1 slide-img" :style="{ 'background-image': 'url(' + slider.background_image + ')' }">
                             <h3></h3>
-                            <img src="assets/images/others/MENS-POLO-COLLECTION.png" alt="Slider">
+                            <img :src="slider.image" alt="Slider">
                             <button>Buy Now</button>
                         </div>
                       </div>
@@ -25,7 +25,7 @@
                                 <button>Click Here</button>
                             </div>
                         </div>
-                      </div> -->
+                      </div> -->sadf
                     </div>
                     <!-- <button class="carousel-control-prev" type="button" data-bs-target="#cover-slide" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -125,7 +125,7 @@ export default {
         checkout
     },
     mixins: [mixins],
-    props: ['products'],
+    props: ['sliders'],
     computed: {
         cartItemCount()
         {

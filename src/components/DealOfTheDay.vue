@@ -33,7 +33,7 @@
                             </div>
                             <div class="images">
                                 <router-link :to="'/product-details?id='+ product.id">
-                                    <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
+                                    <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
                                   </router-link>
                             </div>
                             
@@ -53,8 +53,8 @@
                                     
                                 </div>
                                 </a>
-                                <!--Quickview Modal-->
-                                <quickView :product="product_info"></quickView>
+                               <!--Quickview Modal-->
+                               <quickView :product="product_info"></quickView>
                             </div>
                         </div>
                         
@@ -70,9 +70,9 @@ import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
 export default {
     mixins: [mixins],
-    props: ['products'],
     data(){
         return{
+            products: [],
             product_info : {},
         }
     },
@@ -80,11 +80,19 @@ export default {
         productInfo(info)
         {
             this.product_info = info;
+
         }
     },
     components: {
         quickView,
     },
+    created(){
+        this.$store.dispatch("DealsOfTheDay")
+        .then(res=>{
+            this.products = res;
+           
+        })
+    }
 }
 </script>
 <style>

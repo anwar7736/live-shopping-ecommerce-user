@@ -7,7 +7,7 @@ export const product =  {
         HomeSlider()
         {
             return new Promise((resolve, reject)=>{
-                axios.get("/home_slider_product")
+                axios.get("/home_slider_image")
                 .then(res=>{
                     resolve(res.data);
                 })

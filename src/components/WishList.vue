@@ -55,7 +55,7 @@
                         
                         <div class="images">
                             <router-link :to="'/product-details?id='+ item.id">
-                                        <img src="assets/images/products/1.jpg" alt="Image" class="main-image">
+                                <img :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
                                     </router-link>
                             <div class="options-pannel2 d-lg-block d-md-block d-none" style="height: 6rem;">
                                 <ul>

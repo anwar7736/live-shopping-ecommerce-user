@@ -15,12 +15,12 @@
                 <div class="text-center m-2">
                     <button class="text-center btn btn-sm" @click="removeCompareItem(item.id)"><i class="fas fa-times"></i> Remove</button>
                 </div>
-                <a href="product.html" class="text-decoration-none">
-                    <img src="assets/images/products/1.jpg" alt="" >
+                <router-link :to="'/product-details?id='+ item.id" class="text-decoration-none">
+                    <img :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image"/> 
                     <div class="nav-link text-dark p-1">
                         <b>{{item.product}}</b>
                     </div>
-                    </a>
+                </router-link>
                     <div class="price">
                         <del class="text-muted">{{item.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.default_sell_price}}৳</span>
                     </div>
