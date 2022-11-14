@@ -25,16 +25,16 @@
                         </div>
                         <div class="col-lg-9 col-md-12 col-12 global-carousel-owl-col">
                             
-                            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs mt-4" id="myTab3" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#export_hot" type="button" role="tab" aria-controls="home" aria-selected="true">HOT</button>
+                            <button class="nav-link active" id="export-hot-tab" data-bs-toggle="tab" data-bs-target="#export_hot" type="button" role="tab" aria-controls="home" aria-selected="true">HOT</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#export_new" type="button" role="tab" aria-controls="profile" aria-selected="false">NEW ARRIVAL</button>
+                            <button class="nav-link" id="export-new-tab" data-bs-toggle="tab" data-bs-target="#export_new" type="button" role="tab" aria-controls="profile" aria-selected="false">NEW ARRIVAL</button>
                         </li>
                         </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="export_hot" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-content" id="myTab3Content">
+                            <div class="tab-pane fade show active" id="export_hot" role="tabpanel" aria-labelledby="export-hot-tab">
                                <div class="row row deal-day-row">
                                 <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="hot in products.hot" :key="hot.id">
                                 <div class="discount-tag">
@@ -70,7 +70,7 @@
                             <div class="price">
                                 <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
                             </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
+                            <a href="#" @click.prevent="AddToCart(hot)">
                                 <div class="button m-auto text-light">
                                     <p><b>
                                         BUY NOW
@@ -85,7 +85,7 @@
                                 </div>               
                                </div>
                             </div>
-                            <div class="tab-pane fade row" id="export_new" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade row" id="export_new" role="tabpanel" aria-labelledby="export-new-tab">
                                 <div class="row row deal-day-row">
                                     <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="prod in products.new" :key="prod.id">
                                 <div class="discount-tag">
@@ -121,7 +121,7 @@
                             <div class="price">
                                 <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>
                             </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
+                            <a href="#" @click.prevent="AddToCart(prod)">
                                 <div class="button m-auto text-light">
                                     <p><b>
                                         BUY NOW
@@ -167,7 +167,7 @@ export default {
             this.product_info = info;
         },
     },
-    created(){
+    mounted(){
         
         this.$store.dispatch("ExportQuality")
         .then(res=>{

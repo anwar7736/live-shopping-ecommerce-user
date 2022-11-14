@@ -18,23 +18,7 @@
                             <button>Buy Now</button>
                         </div>
                       </div>
-                      <!-- <div class="carousel-item slide">
-                        <div class="slide-img-2 slide-img row" style="background-image: url(assets/images/others/slider2_polo_womens.png);">
-                            <div class="col-lg-5 col-md-8 col-12 text-center">
-                                <img src="assets/images/others/make-statement.png" alt="Slider" class="2">
-                                <button>Click Here</button>
-                            </div>
-                        </div>
-                      </div> -->sadf
                     </div>
-                    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#cover-slide" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#cover-slide" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button> -->
                   </div>
             </div>
             <div class="container-fluid row-widget">

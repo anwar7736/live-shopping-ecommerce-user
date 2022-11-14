@@ -115,7 +115,7 @@
             <div class="sidebar-main">
                 <div class="m-row">
                     <div class="mobile-sidebar collapsed-left-open">
-                        <form action="" class="mobile-sidebar-form">
+                        <form action="javascript: void(0)" class="mobile-sidebar-form">
                             <input type="text" class="msf-input" placeholder="Search For Products">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
@@ -136,13 +136,11 @@
                                 <li class="nav-item"><router-link to="/contact-us" class="nav-link">Contact Us</router-link></li>
                             </ul>
                             <ul class="navbar-nav m-cat-dp" style="display: none;">
-                                <li class="nav-item m-cat-active"><router-link to="#" class="nav-link">Polo shirt</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">T-shirt</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Panjabi</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Blazer</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Pants</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Shoes</router-link></li>
-                                <li class="nav-item"><router-link to="#" class="nav-link">Watches</router-link></li>
+                                <li class="nav-item" v-for="cat in categories" :key="cat.id">
+                                    <router-link to="#" class="nav-link">
+                                        {{cat.name}}
+                                    </router-link>
+                                </li>
                             </ul>
                         </div>
                     </div>

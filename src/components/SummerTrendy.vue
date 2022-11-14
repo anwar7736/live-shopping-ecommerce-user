@@ -69,7 +69,7 @@
                             <div class="price">
                                 <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
                             </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
+                            <a href="#" @click.prevent="AddToCart(hot)">
                                 <div class="button m-auto text-light">
                                     <p><b>
                                         BUY NOW
@@ -120,7 +120,7 @@
                             <div class="price">
                                 <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>
                             </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
+                            <a href="#" @click.prevent="AddToCart(prod)">
                                 <div class="button m-auto text-light">
                                     <p><b>
                                         BUY NOW
