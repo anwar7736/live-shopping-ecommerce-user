@@ -26,13 +26,13 @@
                             
                             <ul class="nav nav-tabs mt-4" id="myTab2" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="best-hot-tab" data-bs-toggle="tab" data-bs-target="#best_hot" type="button" role="tab" aria-controls="home" aria-selected="true">HOT</button>
+                            <button class="nav-link active" id="best-hot-tab" data-bs-toggle="tab" data-bs-target="#best_hot" type="button" role="tab" aria-controls="best-hot-tab" aria-selected="true">HOT</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="best-new-tab" data-bs-toggle="tab" data-bs-target="#best_new" type="button" role="tab" aria-controls="profile" aria-selected="false">NEW ARRIVAL</button>
+                            <button class="nav-link" id="best-new-tab" data-bs-toggle="tab" data-bs-target="#best_new" type="button" role="tab" aria-controls="best-new-tab" aria-selected="false">NEW ARRIVAL</button>
                         </li>
                         </ul>
-                        <div class="tab-content" id="myTab2Content">
+                        <div class="tab-content d-block" id="myTab2Content">
                             <div class="tab-pane fade show active" id="best_hot" role="tabpanel" aria-labelledby="best-hot-tab">
                                <div class="row row deal-day-row">
                                 <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="hot in products.hot" :key="hot.id">
@@ -153,10 +153,11 @@ export default {
     components: {
         quickView,
     },
+    props: ["products"],
     mixins: [mixins],
     data(){
         return{
-            products: [],
+            // products: [],
             product_info: {},
         }
     },
@@ -165,13 +166,11 @@ export default {
         {
             this.product_info = info;
         },
+
     },
-    created(){
+    mounted(){
         
-        this.$store.dispatch("BestDeal")
-        .then(res=>{
-            this.products = res;
-        })
+       
         
     }
 }

@@ -98,7 +98,6 @@ export default {
     props: ['product'],
     mixins: [mixins],
 
-
 }
 </script>
 <style>

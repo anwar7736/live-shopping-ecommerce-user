@@ -27,13 +27,13 @@
                             
                             <ul class="nav nav-tabs mt-4" id="myTab3" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="export-hot-tab" data-bs-toggle="tab" data-bs-target="#export_hot" type="button" role="tab" aria-controls="home" aria-selected="true">HOT</button>
+                            <button class="nav-link active" id="export-hot-tab" data-bs-toggle="tab" data-bs-target="#export_hot" type="button" role="tab" aria-controls="export-hot-tab" aria-selected="true">HOT</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="export-new-tab" data-bs-toggle="tab" data-bs-target="#export_new" type="button" role="tab" aria-controls="profile" aria-selected="false">NEW ARRIVAL</button>
+                            <button class="nav-link" id="export-new-tab" data-bs-toggle="tab" data-bs-target="#export_new" type="button" role="tab" aria-controls="export-new-tab" aria-selected="false">NEW ARRIVAL</button>
                         </li>
                         </ul>
-                        <div class="tab-content" id="myTab3Content">
+                        <div class="tab-content d-block" id="myTab3Content">
                             <div class="tab-pane fade show active" id="export_hot" role="tabpanel" aria-labelledby="export-hot-tab">
                                <div class="row row deal-day-row">
                                 <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="hot in products.hot" :key="hot.id">

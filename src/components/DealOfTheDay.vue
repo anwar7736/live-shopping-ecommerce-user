@@ -53,8 +53,8 @@
                                     
                                 </div>
                                 </a>
-                               <!--Quickview Modal-->
-                               <quickView :product="product_info"></quickView>
+                                <!--Quickview Modal-->
+                            <quickView :product="product_info"></quickView>
                             </div>
                         </div>
                         
@@ -70,6 +70,9 @@ import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
 export default {
     mixins: [mixins],
+    components: {
+        quickView,
+    },
     data(){
         return{
             products: [],
@@ -79,12 +82,10 @@ export default {
     methods: {
         productInfo(info)
         {
+
             this.product_info = info;
 
         }
-    },
-    components: {
-        quickView,
     },
     created(){
         this.$store.dispatch("DealsOfTheDay")
