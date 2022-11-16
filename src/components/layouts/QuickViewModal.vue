@@ -37,7 +37,7 @@
                         <router-link :to="'/product-details?id='+ product.id" class="btn col-12">View Details</router-link>
                     </div>
                     <div class="modal-product-details col-6 pt-3">
-                        <a href="product.html" class="text-decoration-none text-dark">
+                        <a href="#" class="text-decoration-none text-dark">
                             <h3>{{product.product}}</h3>
                         </a>
                         <h6 class="price pt-3">
