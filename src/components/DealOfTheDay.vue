@@ -6,10 +6,11 @@
                 <div class="liner-continer">
                     <h4 class="title">DEALS OF THE DAY</h4> 
                 </div>
-                <div class="all-products">
+                <loading v-if="seen"/>
+                <div class="all-products" v-if="seen == false">
                     <div class="row deal-day-row">
                         <div class="col-lg-2 col-md-3 col-6 product p-2" v-for="product in products" :key="product.id">
-                            <div class="discount-tag">
+                            <div class="discount-tag d-none">
                                 -48%
                             </div>
                             <div class="options-pannel2">
@@ -42,7 +43,7 @@
                                 <div class="price">
                                     <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                                 </div>
-                                <a href="#" @click.prevent="AddToCart(product)">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product)">
                                     <div class="button m-auto text-light">
                                         <p><b>
                                             BUY NOW
@@ -68,15 +69,18 @@
 <script>
 import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
+import loading from './layouts/LoadingComp';
 export default {
     mixins: [mixins],
     components: {
         quickView,
+        loading
     },
     data(){
         return{
             products: [],
             product_info : {},
+            seen: true,
         }
     },
     methods: {
@@ -91,6 +95,7 @@ export default {
         this.$store.dispatch("DealsOfTheDay")
         .then(res=>{
             this.products = res;
+            this.seen = false;
            
         })
     }

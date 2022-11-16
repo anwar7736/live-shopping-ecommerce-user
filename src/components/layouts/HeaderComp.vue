@@ -80,7 +80,7 @@
                             <div class="search-cat-dp-hover">
                                 <ul>
                                     <li class="nav-item" v-for="cat in categories" :key="cat.id">
-                                        <router-link to="#" class="nav-link">{{cat.name}}</router-link>
+                                        <router-link :to="'/product-category?id='+ cat.id" class="nav-link">{{cat.name}}</router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -90,13 +90,13 @@
                             <input type="text" class="search-input" placeholder="Search For Products">
                             <div class="dpdown d-none d-md-none d-lg-block">
                                 <button class="search-dp ps-3 pe-3">
-                                    <span class="pe-3">Search Category</span> <i class="fas fa-angle-down"></i>
+                                    <span class="pe-3">SELECT CATEGORY</span> <i class="fas fa-angle-down"></i>
                                 </button>
                                     <!-- dropdown  -->
                                         <div class="search-cat-dp">
                                             <ul>
                                                 <li class="nav-item" v-for="cat in categories" :key="cat.id">
-                                                    <router-link to="#" class="nav-link">
+                                                    <router-link :to="'/product-category?id='+ cat.id" class="nav-link">
                                                         {{cat.name}}
                                                     </router-link>
                                                 </li>
@@ -137,7 +137,7 @@
                             </ul>
                             <ul class="navbar-nav m-cat-dp" style="display: none;">
                                 <li class="nav-item" v-for="cat in categories" :key="cat.id">
-                                    <router-link to="#" class="nav-link">
+                                    <router-link :to="'/product-category?id='+ cat.id" class="nav-link">
                                         {{cat.name}}
                                     </router-link>
                                 </li>

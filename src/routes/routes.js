@@ -18,6 +18,7 @@ import WishList from '../components/WishList';
 import Dashboard from '../components/DashboardComp';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import ProductDetails from '../components/ProductDetails';
+import ProductCategory from '../components/ProductCategory';
 import Profile from '../components/ProfileComp';
 
 
@@ -46,6 +47,13 @@ const routes = [
         component:ProductDetails,
         meta: {
             title : 'Product Details',
+        },
+    }, 
+    {
+        path: '/product-category', 
+        component:ProductCategory,
+        meta: {
+            title : 'Category wise product',
         },
     }, 
     {

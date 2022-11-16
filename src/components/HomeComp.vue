@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HomeMain :sliders="homeslider"></HomeMain>
+        <HomeMain></HomeMain>
         <SummerTrendy></SummerTrendy>
         <BestDeal :products="bestdeal"></BestDeal>
         <ExportQuality></ExportQuality>
@@ -36,15 +36,6 @@ export default {
         DealOfTheDay,
     },
     created(){
-        this.$store.dispatch("HomeSlider")
-        .then(res=>{
-            this.homeslider = res;
-        })
-
-        this.$store.dispatch("BestDeal")
-        .then(res=>{
-            this.bestdeal = res;
-        })
         
         
     },

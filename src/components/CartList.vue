@@ -23,6 +23,9 @@
                                             <div class="mt-5">
                                                 <center>
                                                     <h4 class="text-danger"><i class="fa fa-shopping-cart"></i> No item found in your cart list</h4>
+                                                    <router-link to="/shop" class="btn text-light mt-3" style="background-color:#ed6c00;">
+                                                        RETURN TO SHOP
+                                                    </router-link>
                                                 </center>
                                             </div>
                                         </td>
@@ -107,9 +110,10 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" class="btn text-center d-block">
-                                    <button class="text-cap" data-bs-toggle="modal" data-bs-target="#buy-to-cart">Proceed to Checkout <span><i class="fas fa-arrow-right"></i></span></button>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn text-center d-block">
+                                    <button class="text-cap">Proceed to Checkout <span><i class="fas fa-arrow-right"></i></span></button>
                                 </a>
+    
                             </div>
                             
                         </div>

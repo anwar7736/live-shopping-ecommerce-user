@@ -2,9 +2,10 @@
     <div>
         <section>
             <div class="container mt-5 mb-5">
-                <div class="row deal-day-row">
+                <loading v-if="seen"/>
+                <div class="row deal-day-row" v-if="seen == false">
                     <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="sale in flashSell" :key="sale.id">
-                        <div class="discount-tag">
+                        <div class="discount-tag d-none">
                             -48%
                         </div>
                         <div class="options-pannel2">
@@ -39,7 +40,7 @@
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(sale)">
                                 <div class="button m-auto text-light">
-                                    <p><b>
+                                    <p ><b>
                                         BUY NOW
                                     </b></p>
                                     <span>
@@ -48,25 +49,30 @@
                                 
                             </div>
                             </a>
-
-                            <!--Quickview Modal-->
-                            <quickView :product="product_info"></quickView>
                         </div>
                     </div>               
                  </div>
             </div>
         </section>
+        
+        <!--Quickview Modal-->
+        <quickView :product="product_info"></quickView>
+        <!-- Checkout modal  -->
+        <checkout :cartItems="cartItems"></checkout>
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
+import checkout from './layouts/CheckoutModal';
+import loading from './layouts/LoadingComp';
 export default {
     mixins: [mixins],
     data(){
         return{
             flashSell: {},
             product_info : {},
+            seen: true,
         }
     },
     methods: {
@@ -75,14 +81,27 @@ export default {
             this.product_info = info;
         }
     },
+    computed: {
+        cartItemCount()
+        {
+            return this.$store.getters.Total_Cart_Items;
+        },
+        cartItems()
+        {
+            return this.$store.getters.Get_Cart_Items;
+        }
+    },
     components: {
         quickView,
+        checkout,
+        loading
     },
     created()
     {
         this.$store.dispatch("FlashSell")
         .then(res=>{
             this.flashSell = res;
+            this.seen = false;
         })
     }
 }

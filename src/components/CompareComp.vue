@@ -8,6 +8,9 @@
         <div v-if="compareItems.length < 1">
             <center>
                 <h5 class="text-danger"><i class="fa fa-random"></i> No Item found in your compare list</h5>
+                <router-link to="/shop" class="btn text-light mt-3" style="background-color:#ed6c00;">
+                    RETURN TO SHOP
+                </router-link>
             </center>
         </div>
         <div class="row compare-row">
@@ -26,7 +29,7 @@
                     </div>
                     <div class="quantity-buy p-1 ps-0">
                         
-                        <button class="btn" @click="AddToCart(item)">Buy</button>
+                        <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(item)">Buy</button>
                     </div>
                     <p v-html="item.description"></p>
                     <p>Contact us at any time:</p>
@@ -39,21 +42,32 @@
         
     </div>
 </section>
+   <!-- Checkout modal  -->
+   <checkout :cartItems="cartItems"></checkout>
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
+import checkout from './layouts/CheckoutModal';
 export default {
     mixins: [mixins],
     computed: {
         compareItems()
         {
             return this.$store.getters.Get_Compare_Items;
+        },
+        cartItemCount()
+        {
+            return this.$store.getters.Total_Cart_Items;
+        },
+        cartItems()
+        {
+            return this.$store.getters.Get_Cart_Items;
         }
     },
-    methods: {
-
-    }
+    components: {
+        checkout
+    },
 }
 </script>
 <style lang="">

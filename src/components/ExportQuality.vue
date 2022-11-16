@@ -33,11 +33,12 @@
                             <button class="nav-link" id="export-new-tab" data-bs-toggle="tab" data-bs-target="#export_new" type="button" role="tab" aria-controls="export-new-tab" aria-selected="false">NEW ARRIVAL</button>
                         </li>
                         </ul>
-                        <div class="tab-content d-block" id="myTab3Content">
+                        <loading v-if="seen"/>
+                        <div class="tab-content d-block" id="myTab3Content" v-if="seen == false">
                             <div class="tab-pane fade show active" id="export_hot" role="tabpanel" aria-labelledby="export-hot-tab">
                                <div class="row row deal-day-row">
                                 <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="hot in products.hot" :key="hot.id">
-                                <div class="discount-tag">
+                                <div class="discount-tag d-none">
                                  -48%
                                 </div>
                         <div class="options-pannel2">
@@ -70,7 +71,7 @@
                             <div class="price">
                                 <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
                             </div>
-                            <a href="#" @click.prevent="AddToCart(hot)">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
                                 <div class="button m-auto text-light">
                                     <p><b>
                                         BUY NOW
@@ -88,7 +89,7 @@
                             <div class="tab-pane fade row" id="export_new" role="tabpanel" aria-labelledby="export-new-tab">
                                 <div class="row row deal-day-row">
                                     <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="prod in products.new" :key="prod.id">
-                                <div class="discount-tag">
+                                <div class="discount-tag d-none">
                                  -48%
                                 </div>
                         <div class="options-pannel2">
@@ -121,7 +122,7 @@
                             <div class="price">
                                 <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>
                             </div>
-                            <a href="#" @click.prevent="AddToCart(prod)">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
                                 <div class="button m-auto text-light">
                                     <p><b>
                                         BUY NOW
@@ -150,15 +151,18 @@
 <script>
 import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
+import loading from './layouts/LoadingComp';
 export default {
     components: {
         quickView,
+        loading
     },
     mixins: [mixins],
     data(){
         return {
             products: [],
             product_info: {},
+            seen: true,
         }
     },
     methods: {
@@ -172,6 +176,7 @@ export default {
         this.$store.dispatch("ExportQuality")
         .then(res=>{
             this.products = res;
+            this.seen = false;
         })
     }
 }

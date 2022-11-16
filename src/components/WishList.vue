@@ -46,10 +46,13 @@
                         <center>
                             <h4 class="text-danger"><i class="fa fa-heart"></i> Your wishlist is empty!
                             </h4>
+                            <router-link to="/shop" class="btn text-light mt-3" style="background-color:#ed6c00;">
+                                RETURN TO SHOP
+                            </router-link>
                         </center>
                     </div>
                     <div class="col-lg-12 col-md-6 col-12 product wishlist-product p-2 d-lg-flex"  v-for="item in wishlistItems" :key="item.id">
-                        <div class="discount-tag">
+                        <div class="discount-tag d-none">
                             -48%
                         </div>
                         
@@ -81,7 +84,7 @@
                             </div>
                             <p class="product-details-p" v-html="item.description">
                             </p>
-                            <a href="#" @click.prevent="AddToCart(item)">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(item)">
                                 <div class="button text-light">
                                     <p><b>
                                         BUY NOW
@@ -102,11 +105,14 @@
         </div>
     </div>
 </section>
+   <!-- Checkout modal  -->
+   <checkout :cartItems="cartItems"></checkout>
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
+import checkout from './layouts/CheckoutModal';
 export default {
     data(){
         return {
@@ -115,12 +121,21 @@ export default {
     },
     components: {
         quickView,
+        checkout
     },
     mixins: [mixins],
     computed: {
         wishlistItems()
         {
             return this.$store.getters.Get_Wishlist_Items;
+        },
+        cartItemCount()
+        {
+            return this.$store.getters.Total_Cart_Items;
+        },
+        cartItems()
+        {
+            return this.$store.getters.Get_Cart_Items;
         }
     },
     methods: {

@@ -166,7 +166,7 @@
                                         <rect x="15" y="10" width="4" height="4"></rect>
                                         </svg>
                                 </a>
-                                <a href="#" class="nav-link me-3 ms-3 font-lg active" id="filter">
+                                <a href="#" class="nav-link me-3 ms-3 font-lg" id="filter">
                                     <i class="fas fa-sliders-h"></i> Filter
                                 </a>
                             </nav>
@@ -368,10 +368,11 @@ export default {
     methods: {
         categoryFilter(id)
         {
-
+            this.seen = true;
             this.$store.dispatch("ProductFilterByCategory", id)
             .then(res=>{
                 this.products = res;
+                this.seen = false;
             })
             .catch(err=>{
                 console.log(err);
@@ -384,11 +385,9 @@ export default {
 
         productSortByType(type)
         {
-            this.seen = true;
             this.$store.dispatch("productSortByType", type)
             .then(res=>{
                 this.products = res;
-                this.seen = false;
             })
             .catch(err=>{
                 console.log(err);
@@ -397,11 +396,9 @@ export default {
         
         productFilterByPrice(from = '', to = '')
         {
-            this.seen = true;
             this.$store.dispatch("productFilterByPrice",{from, to})
             .then(res=>{
                 this.products = res;
-                this.seen = false;
             })
             .catch(err=>{
                 console.log(err);
@@ -424,6 +421,8 @@ export default {
     },
     created()
     {
+        this.categoryFilter(this.$route.query.id);
+
         this.$store.dispatch("CATEGORY_LIST")
         .then(res=>{
             this.categories = res.categories;
@@ -432,7 +431,7 @@ export default {
             console.log(err);
         })
         
-        this.$store.dispatch("ShopProductList")
+        this.$store.dispatch("ProductFilterByCategory", this.$route.query.id)
         .then(res=>{
             this.products = res;
             this.seen = false;

@@ -11,13 +11,16 @@
                         </button>
                       </div>
                     <div class="carousel-inner carousel-main">
-                      <div class="carousel-item active slide" v-for="slider in sliders" :key="slider.id">
+                      <loading v-if="seen"/>
+                       <div v-if="seen == false">
+                        <div class="carousel-item active slide" v-for="slider in sliders" :key="slider.id">
                         <div class="slide-img-1 slide-img" :style="{ 'background-image': 'url(' + slider.background_image + ')' }">
                             <h3></h3>
                             <img :src="slider.image" alt="Slider">
                             <button>Buy Now</button>
                         </div>
                       </div>
+                       </div>
                     </div>
                   </div>
             </div>
@@ -97,19 +100,26 @@
         </span>
         </button>
         </section>
-        <!-- Main content end  -->
+        <!-- Checkout modal  -->
         <checkout :cartItems="cartItems"></checkout>
 </div>
 </template>
 <script>
 import mixins from '../Mixins';
 import checkout from './layouts/CheckoutModal';
+import loading from './layouts/LoadingComp';
 export default {
     components: {
-        checkout
+        checkout,
+        loading
+    },
+    data(){
+        return {
+            seen : true,
+            sliders : {},
+        }
     },
     mixins: [mixins],
-    props: ['sliders'],
     computed: {
         cartItemCount()
         {
@@ -130,6 +140,14 @@ export default {
             }
             else this.isVisible = true;
         }
+    },
+    created()
+    {
+        this.$store.dispatch("HomeSlider")
+        .then(res=>{
+            this.sliders = res;
+            this.seen  = false;
+        })
     }
 
 }

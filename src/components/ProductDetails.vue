@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12 product-image-col row pt-3">
                         <div class="image single-product-images">
-                            <div class="discount-tag">
+                            <div class="discount-tag d-none">
                                 -48%
                             </div>
                             <div id="product-single" class="carousel slide" data-bs-ride="carousel">
@@ -66,8 +66,10 @@
                                 <button class="cart-qty-plus" type="button" id="inc" value="+">+</button>
                                 
                             </div>
-                            <button class="btn" @click="AddToCart(product)">Buy</button>
+                            <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product)">Buy</button>
                         </div>
+                         <!-- Checkout modal  -->
+                         <checkout :cartItems="cartItems"></checkout>
                         <div class="products-options mt-4 d-lg-flex">
                             <a href="#" class="text-decoration-none text-dark me-3" @click.prevent="addToCompareList(product)">
                                 <b><i class="fas fa-random"></i> Compare</b>
@@ -389,7 +391,7 @@
             <div class="container">
                 <div class="owl-carousel recently-view">
                     <div class="product p-2">
-                        <div class="discount-tag">
+                        <div class="discount-tag d-none">
                             -48%
                         </div>
                         
@@ -441,7 +443,7 @@
                         </div>
                     </div>
                     <div class="product p-2">
-                        <div class="discount-tag">
+                        <div class="discount-tag d-none">
                             -48%
                         </div>
                         
@@ -493,7 +495,7 @@
                         </div>
                     </div>
                     <div class="product p-2">
-                        <div class="discount-tag">
+                        <div class="discount-tag d-none">
                             -48%
                         </div>
                         
@@ -545,7 +547,7 @@
                         </div>
                     </div>
                     <div class="product p-2">
-                        <div class="discount-tag">
+                        <div class="discount-tag d-none">
                             -48%
                         </div>
                         
@@ -597,7 +599,7 @@
                         </div>
                     </div>
                     <div class="product p-2">
-                        <div class="discount-tag">
+                        <div class="discount-tag d-none">
                             -48%
                         </div>
                         
@@ -770,6 +772,7 @@
                                 
                             </div>
                             <button class="btn">Buy</button>
+                        
                         </div>
                         <hr/>
                         <p><b>SKU:</b> 0613</p>
@@ -799,11 +802,16 @@
             </div>
         </div>
     </div>
+
 </div>
 </template>
 <script>
 import mixins from '../Mixins';
+import checkout from './layouts/CheckoutModal';
 export default {
+    components: {
+        checkout,
+    },
     mixins: [mixins],
     data()
     {
@@ -823,7 +831,18 @@ export default {
             console.log(err);
         })
 
-    }
+    },
+    computed: {
+        cartItemCount()
+        {
+            return this.$store.getters.Total_Cart_Items;
+        },
+        cartItems()
+        {
+            return this.$store.getters.Get_Cart_Items;
+        }
+    },
+
 }
 </script>
 <style lang="">
