@@ -34,7 +34,11 @@
                         </div>
                         
                         <div class="product-details text-center pt-2">
-                            <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{sale.product}}</a>
+                            
+                            <div class="product_name">
+                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">      {{sale.product}}
+                                </a>
+                            </div>
                             <div class="price">
                                 <del class="text-muted">{{sale.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{sale.default_sell_price}}৳</span>
                             </div>

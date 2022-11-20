@@ -78,7 +78,7 @@
                         
                         <div class="product-details text-start pt-2 ps-4">
     
-                            <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">{{item.product}}</a>
+                            <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{item.product}}</a>
                             <div class="price">
                                 <del class="text-muted">{{item.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.default_sell_price}}৳</span>
                             </div>

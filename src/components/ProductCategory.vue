@@ -166,12 +166,12 @@
                                         <rect x="15" y="10" width="4" height="4"></rect>
                                         </svg>
                                 </a>
-                                <a href="#" class="nav-link me-3 ms-3 font-lg" id="filter">
+                                <a href="#" class="nav-link me-3 ms-3 font-lg" id="filter" @click.prevent="showHide">
                                     <i class="fas fa-sliders-h"></i> Filter
                                 </a>
                             </nav>
                         </div>
-                        <div class="filter-dropdown active">
+                        <div class="filter-dropdown" v-if="active">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12 sort-by pb-3">
                                     <h5>Sort By</h5>
@@ -310,7 +310,10 @@
                                 
                                 <div class="product-details text-center pt-2 ps-2">
 
-                                    <a href="product.html" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product}}</a>
+                                   <div class="product_name">
+                                        <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;"> {{product.product}}
+                                        </a>
+                                   </div>
                                     <div class="price">
                                         <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                                     </div>
@@ -358,6 +361,7 @@ export default {
             rangeFrom: 0,
             rangeTo: 2500,
             seen: true,
+            active: false,
         }
     },
     components: {
@@ -366,6 +370,14 @@ export default {
         loading
     },
     methods: {
+        showHide()
+        {
+            if(this.active)
+            {
+                this.active = false;
+            }
+            else  this.active = true;
+        },
         categoryFilter(id)
         {
             this.seen = true;
@@ -385,9 +397,11 @@ export default {
 
         productSortByType(type)
         {
+            this.seen = true;
             this.$store.dispatch("productSortByType", type)
             .then(res=>{
                 this.products = res;
+                this.seen = false;
             })
             .catch(err=>{
                 console.log(err);
@@ -396,9 +410,11 @@ export default {
         
         productFilterByPrice(from = '', to = '')
         {
+            this.seen = true;
             this.$store.dispatch("productFilterByPrice",{from, to})
             .then(res=>{
                 this.products = res;
+                this.seen = false;
             })
             .catch(err=>{
                 console.log(err);

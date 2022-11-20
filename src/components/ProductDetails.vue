@@ -48,6 +48,7 @@
                         <a href="product.html" class="text-decoration-none text-dark">
                             <h3>{{product.product}}</h3>
                         </a>
+                        
                         <h6 class="price pt-3">
                             <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
                         </h6>
