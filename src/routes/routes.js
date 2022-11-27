@@ -20,6 +20,7 @@ import PrivacyPolicy from '../components/PrivacyPolicy';
 import ProductDetails from '../components/ProductDetails';
 import ProductCategory from '../components/ProductCategory';
 import Profile from '../components/ProfileComp';
+import SearchProduct from '../components/SearchProducts';
 
 
 import NotFound from '../components/404NotFound';
@@ -40,6 +41,13 @@ const routes = [
             title : 'My Account',
             
           
+        },
+    },  
+    {
+        path: '/product-search', 
+        component:SearchProduct,
+        meta: {
+            title : 'Searching Products',
         },
     }, 
     {

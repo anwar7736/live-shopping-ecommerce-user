@@ -2,7 +2,7 @@
     <div>
         <link rel="stylesheet" href="assets/css/shop.css">
         <section>
-            <div class="container-fluid">
+            <div class="container">
                 <div class="shop row">
                     <div class="col-lg-3 col-md-5 col-10 shop-filter-sidebar">
                         <div class="category mb-3 sidebar-box">
@@ -311,8 +311,8 @@
                                 <div class="product-details text-center pt-2 ps-2">
 
                                    <div class="product_name">
-                                        <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;"> {{product.product}}
-                                        </a>
+                                        <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;"> {{product.product}}
+                                        </router-link>
                                    </div>
                                     <div class="price">
                                         <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>

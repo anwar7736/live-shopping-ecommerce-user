@@ -2,7 +2,7 @@
     <div>
      <!-- Main content start  -->
         <section>
-            <div class="container-fluid">
+            <div class="container">
                 <div id="cover-slide" class="carousel slide carousel-fade " data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#cover-slide" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"><div></div></button>
@@ -24,7 +24,7 @@
                     </div>
                   </div>
             </div>
-            <div class="container-fluid row-widget">
+            <div class="container row-widget">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 m-auto text-start text-lg-center">
                         <div class="d-flex text-lg-center text-start m-auto justify-content-lg-center justify-content-start">

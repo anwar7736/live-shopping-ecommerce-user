@@ -15,7 +15,7 @@
                 </center>
             </div>
             <div class="cart-item cart1 d-flex justify-content-between" v-for="item in cartItems" :key="item.id">
-                <img :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80"/>
+                <img class="mb-2" :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80"/>
                 <div class="align-item-center ps-3 quantity-buy" >
                     <p><b>
                         {{item.product}}

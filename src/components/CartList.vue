@@ -2,7 +2,7 @@
     <div>
         <section>
             <link rel="stylesheet" href="assets/css/cart.css">
-            <div class="container-fluid mt-5 mb-5">
+            <div class="container mt-5 mb-5">
                 <div class="row">
                     <div class="col-lg-8 col-md-12 col-12 cart-items">
                         <div class="table-responsive">
@@ -46,7 +46,7 @@
                                         </td>
                                         <td>
                                             <div class="product-name">
-                                                <router-link to="/product-details" class="text-decoration-none text-dark">
+                                                <router-link :to="'/product-details?id='+ item.id" class="text-decoration-none text-dark">
                                                     {{item.product}}
                                                 </router-link>
                                             </div>

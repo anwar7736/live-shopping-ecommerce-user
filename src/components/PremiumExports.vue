@@ -2,7 +2,7 @@
     <div>
                 <!-- gift card section start  -->
                 <section>
-            <div class="container-fluid">
+            <div class="container">
                 <div class="gift-card global-cat-sec">
                     <div class="section-cat-title">
                         <h2>PREMIUM EXPORTS</h2>

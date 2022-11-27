@@ -2,7 +2,7 @@
     <div>
               <!-- All Products Grid Section start  -->
               <section>
-            <div class="container-fluid">
+            <div class="container">
                 <div class="liner-continer">
                     <h4 class="title">DEALS OF THE DAY</h4> 
                 </div>
@@ -25,6 +25,8 @@
                                             <i class="fas fa-search"></i>
                                         </a>
                                     </li>
+                                                                         <!--Quickview Modal-->
+                            <quickView :product="product_info"></quickView>
                                     <li title="Add To Wishlist">
                                         <a href="#" class="compare" @click.prevent="AddToWishList(product)">
                                             <i class="far fa-heart"></i>
@@ -41,7 +43,8 @@
                             <div class="product-details text-center pt-2">
                                
                                 <div class="product_name">
-                                    <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product}}</a>
+                                    <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product}}
+                                    </router-link>
                                 </div>
                                 <div class="price">
                                     <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
@@ -57,8 +60,7 @@
                                     
                                 </div>
                                 </a>
-                                <!--Quickview Modal-->
-                            <quickView :product="product_info"></quickView>
+                            
                             </div>
                         </div>
                         

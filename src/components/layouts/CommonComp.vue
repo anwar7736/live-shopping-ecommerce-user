@@ -2,7 +2,7 @@
     <div>
         <section>
             <div class="features pt-4 pb-4 ps-3 pe-3" style="background-color: #ed6c00;">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row feature-row">
                         <div class="col-lg col-md-4 col-12 feature-col m-auto text-start p-2">
                             <div class="d-flex feature-flex">

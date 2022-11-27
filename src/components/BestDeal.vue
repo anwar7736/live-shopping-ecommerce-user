@@ -2,7 +2,7 @@
     <div>
                 <!-- Best Deal section start  -->
             <section>
-            <div class="container-fluid mt-5">
+            <div class="container mt-5">
                 <div class="best-deal global-cat-sec">
                     <div class="section-cat-title">
                         <h2>Best Deal</h2>
@@ -68,7 +68,8 @@
                         <div class="product-details text-center pt-2">
                             
                             <div class="product_name">
-                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product}}</a>
+                                <router-link :to="'/product-details?id='+ hot.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product}}
+                                </router-link>
                             </div>
                             <div class="price">
                                 <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
@@ -122,7 +123,8 @@
                         <div class="product-details text-center pt-2">
                            
                             <div class="product_name">
-                                <a href="#" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product}}</a>
+                                <router-link :to="'/product-details?id='+ prod.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product}}
+                                </router-link>
                             </div>
                             <div class="price">
                                 <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>

@@ -147,6 +147,18 @@ export const product =  {
                     reject(err);
                 })
             });
+        }, 
+        productSearch(context, query)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/product_search/" + query)
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
         },
     },
 };

@@ -3,7 +3,7 @@
                 <!-- header start  -->
                 <header>
             <!-- topbar start  -->
-                <div class="topbar-main col-12 container-fluid">
+                <div class="topbar-main col-12 container">
                     <div class="topbar d-flex justify-content-between">
                         <ul class="topbar-left p-0 mb-0">
                             <li><router-link to="/return-policy" class="top-l-link">Return</router-link></li>
@@ -23,7 +23,7 @@
             <!-- topbar end  -->
             <!-- navbar start  -->
             <div class="manubar">
-                <div class="container-fluid">
+                <div class="container">
                     <ul class="navbar-inner col-12 mb-0">
                         <li class="menu-bar d-block d-md-block d-lg-none">
                             <button id="menu-toggler" class="menu-toggler">
@@ -70,7 +70,7 @@
             </div>
             <!-- navbar end  -->
             <div class="search-bar">
-                <div class="container-fluid">
+                <div class="container">
                     <ul class="searchbar-inner col-12">
                         <li class="dpdown cat-dp-main d-none d-md-none d-lg-block">
                             <button class="cat-dp">
@@ -87,13 +87,13 @@
                         <!-- dropdown  -->
                         </li>
                         <li class="search-box ps-lg-3">
-                            <input type="text" class="search-input" placeholder="Search For Products">
+                            <input type="text" class="search-input" v-model="query" placeholder="Search For Products">
                             <div class="dpdown d-none d-md-none d-lg-block">
                                 <button class="search-dp ps-3 pe-3">
                                     <span class="pe-3">SELECT CATEGORY</span> <i class="fas fa-angle-down"></i>
                                 </button>
                                     <!-- dropdown  -->
-                                        <div class="search-cat-dp">
+                                        <div class="search-cat-dp" @mouseout="hoverOut">
                                             <ul>
                                                 <li class="nav-item" v-for="cat in categories" :key="cat.id">
                                                     <router-link :to="'/product-category?id='+ cat.id" class="nav-link">
@@ -104,7 +104,7 @@
                                         </div>
                                     <!-- dropdown  -->
                             </div>
-                            <button class="search-submit" type="submit">
+                            <button class="search-submit" type="button" @click="searchProduct">
                                 <i class="fas fa-search"></i>
                             </button>
                         </li>
@@ -151,7 +151,7 @@
         </header>
         <!-- header end  -->
         <div class="manubar" id="navbar">
-            <div class="container-fluid">
+            <div class="container">
                 <ul class="navbar-inner col-12 mb-0">
                     <li class="menu-bar d-block d-md-block d-lg-none">
                         <button id="menu-toggler" class="menu-toggler">
@@ -205,7 +205,8 @@ export default {
         return {
            hover: "search-cat-dp-hover",
            cat: "search-cat-dp",
-           categories : {},
+           categories: {},
+           query: '',
         }
     },
     methods: {
@@ -224,6 +225,11 @@ export default {
                 });
             }
         },
+        searchProduct()
+        {
+            this.$router.push('/product-search?query='+this.query);
+            this.query = "";
+        }
 
        
     },
