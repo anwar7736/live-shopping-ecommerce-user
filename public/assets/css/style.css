@@ -1317,3 +1317,7 @@ footer .row div form button{
     opacity: 1;
   }
 }
+
+.carousel__slide {
+  width:162px !important;
+}

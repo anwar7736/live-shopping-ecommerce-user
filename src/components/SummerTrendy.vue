@@ -23,20 +23,19 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-12 col-12 global-carousel-owl-col">
-                
-                        <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#summer_hot" type="button" role="tab" aria-controls="home" aria-selected="true">HOT</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#summer_new" type="button" role="tab" aria-controls="profile" aria-selected="false">NEW ARRIVAL</button>
-                        </li>
-                        </ul>
-                        <loading v-if="seen"/>
-                        <div class="tab-content" id="myTabContent" v-if="seen == false">
-                            <div class="tab-pane fade show active" id="summer_hot" role="tabpanel" aria-labelledby="home-tab">
-                               <div class="row row deal-day-row">
-                                <carousel :items-to-show="5">
+                           
+                            <div class="owl-tab-type d-flex tabs">
+                                <div class="btn" :class="{active:hot}" @click="summerHot">
+                                    <i class="fas fa-fire"></i> HOT
+                                </div>
+                                <div class="btn" :class="{active:newClass}" @click="summerNew">
+                                    <i class="fas fa-fire"></i>  NEW ARRIVAL
+                                </div>
+                            </div>
+                  
+                            <loading v-if="seen"/>
+                               <div class="row row deal-day-row" v-if="seen == false">
+                                <carousel :items-to-show="5" v-if="summer_hot">
                                 <slide  v-for="hot in products.hot" :key="hot.id">
                                 <div class=" product p-2">
                                 <div class="discount-tag d-none">
@@ -50,7 +49,7 @@
                                     </a>
                                 </li>
                                 <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(hot)">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(848)">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </li>
@@ -74,7 +73,7 @@
                                 </router-link>
                             </div>
                             <div class="price">
-                                <del class="text-muted">{{hot.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.default_sell_price}}৳</span>
+                                <del class="text-muted">{{hot.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.variation.default_sell_price}}৳</span>
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
                                 <div class="button m-auto text-light">
@@ -96,12 +95,8 @@
                                 <pagination />
                                 </template>
                             </carousel>
-             
-                               </div>
-                            </div>
-                            <div class="tab-pane fade row" id="summer_new" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row row deal-day-row">
-                                <carousel :items-to-show="5">
+                            <div class="" v-if="seen == false">
+                                <carousel :items-to-show="5" v-if="summer_new">
                                 <slide  v-for="prod in products.new" :key="prod.id">
                                 <div class=" product p-2">
                                 <div class="discount-tag d-none">
@@ -115,7 +110,7 @@
                                     </a>
                                 </li>
                                 <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(prod)">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(prod.id)">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </li>
@@ -139,7 +134,7 @@
                                 </router-link>
                             </div>
                             <div class="price">
-                                <del class="text-muted">{{prod.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.default_sell_price}}৳</span>
+                                <del class="text-muted">{{prod.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.variation.default_sell_price}}৳</span>
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
                                 <div class="button m-auto text-light">
@@ -162,7 +157,7 @@
                                 </template>
                             </carousel>
              
-                               </div>
+                          
                             </div>
                         </div>
                         </div>
@@ -197,12 +192,30 @@ export default {
             products: [],
             product_info: {},
             seen: true,
+            summer_hot:true,
+            summer_new:false,
+            hot: 'active',
+            newClass: '',
         }
     },
     methods: {
-        productInfo(info)
-        {
-            this.product_info = info;
+        productInfo(id){
+            this.$store.dispatch("ProductFilterById", id)
+            .then(res=>{
+                this.product_info = res;
+            })
+        },
+        summerHot(){
+            this.summer_hot = true;
+            this.summer_new = false;
+            this.hot = 'active';
+            this.newClass = '';
+        }, 
+        summerNew(){
+            this.summer_hot = false;
+            this.summer_new = true;
+            this.hot = '';
+            this.newClass = 'active';
         },
     },
     created(){
@@ -211,12 +224,10 @@ export default {
             this.products = res;
             this.seen = false;
             
-        })
-    }
+        });
+    },
 }
 </script>
 <style>
-    .carousel__slide {
-        width:162px !important;
-    }
+
 </style>

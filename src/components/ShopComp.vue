@@ -295,7 +295,7 @@
                                                 </a>
                                             </li>
                                             <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(product)">
+                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(product.id)">
                                                     <i class="fas fa-search"></i>
                                                 </a>
                                             </li>
@@ -316,7 +316,7 @@
                                   </div>
 
                                     <div class="price">
-                                        <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
+                                        <del class="text-muted">{{product.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.variation.default_sell_price}}৳</span>
                                     </div>
                                     <p class="product-details-p" style="display: none;" v-html="product.description">
                                     </p>
@@ -390,9 +390,11 @@ export default {
                 console.log(err);
             })
         },
-        productInfo(info)
-        {
-            this.product_info = info;
+        productInfo(id){
+            this.$store.dispatch("ProductFilterById", id)
+            .then(res=>{
+                this.product_info = res;
+            })
         },
 
         productSortByType(type)

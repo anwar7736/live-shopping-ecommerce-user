@@ -50,7 +50,7 @@
                         </a>
                         
                         <h6 class="price pt-3">
-                            <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
+                            <del class="text-muted">{{product.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.variation.default_sell_price}}৳</span>
                         </h6>
                         <p class="text-sm" v-html="product.description">
                         </p>

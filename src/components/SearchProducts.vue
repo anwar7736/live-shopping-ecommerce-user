@@ -17,7 +17,7 @@
                                     </a>
                                 </li>
                                 <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(item)">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(item.id)">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </li>
@@ -41,7 +41,7 @@
                                 </router-link>
                             </div>
                             <div class="price">
-                                <del class="text-muted">{{item.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.default_sell_price}}৳</span>
+                                <del class="text-muted">{{item.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.variation.default_sell_price}}৳</span>
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(item)">
                                 <div class="button m-auto text-light">
@@ -81,9 +81,11 @@ export default {
         }
     },
     methods: {
-        productInfo(info)
-        {
-            this.product_info = info;
+        productInfo(id){
+            this.$store.dispatch("ProductFilterById", id)
+            .then(res=>{
+                this.product_info = res;
+            })
         },
        
     },

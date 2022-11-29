@@ -14,24 +14,38 @@
                     <h6 class="text-danger"><i class="fa fa-shopping-cart"></i> Your cart is empty!</h6>
                 </center>
             </div>
-            <div class="cart-item cart1 d-flex justify-content-between" v-for="item in cartItems" :key="item.id">
-                <img class="mb-2" :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80"/>
+            <div class="cart-item cart1 d-flex justify-content-between" v-for="item in cartItems" :key="item.item.id">
+                <img class="mb-2" :src="item.item.image_url" @error="item.item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80"/>
                 <div class="align-item-center ps-3 quantity-buy" >
                     <p><b>
                         {{item.product}}
                     </b></p>
                     <div class="quantity">
-                        <button class="cart-qty-minus btn" id="dec" type="button" value="-" @click="decreaseQty(item.id)">-</button>
-                        <input type="text" name="qty" id="qty" minlength="1" v-model="item.quantity" readonly class="input-text qty" />
-                        <button class="cart-qty-plus btn" type="button" id="inc" value="+" @click="increaseQty(item.id)">+</button>
+                        <button class="cart-qty-minus btn" id="dec" type="button" value="-" @click="decreaseQty(item.item.id)">-</button>
+                        <input type="text" name="qty" id="qty" minlength="1" v-model="item.qty" readonly class="input-text qty" />
+                        <button class="cart-qty-plus btn" type="button" id="inc" value="+" @click="increaseQty(item.item.id)">+</button>
                         
                     </div>
+                    <strong class="text-sm" v-if="item.item.type === 'variable'">
+                            <span>Variations:</span>
+                            <div class="d-flex justify-content-between">
+                                <div class="" v-for="v in item.item.variations" :key="v.id">
+                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" v-model="size" class="size" :checked="v.id === item.size" /> {{v.name}}</label>
+                                </div>
+
+                            </div>
+
+                </strong><br/>
                 </div>
                 <p class="price text-end">
-                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.sell_price_inc_tax}}৳</span>
-                    <br><del class="text-muted">{{item.default_sell_price}}৳</del> <br>
-                    <button class="btn"><i class="fas fa-trash-alt" @click="removeItem(item.id)"></i></button>
+                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.item.variation.sell_price_inc_tax}}৳</span>
+                    <br><del class="text-muted">{{item.item.variation.default_sell_price}}৳</del> <br>
+                    <button class="btn"><i class="fas fa-trash-alt" @click="removeItem(item.item.id)"></i></button>
                 </p>
+                <p>
+                    
+                
+            </p>
             </div>
         </div>
         <hr>
@@ -61,11 +75,13 @@ import mixins from '../../Mixins';
 export default {
     data()
     {
-        return{
+        return{ 
+            size: '',
             customer:{
                 name: '',
                 phone: '',
                 address: '',
+               
             },
         }
     },
@@ -74,6 +90,15 @@ export default {
     methods: {
         checkout()
         {
+            this.cartItems.map(item=> {
+                if(item.item.type === 'variable')
+                {
+                    if(item.size === '')
+                    {
+                        toastr.error('Size is required');
+                    }
+                }
+            });
             this.$store.dispatch("Checkout", this.customer)
             .then((res)=>{
                 console.log(res);
@@ -82,12 +107,23 @@ export default {
                 phone: '',
                 address: '',
             };
-            toastr.success('Your order has been placed successfully!');
+            if(res.success)
+            {
+                toastr.success('Your order has been placed successfully!');
+            }
+            else if(res.error)
+            {
+                toastr.error(res.error);
+            }
             })
             .catch(err=>{
                 console.log(err);
             })
            
+        },
+        changeSize(id, size)
+        {
+            this.$store.dispatch("UpdateSize", {id, size});
         }
 
     },

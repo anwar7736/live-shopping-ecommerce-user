@@ -9,8 +9,8 @@
                             <table class="table">
                                 <thead class="border border-dark border-end-0 border-top-0 border-start-0">
                                     <tr>
-                                        <th scope="col">&nbsp;</th>
-                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">Action</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col">Product</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Quantity</th>
@@ -30,10 +30,10 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr class="border border-muted border-end-0 border-top-0 border-start-0" v-for="item in cartItems" :key="item.id">
+                                    <tr class="border border-muted border-end-0 border-top-0 border-start-0" v-for="cart in cartItems" :key="cart.item.id">
                                         <td>
                                                 <div class="remove">
-                                                    <button class="btn" @click="removeItem(item.id)">
+                                                    <button class="btn" @click="removeItem(cart.item.id)">
                                                         <i class="fas fa-times"></i>
                                                     </button>
                                                 </div>
@@ -41,28 +41,30 @@
                                         <td>
                                             <div class="thambnail">
                                                
-                                                <img :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80" /> 
+                                                <img :src="cart.item.image_url" @error="cart.item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80" /> 
                                             </div>
                                         </td>
                                         <td>
                                             <div class="product-name">
-                                                <router-link :to="'/product-details?id='+ item.id" class="text-decoration-none text-dark">
-                                                    {{item.product}}
+                                                <router-link :to="'/product-details?id='+ cart.item.id" class="text-decoration-none text-dark">
+                                                    {{cart.item.product}}
                                                 </router-link>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="product-price" data-title="Price">
-                                                <p class="text-muted"><del>{{item.sell_price_inc_tax}}৳</del> <span>{{item.default_sell_price}}৳</span></p>
+                                                <p class="text-muted"><del>{{cart.item.variation.sell_price_inc_tax}}৳</del> <span>{{cart.item.variation.default_sell_price}}৳</span></p>
                                             </div>
+                                        </td>                                        
+                                        <td>
                                         </td>
                                         <td>
                                             <div class="cart-quantiy" data-title="Quantity">
                                                 <div class="quantity-buy">
                                                     <div class="quantity">
-                                                        <button class="cart-qty-minus" id="dec" type="button" value="-" @click="decreaseQty(item.id)">-</button>
-                                                        <input type="text" name="qty" id="qty" maxlength="12" v-model="item.quantity" readonly class="input-text qty" style="margin:4px;"/>
-                                                        <button class="cart-qty-plus" type="button" id="inc" value="+" @click="increaseQty(item.id)">+</button>
+                                                        <button class="cart-qty-minus" id="dec" type="button" value="-" @click="decreaseQty(cart.item.id)">-</button>
+                                                        <input type="text" name="qty" id="qty" maxlength="12" v-model="cart.qty" readonly class="input-text qty" style="margin:4px;"/>
+                                                        <button class="cart-qty-plus" type="button" id="inc" value="+" @click="increaseQty(cart.item.id)">+</button>
                                                         
                                                     </div>
                                                 </div>
@@ -71,7 +73,7 @@
                                         <td>
                                             <div class="subtotal" title="subtotal">
                                                 <p class="main-color">
-                                                    {{item.quantity * item.default_sell_price}}৳
+                                                    {{cart.qty * cart.item.variation.default_sell_price}}৳
                                                 </p>
                                             </div>
                                         </td>
@@ -104,9 +106,9 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr v-for="item in cartItems" :key="item.id">
-                                            <td>{{item.product}}  × {{item.quantity}}</td>
-                                            <td class="text-end"> {{item.quantity * item.default_sell_price}}৳</td>
+                                        <tr v-for="cart in cartItems" :key="cart.item.id">
+                                            <td>{{cart.item.product}}  × {{cart.qty}}</td>
+                                            <td class="text-end"> {{cart.qty * cart.item.variation.default_sell_price}}৳</td>
                                         </tr>
                                     </tbody>
                                 </table>

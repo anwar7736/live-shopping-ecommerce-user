@@ -36,51 +36,39 @@
                         </div>
                         <router-link :to="'/product-details?id='+ product.id" class="btn col-12">View Details</router-link>
                     </div>
-                    <div class="modal-product-details col-6 pt-3">
+                    <div class="modal-product-details col-6 pt-3" v-if="product.variation">
                         <a href="#" class="text-decoration-none text-dark">
+                            
                             <h3>{{product.product}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <del class="text-muted">{{product.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.default_sell_price}}৳</span>
+                            <del class="text-muted">{{product.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.variation.default_sell_price}}৳</span>
                         </h6>
                         <p class="text-sm" v-html="product.description">
-                        </p>
-                        <p class="text-sm pt-4">
-                            Contact us at any time:
-                        </p>
-                        <p class="text-sm pt-2">
-                            +8801 403 111 999
-                        </p>
+                        </p>                        
+                        <strong class="text-sm" v-if="product.type === 'variable'">
+                            <span>Variations:</span>
+                            <div class="d-flex justify-content-between">
+                                <div class="" v-for="v in product.variations" :key="v.id">
+                                    <label><input type="radio" :value="v.id" v-model="size" class="size"/> {{v.name}}</label>
+                                </div>
+
+                            </div>
+
+                        </strong><br/>
                         <div class="quantity-buy d-flex">
                             <div class="quantity">
-                                <button class="cart-qty-minus" id="dec" type="button" value="-">-</button>
-                                <input type="text" name="qty" id="qty" maxlength="12" value="1" class="input-text qty" />
-                                <button class="cart-qty-plus" type="button" id="inc" value="+">+</button>
+                                <button class="cart-qty-minus" type="button" value="-" @click="decreaseQty">-</button>
+                                <input type="number" min="1" v-model="quantity" class="input-text qty" />
+                                <button class="cart-qty-plus" type="button" value="+" @click="increaseQty">+</button>
                                 
                             </div>
-                            <button class="btn" @click="AddToCart(product)">Buy</button>
+                            <br/>
+                            <button class="btn" @click="AddToCart(product, size, quantity)">Add To Cart</button>
                         </div>
                         <hr>
                         <p><b>SKU:</b> {{product.sku}}</p>
                         <p><b>Category: </b> {{product.category}}</p>
-                        <p><b>Tags: </b>  polo shirt, Sky Blue</p>
-                        <p><b>Share: </b> 
-                            <a href="#" class="text-dark text-sm p-2 text-decoration-none">
-                            <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="text-dark text-sm p-2 text-decoration-none">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="text-dark text-sm p-2 text-decoration-none">
-                                <i class="fab fa-pinterest-p"></i>
-                            </a>
-                            <a href="#" class="text-dark text-sm p-2 text-decoration-none">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-dark text-sm p-2 text-decoration-none">
-                                <i class="fab fa-telegram-plane"></i>
-                            </a> 
-                        </p>
                         
                     </div>
                 </div>
@@ -97,6 +85,26 @@ import mixins from '../../Mixins';
 export default {
     props: ['product'],
     mixins: [mixins],
+    data(){
+        return {
+            size: "",
+            quantity: 1,
+        }
+    },
+    methods: {
+        increaseQty()
+        {
+            this.quantity +=1;
+        },
+         decreaseQty()
+        {
+            if(this.quantity >1)
+            {
+                this.quantity -=1;
+            }
+        }
+    },
+    
 
 }
 </script>

@@ -7,9 +7,9 @@ export default{
             store.dispatch("AddToWishList", item)
            
         },
-        AddToCart(item)
+        AddToCart(item, size = '', qty = 1)
         {
-            store.dispatch("AddToCart", item);
+            store.dispatch("AddToCart", {item, size, qty});
             toastr.success('Item added to cart list');
         },
         addToCompareList(item)

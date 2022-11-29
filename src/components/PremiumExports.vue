@@ -9,51 +9,51 @@
                     </div>
                     
                 </div>
-                <div class="owl-carousel gift-card-owl mt-4 mb-5">
-                    <div>
-                        <div class="image" >
-                            <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="gift-card-img col-12">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="image" >
-                            <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="gift-card-img col-12">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="image" >
-                            <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="gift-card-img col-12">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="image" >
-                            <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="gift-card-img col-12">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="image" >
-                            <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="gift-card-img col-12">
-                        </div>
-                    </div>
-                </div>
+                    <loading v-if="seen"/>
+                    <carousel :items-to-show="5" v-if="seen == false">
+                        <slide  v-for="item in products" :key="item.id">
+                            <div>
+                                <div class="image" >
+                                    <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="">
+                                </div>
+                            </div>
+                        </slide>
+                        <template #addons>
+                            <navigation />
+                            <pagination />
+                        </template>
+                    </carousel>
             </div>
         </section>
         <!-- gift card section end  -->
     </div>
 </template>
 <script>
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import loading from './layouts/LoadingComp';
 export default {
+    components: {
+            loading,
+            Carousel,
+            Slide,
+            Pagination,
+            Navigation
+    },
     data(){
         return {
             products: [],
-        }
+            seen: true,
+    }
     },
     created(){
         this.$store.dispatch("PremiumExports")
         .then(res=>{
             this.products = res;
+            this.seen = false;
         });
-    }
+    },
+    
 }
 </script>
 <style>

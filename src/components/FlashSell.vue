@@ -16,7 +16,7 @@
                                     </a>
                                 </li>
                                 <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(sale)">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(848)">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </li>
@@ -36,13 +36,13 @@
                         <div class="product-details text-center pt-2">
                             
                             <div class="product_name">
-                                <router-link :to="'/product-details?id='+ sale.id" class="text-dark" style="text-decoration: none; font-weight: 600;">      {{sale.product}}
+                                <router-link :to="'/product-details?id='+ sale.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{sale.product}}
                                 </router-link>
                             </div>
                             <div class="price">
-                                <del class="text-muted">{{sale.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{sale.default_sell_price}}৳</span>
+                                <del class="text-muted">{{sale.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{sale.variation.default_sell_price}}৳</span>
                             </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(sale)">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(sale.id)">
                                 <div class="button m-auto text-light">
                                     <p ><b>
                                         BUY NOW
@@ -62,7 +62,7 @@
         <!--Quickview Modal-->
         <quickView :product="product_info"></quickView>
         <!-- Checkout modal  -->
-        <checkout :cartItems="cartItems"></checkout>
+        <checkout :cartItems="cartItems"></checkout>       
     </div>
 </template>
 <script>
@@ -80,9 +80,13 @@ export default {
         }
     },
     methods: {
-        productInfo(info)
+        productInfo(id)
         {
-            this.product_info = info;
+            this.$store.dispatch("ProductFilterById", id)
+            .then(res=>{
+                this.product_info = res;
+                
+            })
         }
     },
     computed: {
@@ -98,7 +102,7 @@ export default {
     components: {
         quickView,
         checkout,
-        loading
+        loading,
     },
     created()
     {

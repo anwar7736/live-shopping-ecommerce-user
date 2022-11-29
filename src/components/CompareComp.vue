@@ -25,7 +25,7 @@
                     </div>
                 </router-link>
                     <div class="price">
-                        <del class="text-muted">{{item.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.default_sell_price}}৳</span>
+                        <del class="text-muted">{{item.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.variation.default_sell_price}}৳</span>
                     </div>
                     <div class="quantity-buy p-1 ps-0">
                         
