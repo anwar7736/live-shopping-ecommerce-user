@@ -53,7 +53,7 @@
                                         </td>
                                         <td>
                                             <div class="product-price" data-title="Price">
-                                                <p class="text-muted"><del>{{cart.item.variation.sell_price_inc_tax}}৳</del> <span>{{cart.item.variation.default_sell_price}}৳</span></p>
+                                                <p class="text-muted"><del>{{Number(cart.item.variation.sell_price_inc_tax).toFixed(2)}}৳</del> <span>{{Number(cart.item.variation.default_sell_price).toFixed(2)}}৳</span></p>
                                             </div>
                                         </td>                                        
                                         <td>
@@ -73,7 +73,7 @@
                                         <td>
                                             <div class="subtotal" title="subtotal">
                                                 <p class="main-color">
-                                                    {{cart.qty * cart.item.variation.default_sell_price}}৳
+                                                    {{cart.qty * Number(cart.item.variation.default_sell_price).toFixed(2)}}৳
                                                 </p>
                                             </div>
                                         </td>
@@ -142,6 +142,7 @@ export default {
             return this.$store.getters.Get_Cart_Items;
         }
     },
+
     methods: {
         // checkout()
         // {

@@ -40,12 +40,13 @@
                                 </router-link>
                             </div>
                             <div class="price">
-                                <del class="text-muted">{{sale.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{sale.variation.default_sell_price}}৳</span>
+                                <del class="text-muted">{{Number(sale.variation.sell_price_inc_tax).toFixed(2)}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(sale.variation.default_sell_price).toFixed(2)}}৳</span>
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(sale.id)">
                                 <div class="button m-auto text-light">
                                     <p ><b>
                                         BUY NOW
+
                                     </b></p>
                                     <span>
                                         <i class="fas fa-shopping-cart"></i>

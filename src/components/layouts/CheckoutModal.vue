@@ -99,6 +99,7 @@ export default {
                     }
                 }
             });
+
             this.$store.dispatch("Checkout", this.customer)
             .then((res)=>{
                 console.log(res);
@@ -109,7 +110,7 @@ export default {
             };
             if(res.success)
             {
-                toastr.success('Your order has been placed successfully!');
+                toastr.success(res.success);
             }
             else if(res.error)
             {

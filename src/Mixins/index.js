@@ -9,8 +9,15 @@ export default{
         },
         AddToCart(item, size = '', qty = 1)
         {
-            store.dispatch("AddToCart", {item, size, qty});
-            toastr.success('Item added to cart list');
+            if(item.type === 'variable' && size === '')
+            {
+                toastr.error('Product size is required!');
+            }
+            else {
+                store.dispatch("AddToCart", {item, size, qty});
+                toastr.success('Item added to cart list');
+            }
+
         },
         addToCompareList(item)
         {

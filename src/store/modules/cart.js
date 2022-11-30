@@ -48,8 +48,11 @@ export const cart =  {
                 axios.post("/checkout", {customer: customerData, items: context.state.cartItems})
                 .then(res=>{
                     resolve(res.data);
-                    context.commit("Checkout");
-                })
+                    if(res.data.success)
+                    {
+                        context.commit("Checkout");
+                    }
+                    })
                 .catch(err=>{
                     reject(err);
                 })
@@ -125,8 +128,7 @@ export const cart =  {
 
         Checkout(state)
         {
-            // state.cartItems = [];
-            console.log(state);
+            state.cartItems = [];
         }
     }
 };
