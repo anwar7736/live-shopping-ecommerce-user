@@ -53,7 +53,7 @@
                                         </td>
                                         <td>
                                             <div class="product-price" data-title="Price">
-                                                <p class="text-muted"><del>{{Number(cart.item.variation.sell_price_inc_tax).toFixed(2)}}৳</del> <span>{{Number(cart.item.variation.default_sell_price).toFixed(2)}}৳</span></p>
+                                                <p class="text-muted"><span>{{Number(cart.item.variation.default_sell_price).toFixed(2)}}৳</span></p>
                                             </div>
                                         </td>                                        
                                         <td>

@@ -25,8 +25,6 @@
                                             <i class="fas fa-search"></i>
                                         </a>
                                     </li>
-                                                                         <!--Quickview Modal-->
-                            <quickView :product="product_info"></quickView>
                                     <li title="Add To Wishlist">
                                         <a href="#" class="compare" @click.prevent="AddToWishList(product)">
                                             <i class="far fa-heart"></i>
@@ -47,7 +45,7 @@
                                     </router-link>
                                 </div>
                                 <div class="price">
-                                    <del class="text-muted">{{product.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.variation.default_sell_price}}৳</span>
+                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
                                 </div>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product)">
                                     <div class="button m-auto text-light">
@@ -67,6 +65,8 @@
                     </div>
                 </div>
             </div>
+        <!--Quickview Modal-->
+        <quickView :product="product_info"></quickView>
         </section>
         <!-- All Products Grid Section end  -->
     </div>

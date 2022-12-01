@@ -16,6 +16,7 @@ export default{
             else {
                 store.dispatch("AddToCart", {item, size, qty});
                 toastr.success('Item added to cart list');
+                
             }
 
         },

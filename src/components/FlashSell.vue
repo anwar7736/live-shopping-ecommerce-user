@@ -16,7 +16,7 @@
                                     </a>
                                 </li>
                                 <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(848)">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(sale.id)">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </li>
@@ -40,13 +40,12 @@
                                 </router-link>
                             </div>
                             <div class="price">
-                                <del class="text-muted">{{Number(sale.variation.sell_price_inc_tax).toFixed(2)}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(sale.variation.default_sell_price).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(sale.variation.default_sell_price).toFixed(2)}}৳</span>
                             </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(sale.id)">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(sale)">
                                 <div class="button m-auto text-light">
-                                    <p ><b>
+                                    <p><b>
                                         BUY NOW
-
                                     </b></p>
                                     <span>
                                         <i class="fas fa-shopping-cart"></i>
@@ -61,7 +60,7 @@
         </section>
         
         <!--Quickview Modal-->
-        <quickView :product="product_info"></quickView>
+        <quickView :product="product_info" ></quickView>
         <!-- Checkout modal  -->
         <checkout :cartItems="cartItems"></checkout>       
     </div>

@@ -316,7 +316,7 @@
                                   </div>
 
                                     <div class="price">
-                                        <del class="text-muted">{{product.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.variation.default_sell_price}}৳</span>
+                                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
                                     </div>
                                     <p class="product-details-p" style="display: none;" v-html="product.description">
                                     </p>

@@ -41,7 +41,7 @@
                                 </router-link>
                             </div>
                             <div class="price">
-                                <del class="text-muted">{{item.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.variation.default_sell_price}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(item)">
                                 <div class="button m-auto text-light">

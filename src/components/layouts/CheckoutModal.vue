@@ -38,8 +38,7 @@
                 </strong><br/>
                 </div>
                 <p class="price text-end">
-                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{item.item.variation.sell_price_inc_tax}}৳</span>
-                    <br><del class="text-muted">{{item.item.variation.default_sell_price}}৳</del> <br>
+                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.item.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
                     <button class="btn"><i class="fas fa-trash-alt" @click="removeItem(item.item.id)"></i></button>
                 </p>
                 <p>

@@ -73,7 +73,7 @@
                                </router-link>
                            </div>
                            <div class="price">
-                               <del class="text-muted">{{hot.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{hot.variation.default_sell_price}}৳</span>
+                               <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(hot.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
                            </div>
                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
                                <div class="button m-auto text-light">
@@ -134,7 +134,7 @@
                                </router-link>
                            </div>
                            <div class="price">
-                               <del class="text-muted">{{prod.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{prod.variation.default_sell_price}}৳</span>
+                               <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
                            </div>
                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
                                <div class="button m-auto text-light">
