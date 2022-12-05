@@ -22,7 +22,7 @@
                     </b></p>
                     <div class="quantity">
                         <button class="cart-qty-minus btn" id="dec" type="button" value="-" @click="decreaseQty(item.item.id)">-</button>
-                        <input type="text" name="qty" id="qty" minlength="1" v-model="item.qty" readonly class="input-text qty" />
+                        <input type="text" min="1" name="qty" id="qty" v-model="item.qty" @blur="updateQty(item)" class="input-text qty"/>
                         <button class="cart-qty-plus btn" type="button" id="inc" value="+" @click="increaseQty(item.item.id)">+</button>
                         
                     </div>

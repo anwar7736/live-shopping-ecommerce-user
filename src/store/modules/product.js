@@ -3,6 +3,15 @@ import baseURL from './baseURL';
 axios.defaults.baseURL = baseURL;
 
 export const product =  {
+    state: {
+        searchItems: [],
+    },
+    getters: {
+        Get_Search_Items(state)
+        {
+            return state.searchItems;
+        }
+    },
     actions: {
         HomeSlider()
         {
@@ -150,15 +159,19 @@ export const product =  {
         }, 
         productSearch(context, query)
         {
-            return new Promise((resolve, reject)=>{
                 axios.get("/product_search/" + query)
                 .then(res=>{
-                    resolve(res.data);
+                    context.commit("productSearch", res.data);
                 })
                 .catch(err=>{
-                    reject(err);
+                    console.log(err);
                 })
-            });
         },
+    },
+    mutations: {
+        productSearch(state, data)
+        {
+            state.searchItems = data;
+        }
     },
 };

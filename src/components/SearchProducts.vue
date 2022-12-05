@@ -3,9 +3,10 @@
         <section>
             <div class="container mt-5 mb-5">
                 <h3 class="text-center">All Searching Products</h3><hr/>
-                <loading v-if="seen"/>
-                <div class="row deal-day-row" v-if="seen == false">
-                    <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="item in products" :key="item.id">
+                
+               
+                <div class="row deal-day-row">
+                    <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="item in searchItems" :key="item.id">
                         <div class="discount-tag d-none">
                             -48%
                         </div>
@@ -37,7 +38,7 @@
                         <div class="product-details text-center pt-2">
                             
                             <div class="product_name">
-                                <router-link :to="'/product-details?id='+ item.id" class="text-dark" style="text-decoration: none; font-weight: 600;">      {{item.product}}
+                                <router-link :to="'/product-details?id='+ item.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{item.product}}
                                 </router-link>
                             </div>
                             <div class="price">
@@ -61,7 +62,7 @@
         </section>
         
         <!--Quickview Modal-->
-        <quickView :product="product_info"></quickView>
+        <quickView :product="product_info" :variations="variations"></quickView>
         <!-- Checkout modal  -->
         <checkout :cartItems="cartItems"></checkout>
     </div>
@@ -70,13 +71,13 @@
 import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
 import checkout from './layouts/CheckoutModal';
-import loading from './layouts/LoadingComp';
+// import loading from './layouts/LoadingComp';
 export default {
     mixins: [mixins],
     data(){
         return{
-            products: {},
             product_info : {},
+            variations : {},
             seen: true,
         }
     },
@@ -84,7 +85,8 @@ export default {
         productInfo(id){
             this.$store.dispatch("ProductFilterById", id)
             .then(res=>{
-                this.product_info = res;
+                this.product_info = res.product;
+                this.variations = res.variations;
             })
         },
        
@@ -98,22 +100,18 @@ export default {
         {
             return this.$store.getters.Get_Cart_Items;
         },
+
+        searchItems()
+        {
+            return this.$store.getters.Get_Search_Items;
+        }
         
     },
     components: {
         quickView,
         checkout,
-        loading
+        // loading
     },
-    created()
-    {
-        let query = this.$route.query.query;
-        this.$store.dispatch("productSearch", query)
-        .then(res=>{
-            this.products = res;
-            this.seen = false;
-        })
-    }
 }
 </script>
 <style scoped>

@@ -165,7 +165,7 @@
                 </div>
             </div>
             <!--Quickview Modal-->
-            <quickView :product="product_info"></quickView>
+            <quickView :product="product_info" :variations="variations"></quickView>
         </section>
         <!-- Best Deal section end  -->
     </div>
@@ -191,6 +191,7 @@ export default {
         return{
             products: {},
             product_info: {},
+            variations : {},
             seen: true,
             best_hot:true,
             best_new:false,
@@ -202,7 +203,8 @@ export default {
         productInfo(id){
             this.$store.dispatch("ProductFilterById", id)
             .then(res=>{
-                this.product_info = res;
+                this.product_info = res.product;
+                this.variations = res.variations;
             })
         },
         bestHot(){

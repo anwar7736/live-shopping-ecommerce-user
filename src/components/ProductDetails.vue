@@ -13,15 +13,31 @@
                             <div id="product-single" class="carousel slide" data-bs-ride="carousel">
                             
                                 <div class="carousel-inner" role="listbox">
-                                    <a href="assets/images/gift-card/1000tk.jpg" class="carousel-item active">
-                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/> 
-                                    </a>
-                                    <a href="assets/images/gift-card/2000tk.jpg" class="carousel-item">
+                                    <a href="#" class="carousel-item active">
                                         <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
                                     </a>
-                                    <a href="assets/images/gift-card/200tk.jpg" class="carousel-item">
+                                    <a href="#" class="carousel-item">
                                         <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
                                     </a>
+                                    <div class="carousel-item">
+                                        <iframe width="560" height="320" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div> 
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-3 mt-1">
+                                        <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
+                                    </div>                                    
+                                    <div class="col-md-3 mt-1">
+                                        <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
+                                    </div>
+                                    <div class="col-md-3 mt-1">
+                                        <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
+                                    </div>
+                                    <div class="col-md-3 mt-1">
+                                        <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#product-single" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -62,12 +78,12 @@
                         </p>
                         <div class="quantity-buy d-flex">
                             <div class="quantity">
-                                <button class="cart-qty-minus" id="dec" type="button" value="-">-</button>
-                                <input type="text" name="qty" id="qty"  minlength="1" value="1" class="input-text qty" />
-                                <button class="cart-qty-plus" type="button" id="inc" value="+">+</button>
+                                <button class="cart-qty-minus" id="dec" @click="decrement" type="button" value="-">-</button>
+                                <input type="text" name="qty" id="qty"  min="1" v-model="qty" class="input-text qty" />
+                                <button class="cart-qty-plus" type="button" @click="increment" id="inc" value="+">+</button>
                                 
                             </div>
-                            <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product)">Buy</button>
+                            <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product, size, qty)">Buy</button>
                         </div>
                          <!-- Checkout modal  -->
                          <checkout :cartItems="cartItems"></checkout>
@@ -158,6 +174,21 @@ export default {
     {
         return {
             product : {},
+            qty: 1,
+            size: '',
+        }
+    },
+    methods: {
+        increment()
+        {
+            this.qty++;
+        },
+        decrement()
+        {
+            if(this.qty > 1)
+            {
+                this.qty--;
+            }
         }
     },
     created()
@@ -166,7 +197,7 @@ export default {
         this.$store.dispatch("ProductFilterById", product_id)
         .then(res=>{
             console.log(res);
-            this.product = res;
+            this.product = res.product;
         })
         .catch(err=>{
             console.log(err);

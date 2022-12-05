@@ -60,7 +60,7 @@
         </section>
         
         <!--Quickview Modal-->
-        <quickView :product="product_info" ></quickView>
+        <quickView :product="product_info" :variations="variations"></quickView>
         <!-- Checkout modal  -->
         <checkout :cartItems="cartItems"></checkout>       
     </div>
@@ -76,6 +76,7 @@ export default {
         return{
             flashSell: {},
             product_info : {},
+            variations : {},
             seen: true,
         }
     },
@@ -84,7 +85,8 @@ export default {
         {
             this.$store.dispatch("ProductFilterById", id)
             .then(res=>{
-                this.product_info = res;
+                this.product_info = res.product;
+                this.variations = res.variations;
                 
             })
         }

@@ -53,8 +53,9 @@
                     <div class="footer-menu-col mt-5">
                         <form action="javascript: void(0)" >
                             <div class="input-group d-flex">
-                                <input type="text" placeholder="Search....">
-                                <button class="text-center p-1"><i class="fas fa-arrow-right"></i></button>
+                                <input type="text" placeholder="Search...."
+                                v-model="query" @keyup.enter="searchProduct">
+                                <button @click.prevent="searchProduct" class="text-center p-1"><i class="fas fa-arrow-right"></i></button>
                             </div>
                         </form>
                         <div class="contact-info mt-2">
@@ -137,7 +138,14 @@
 export default {
     data(){
         return {
-            
+            query: '',
+        }
+    },
+    methods: {
+        searchProduct()
+        {
+            this.$router.push('/product-search?query='+this.query);
+            this.query = "";
         }
     }
 }

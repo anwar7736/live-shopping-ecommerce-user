@@ -19,7 +19,7 @@ export default createStore({
         wishlist,
     },
     plugins: [createPersistedState({
-        paths: ['auth', 'cart', 'compare', 'wishlist']
+        paths: ['auth', 'cart', 'compare', 'wishlist', 'product']
     })
 ],
     

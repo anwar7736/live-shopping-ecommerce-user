@@ -49,7 +49,7 @@
                                     </a>
                                 </li>
                                 <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(848)">
+                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(hot.id)">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </li>
@@ -165,7 +165,7 @@
                 </div>
             </div>
             <!--Quickview Modal-->
-            <quickView :product="product_info"></quickView>
+            <quickView :product="product_info" :variations="variations"></quickView>
         </section>
         <!-- SUMMER TRENDY section end  -->
     </div>
@@ -191,6 +191,7 @@ export default {
         return {
             products: [],
             product_info: {},
+            variations: {},
             seen: true,
             summer_hot:true,
             summer_new:false,
@@ -202,7 +203,8 @@ export default {
         productInfo(id){
             this.$store.dispatch("ProductFilterById", id)
             .then(res=>{
-                this.product_info = res;
+                this.product_info = res.product;
+                this.variations = res.variations;
             })
         },
         summerHot(){

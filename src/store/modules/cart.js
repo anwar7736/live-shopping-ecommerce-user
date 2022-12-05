@@ -111,7 +111,7 @@ export const cart =  {
         {
             let cartItems = state.cartItems;
             let index = cartItems.findIndex(data=> data.item.id == item.item.id);
-            cartItems[index]['qty'] = item.quantity;
+            cartItems[index]['qty'] = Number(item.qty);
         },
         UpdateSize(state, item)
         {

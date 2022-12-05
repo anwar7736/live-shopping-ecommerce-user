@@ -227,7 +227,9 @@ export default {
         },
         searchProduct()
         {
+            this.$store.dispatch("productSearch", this.query)
             this.$router.push('/product-search?query='+this.query);
+            // window.location.href = "/product-search?query="+this.query;
             this.query = "";
         }
 

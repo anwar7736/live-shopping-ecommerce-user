@@ -15,15 +15,19 @@
                     <div class="modal-product-image col-6">
                         <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
                             <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
-                                    <img :src="product.image_url" alt="Image" class="col-12"/> 
+                                <div class="carousel-item active" v-if="product.video">
+                                    <iframe width="560" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>                                
+                                <div class="carousel-item">
+                                    <img :src="product.image_url" alt="" class="col-12"/> 
                                 </div>
                                 <div class="carousel-item">
-                                    <img :src="product.image_url" alt="Image" class="col-12"/> 
+                                    <img :src="product.image_url" alt="" class="col-12"/> 
                                 </div>
                                 <div class="carousel-item">
-                                    <img :src="product.image_url" alt="Image" class="col-12"/> 
-                                </div>
+                                    <img :src="product.image_url" alt="" class="col-12"/> 
+                                </div>                                
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -42,14 +46,14 @@
                             <h3>{{product.product}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <del class="text-muted">{{product.variation.sell_price_inc_tax}}৳</del><span class="ps-1" style="color: #ff7400; font-weight: bold;">{{product.variation.default_sell_price}}৳</span>
+                            <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
                         </h6>
                         <p class="text-sm" v-html="product.description">
                         </p>                        
                         <strong class="text-sm" v-if="product.type === 'variable'">
                             <span>Variations:</span>
                             <div class="d-flex justify-content-between">
-                                <div class="" v-for="v in product.variations" :key="v.id">
+                                <div class="" v-for="v in variations" :key="v.id">
                                     <label><input type="radio" :value="v.id" v-model="size" class="size"/> {{v.name}}</label>
                                 </div>
 
@@ -83,7 +87,7 @@
 <script>
 import mixins from '../../Mixins';
 export default {
-    props: ['product'],
+    props: ['product', 'variations'],
     mixins: [mixins],
     data(){
         return {

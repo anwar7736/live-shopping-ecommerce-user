@@ -321,7 +321,7 @@
                                     <p class="product-details-p" style="display: none;" v-html="product.description">
                                     </p>
                                     <!--Quickview Modal-->
-                                    <quickView :product="product_info"></quickView>
+                                    <quickView :product="product_info" :variations="variations"></quickView>
                                     
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product)">
                                         <div class="button m-auto text-light">
@@ -359,6 +359,7 @@ export default {
             categories: {},
             products: {},
             product_info : {},
+            variations : {},
             rangeFrom: 0,
             rangeTo: 2500,
             seen: true,
@@ -393,7 +394,8 @@ export default {
         productInfo(id){
             this.$store.dispatch("ProductFilterById", id)
             .then(res=>{
-                this.product_info = res;
+                this.product_info = res.product;
+                this.variations = res.variations;
             })
         },
 

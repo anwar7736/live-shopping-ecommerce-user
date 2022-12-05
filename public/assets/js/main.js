@@ -38,8 +38,15 @@ $(document).ready(function () {
     $(".search-cat-dp-hover").slideToggle("fast");
   });
 
-  // for all tabs
+  
+  $(document).on("click", function(event){
+    var $trigger = $(".search-dp");
+    if($trigger !== event.target && !$trigger.has(event.target).length){
+        $(".search-cat-dp").slideUp("fast");
+    }            
+});
 
+  // for all tabs
   $("#tab1").addClass("active");
   $("#tab1con").fadeIn("slow");
   $("#tab2con").css("display", "none");

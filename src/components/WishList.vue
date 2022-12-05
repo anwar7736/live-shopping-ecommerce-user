@@ -102,7 +102,7 @@
                 </div>
             </div>
             <!--Quickview Modal-->
-            <quickView :product="product_info"></quickView>
+            <quickView :product="product_info" :variations="variations"></quickView>
         </div>
     </div>
 </section>
@@ -118,6 +118,7 @@ export default {
     data(){
         return {
             product_info : {},
+            variations : {},
         }
     },
     components: {
@@ -143,7 +144,8 @@ export default {
         productInfo(id){
             this.$store.dispatch("ProductFilterById", id)
             .then(res=>{
-                this.product_info = res;
+                this.product_info = res.product;
+                this.variations = res.variations;
             })
         },
     }

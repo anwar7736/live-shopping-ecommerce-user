@@ -63,7 +63,7 @@
                                                 <div class="quantity-buy">
                                                     <div class="quantity">
                                                         <button class="cart-qty-minus" id="dec" type="button" value="-" @click="decreaseQty(cart.item.id)">-</button>
-                                                        <input type="text" name="qty" id="qty" maxlength="12" v-model="cart.qty" readonly class="input-text qty" style="margin:4px;"/>
+                                                        <input type="text" min="1" name="qty" id="qty" v-model="cart.qty" @blur="updateQty(cart)" class="input-text qty" style="margin:4px;"/>
                                                         <button class="cart-qty-plus" type="button" id="inc" value="+" @click="increaseQty(cart.item.id)">+</button>
                                                         
                                                     </div>
@@ -136,6 +136,13 @@ export default {
     components: {
         checkout
     },
+    data(){
+        return {
+           item: {
+            qty: '',
+           }
+        }
+    },
     computed: {
         cartItems()
         {
@@ -158,6 +165,7 @@ export default {
         //         toastr.error('No item found in your cart list');
         //     }
         // }
+
     }
 }
 </script>

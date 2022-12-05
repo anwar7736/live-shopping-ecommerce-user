@@ -10,11 +10,11 @@
                     
                 </div>
                     <loading v-if="seen"/>
-                    <carousel :items-to-show="5" v-if="seen == false">
+                    <carousel :items-to-show="4" v-if="seen == false">
                         <slide  v-for="item in products" :key="item.id">
                             <div>
                                 <div class="image" >
-                                    <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="">
+                                    <img src="assets/images/gift-card/200tk.jpg" alt="200taka gift card" class="p-2">
                                 </div>
                             </div>
                         </slide>
