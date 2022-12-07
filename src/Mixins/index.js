@@ -52,6 +52,11 @@ export default{
             toastr.error('Item remove from cart list');
         },
 
+        categoryFilter(id)
+        {
+            store.dispatch("ProductFilterByCategory", id);
+        },
+
         
     }
 }

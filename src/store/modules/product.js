@@ -5,12 +5,17 @@ axios.defaults.baseURL = baseURL;
 export const product =  {
     state: {
         searchItems: [],
+        categoryItems: [],
     },
     getters: {
         Get_Search_Items(state)
         {
             return state.searchItems;
-        }
+        },
+        Get_Category_Items(state)
+        {
+            return state.categoryItems;
+        },
     },
     actions: {
         HomeSlider()
@@ -111,15 +116,13 @@ export const product =  {
         }, 
         ProductFilterByCategory(context, id)
         {
-            return new Promise((resolve, reject)=>{
                 axios.get("/product_filter_by_category/" + id)
                 .then(res=>{
-                    resolve(res.data);
+                    context.commit("categoryProducts", res.data);
                 })
                 .catch(err=>{
-                    reject(err);
+                    console.log(err);
                 })
-            });
         }, 
         ProductFilterById(context, id)
         {
@@ -172,6 +175,12 @@ export const product =  {
         productSearch(state, data)
         {
             state.searchItems = data;
-        }
+        },
+        
+        categoryProducts(state, data)
+        {
+            state.categoryItems = data;
+        },
+
     },
 };

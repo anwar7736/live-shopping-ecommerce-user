@@ -278,7 +278,7 @@
                         </div>
                         <loading v-if="seen"/>
                         <div class="all-products row deal-day-row" v-if="seen == false">
-                            <div class="col-lg-3 col-md-3 col-6 product p-2" v-for="product in products" :key="product.id">
+                            <div class="col-lg-3 col-md-3 col-6 product p-2" v-for="product in categoryItems" :key="product.id">
                                 <div class="discount-tag d-none">
                                     -48%
                                 </div>
@@ -361,7 +361,7 @@ export default {
             variations : {},
             rangeFrom: 0,
             rangeTo: 2500,
-            seen: true,
+            seen: false,
             active: false,
         }
     },
@@ -378,18 +378,6 @@ export default {
                 this.active = false;
             }
             else  this.active = true;
-        },
-        categoryFilter(id)
-        {
-            this.seen = true;
-            this.$store.dispatch("ProductFilterByCategory", id)
-            .then(res=>{
-                this.products = res;
-                this.seen = false;
-            })
-            .catch(err=>{
-                console.log(err);
-            })
         },
         productInfo(id){
             this.$store.dispatch("ProductFilterById", id)
@@ -437,7 +425,11 @@ export default {
         cartItems()
         {
             return this.$store.getters.Get_Cart_Items;
-        }
+        },
+        categoryItems()
+        {
+            return this.$store.getters.Get_Category_Items;
+        },
     },
     created()
     {

@@ -80,7 +80,7 @@
                             <div class="search-cat-dp-hover">
                                 <ul>
                                     <li class="nav-item" v-for="cat in categories" :key="cat.id">
-                                        <router-link :to="'/product-category?id='+ cat.id" class="nav-link">{{cat.name}}</router-link>
+                                        <router-link :to="'/product-category?id='+ cat.id" class="nav-link" @click.prevent="categoryFilter(cat.id)">{{cat.name}}</router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -96,7 +96,7 @@
                                         <div class="search-cat-dp" @mouseout="hoverOut">
                                             <ul>
                                                 <li class="nav-item" v-for="cat in categories" :key="cat.id">
-                                                    <router-link :to="'/product-category?id='+ cat.id" class="nav-link">
+                                                    <router-link :to="'/product-category?id='+ cat.id" class="nav-link" @click.prevent="categoryFilter(cat.id)">
                                                         {{cat.name}}
                                                     </router-link>
                                                 </li>
@@ -199,8 +199,10 @@
     </div>
 </template>
 <script>
+import mixins from '../../Mixins';
 import toastr from 'toastr';
 export default {
+    mixins: [mixins],
     data(){
         return {
            hover: "search-cat-dp-hover",

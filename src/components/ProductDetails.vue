@@ -13,27 +13,29 @@
                             <div id="product-single" class="carousel slide" data-bs-ride="carousel">
                             
                                 <div class="carousel-inner" role="listbox">
-                                    <a href="#" class="carousel-item active">
-                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
+                                    <a href="#" class="carousel-item active" v-for="image in product.images" :key="image.id">
+                                        <img :src="image.image" @error="image.image='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
                                     </a>
-                                    <a href="#" class="carousel-item">
-                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
-                                    </a>
+                                    <div v-if="product.images.length === 0">
+                                        <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
+                                            <img src="assets/images/products/default-image.jpg" alt="Image" class="w-100 d-block"/>
+                                        </a>
+                                    </div>
                                     <div class="carousel-item">
                                         <iframe width="560" height="320" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div> 
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-3 mt-1">
-                                        <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
-                                    </div>                                    
-                                    <div class="col-md-3 mt-1">
-                                        <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
-                                    </div>
-                                    <div class="col-md-3 mt-1">
-                                        <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
-                                    </div>
+                                    <div v-if="product.images.length === 0">
+                                        <div class="col-md-3 mt-1" v-for="image in 3" :key="image">
+                                            <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
+                                        </div>  
+                                    </div>      
+                                    <div class="col-md-3 mt-1" v-for="image in product.images" :key="image.id">
+                                        <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
+                                    </div>    
+
                                     <div class="col-md-3 mt-1">
                                         <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>

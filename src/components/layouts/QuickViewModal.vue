@@ -14,21 +14,34 @@
                 <div class="row">
                     <div class="modal-product-image col-6">
                         <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
-                            <div class="carousel-inner" role="listbox">
+                            <div class="carousel-inner" role="listbox">                               
+                                <div class="carousel-item" v-for="image in product.images" :key="image.id">
+                                    <img :src="image.image" @error="image.image='assets/images/products/default-image.jpg'" alt="" class="col-12"/> 
+                                </div>  
+                                <div v-if="product.images == ''">
+                                    <a href="#" class="carousel-item" v-for="image in 3" :key="image">
+                                        <img src="assets/images/products/default-image.jpg" alt="Image" class="col-12"/>
+                                    </a>
+                                </div>
                                 <div class="carousel-item active" v-if="product.video">
                                     <iframe width="560" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
-                                </div>                                
-                                <div class="carousel-item">
-                                    <img :src="product.image_url" alt="" class="col-12"/> 
-                                </div>
-                                <div class="carousel-item">
-                                    <img :src="product.image_url" alt="" class="col-12"/> 
-                                </div>
-                                <div class="carousel-item">
-                                    <img :src="product.image_url" alt="" class="col-12"/> 
-                                </div>                                
+                                </div>                           
                             </div>
+                            <div class="row mt-2">
+                                <div class="col-md-3 mt-1" v-for="image in product.images" :key="image.id">
+                                        <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
+                                </div>                             
+                                <div v-if="product.images == ''">
+                                    <div class="col-md-3 mt-1" v-for="image in 3" :key="image">
+                                        <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
+                                    </div> 
+                                </div>                                                       
+                                    <div class="col-md-3 mt-1" v-if="product.video">
+                                        <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
