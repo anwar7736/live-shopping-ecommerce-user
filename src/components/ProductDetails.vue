@@ -13,15 +13,17 @@
                             <div id="product-single" class="carousel slide" data-bs-ride="carousel">
                             
                                 <div class="carousel-inner" role="listbox">
-                                    <a href="#" class="carousel-item active" v-for="image in product.images" :key="image.id">
-                                        <img :src="image.image" @error="image.image='assets/images/products/default-image.jpg'" alt="Image" class="w-100 d-block"/>
+                                    <a href="#" :class="index === activeID ? 'carousel-item active' : 'carousel-item active'" v-for="(image, index) in product.images" :key="image.id">
+                                        <vue-image-zoomer>
+                                            <img :src="image.image" alt="Image" class="w-100 d-block"/>
+                                        </vue-image-zoomer>
                                     </a>
                                     <div v-if="product.images.length === 0">
                                         <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
                                             <img src="assets/images/products/default-image.jpg" alt="Image" class="w-100 d-block"/>
                                         </a>
                                     </div>
-                                    <div class="carousel-item">
+                                    <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video">
                                         <iframe width="560" height="320" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div> 
@@ -32,11 +34,11 @@
                                             <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                         </div>  
                                     </div>      
-                                    <div class="col-md-3 mt-1" v-for="image in product.images" :key="image.id">
+                                    <div @click="carouselActive(index)" class="col-md-3 mt-1" v-for="(image, index) in product.images" :key="image.id">
                                         <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
                                     </div>    
 
-                                    <div class="col-md-3 mt-1">
+                                    <div class="col-md-3 mt-1" v-if="product.video">
                                         <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
@@ -166,10 +168,13 @@
 </template>
 <script>
 import mixins from '../Mixins';
+import { VueImageZoomer } from 'vue-image-zoomer'
+import 'vue-image-zoomer/dist/style.css';
 import checkout from './layouts/CheckoutModal';
 export default {
     components: {
         checkout,
+        VueImageZoomer
     },
     mixins: [mixins],
     data()
@@ -178,6 +183,7 @@ export default {
             product : {},
             qty: 1,
             size: '',
+            active: 1,
         }
     },
     methods: {
@@ -191,6 +197,10 @@ export default {
             {
                 this.qty--;
             }
+        },
+        carouselActive(id)
+        {
+            this.active = id;
         }
     },
     created()
@@ -214,11 +224,15 @@ export default {
         cartItems()
         {
             return this.$store.getters.Get_Cart_Items;
+        },
+        activeID()
+        {
+            return this.active;
         }
     },
 
 }
 </script>
-<style lang="">
-    
+<style scoped>
+
 </style>

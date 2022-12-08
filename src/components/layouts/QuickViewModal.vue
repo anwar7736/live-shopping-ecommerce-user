@@ -15,16 +15,16 @@
                     <div class="modal-product-image col-6">
                         <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
                             <div class="carousel-inner" role="listbox">                               
-                                <div class="carousel-item" v-for="image in product.images" :key="image.id">
+                                <div class="carousel-item active" v-for="image in product.images" :key="image.id">
                                     <img :src="image.image" @error="image.image='assets/images/products/default-image.jpg'" alt="" class="col-12"/> 
                                 </div>  
                                 <div v-if="product.images == ''">
-                                    <a href="#" class="carousel-item" v-for="image in 3" :key="image">
+                                    <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
                                         <img src="assets/images/products/default-image.jpg" alt="Image" class="col-12"/>
                                     </a>
                                 </div>
-                                <div class="carousel-item active" v-if="product.video">
-                                    <iframe width="560" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                <div class="carousel-item" v-if="product.video">
+                                    <iframe width="100%" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>                           
                             </div>
@@ -126,5 +126,9 @@ export default {
 }
 </script>
 <style>
-    
+    div#player {
+        margin-left: -20%;
+}
+
+
 </style>
