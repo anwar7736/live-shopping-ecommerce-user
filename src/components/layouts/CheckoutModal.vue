@@ -28,11 +28,15 @@
                     </div>
                     <strong class="text-sm" v-if="item.item.type === 'variable'">
                             <span>Variations:</span>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between" v-if="item.variations">
+                                <div class="" v-for="v in item.variations" :key="v.id">
+                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" v-model="size" class="size" :checked="v.id === item.size" /> {{v.name}}</label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between" v-if="item.item.variations">
                                 <div class="" v-for="v in item.item.variations" :key="v.id">
                                     <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" v-model="size" class="size" :checked="v.id === item.size" /> {{v.name}}</label>
                                 </div>
-
                             </div>
 
                 </strong><br/>
@@ -76,6 +80,7 @@ export default {
     {
         return{ 
             size: '',
+            status: 0,
             customer:{
                 name: '',
                 phone: '',
@@ -96,29 +101,35 @@ export default {
                     {
                         toastr.error('Size is required');
                     }
+                    else{
+                        this.status++;
+                    }
                 }
             });
 
-            this.$store.dispatch("Checkout", this.customer)
-            .then((res)=>{
-                console.log(res);
-                this.customer = {
-                name: '',
-                phone: '',
-                address: '',
-            };
-            if(res.success)
-            {
-                toastr.success(res.success);
-            }
-            else if(res.error)
-            {
-                toastr.error(res.error);
-            }
-            })
-            .catch(err=>{
-                console.log(err);
-            })
+           if(this.status !== 0)
+           {
+                this.$store.dispatch("Checkout", this.customer)
+                .then((res)=>{
+                    console.log(res);
+                    this.customer = {
+                    name: '',
+                    phone: '',
+                    address: '',
+                };
+                if(res.success)
+                {
+                    toastr.success(res.success);
+                }
+                else if(res.error)
+                {
+                    toastr.error(res.error);
+                }
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+           }
            
         },
         changeSize(id, size)

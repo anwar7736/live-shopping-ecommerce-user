@@ -81,7 +81,7 @@
                                 
                             </div>
                             <br/>
-                            <button class="btn" @click="AddToCart(product, size, quantity)">Add To Cart</button>
+                            <button class="btn" @click="AddToCart(product, variations, 1, size, quantity)">Add To Cart</button>
                         </div>
                         <hr>
                         <p><b>SKU:</b> {{product.sku}}</p>

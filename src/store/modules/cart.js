@@ -65,6 +65,7 @@ export const cart =  {
         {
             let qty = item.qty;
             let size = item.size;
+            let variations = item.variations;
             let cartItems = state.cartItems;
             let bool = cartItems.some(data=> data.item.id == item.item.id);
             console.log(item.item);
@@ -83,11 +84,11 @@ export const cart =  {
             else if(!bool){
                 if(qty > 1)
                 {
-                    cartItems.push({...item, qty, size});
+                    cartItems.push({...item, variations, qty, size});
                 }
 
                 else {
-                    cartItems.push({...item, qty:1, size});
+                    cartItems.push({...item, variations, qty:1, size});
                 }
             }
         },

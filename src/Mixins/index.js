@@ -7,14 +7,15 @@ export default{
             store.dispatch("AddToWishList", item)
            
         },
-        AddToCart(item, size = '', qty = 1)
+        AddToCart(item, variations = '', type = '', size = '', qty = 1)
         {
-            if(item.type === 'variable' && size === '')
+            if(item.type === 'variable' && size === '' && type != '')
             {
                 toastr.error('Product size is required!');
             }
+
             else {
-                store.dispatch("AddToCart", {item, size, qty});
+                store.dispatch("AddToCart", {item, variations, size, qty});
                 toastr.success('Item added to cart list');
                 
             }
