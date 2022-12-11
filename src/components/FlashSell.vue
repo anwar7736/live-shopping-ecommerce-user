@@ -50,7 +50,7 @@
                                     <span>
                                         <i class="fas fa-shopping-cart"></i>
                                     </span>
-                                
+
                             </div>
                             </a>
                         </div>
@@ -62,7 +62,9 @@
         <!--Quickview Modal-->
         <quickView :product="product_info" :variations="variations"></quickView>
         <!-- Checkout modal  -->
-        <checkout :cartItems="cartItems"></checkout>       
+        <checkout :cartItems="cartItems"></checkout>     
+        <!--checkout logo -->
+        <buy/>  
     </div>
 </template>
 <script>
@@ -70,6 +72,7 @@ import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
 import checkout from './layouts/CheckoutModal';
 import loading from './layouts/LoadingComp';
+import buy from './layouts/BuyModal';
 export default {
     mixins: [mixins],
     data(){
@@ -105,6 +108,7 @@ export default {
         quickView,
         checkout,
         loading,
+        buy
     },
     created()
     {

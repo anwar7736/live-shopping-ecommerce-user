@@ -24,13 +24,13 @@
                                         </a>
                                     </div>
                                     <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video">
-                                        <iframe width="560" height="320" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        <iframe width="100%" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div> 
                                 </div>
                                 <div class="row mt-2">
                                     <div v-if="product.images.length === 0">
-                                        <div class="col-md-3 mt-1" v-for="image in 3" :key="image">
+                                        <div class="col-md-3 mt-1" v-for="image in 1" :key="image">
                                             <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                         </div>  
                                     </div>      
@@ -83,11 +83,11 @@
                         <div class="quantity-buy d-flex">
                             <div class="quantity">
                                 <button class="cart-qty-minus" id="dec" @click="decrement" type="button" value="-">-</button>
-                                <input type="text" name="qty" id="qty"  min="1" v-model="qty" class="input-text qty" />
+                                <input type="text" name="qty" id="qty" min="1" @blur="updateQty" v-model="qty" class="input-text qty" />
                                 <button class="cart-qty-plus" type="button" @click="increment" id="inc" value="+">+</button>
                                 
                             </div>
-                            <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product, size, qty)">Buy</button>
+                            <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product, variations, '', size, qty)">Buy</button>
                         </div>
                          <!-- Checkout modal  -->
                          <checkout :cartItems="cartItems"></checkout>
@@ -162,6 +162,8 @@
                             </div>
                         </div>
                       </div>
+                      <!--checkout logo -->
+                      <buy/>  
         </section>
 
 </div>
@@ -171,16 +173,20 @@ import mixins from '../Mixins';
 import { VueImageZoomer } from 'vue-image-zoomer'
 import 'vue-image-zoomer/dist/style.css';
 import checkout from './layouts/CheckoutModal';
+import toastr from 'toastr';
+import buy from './layouts/BuyModal';
 export default {
     components: {
         checkout,
-        VueImageZoomer
+        VueImageZoomer,
+        buy
     },
     mixins: [mixins],
     data()
     {
         return {
             product : {},
+            variations : {},
             qty: 1,
             size: '',
             active: 1,
@@ -189,7 +195,11 @@ export default {
     methods: {
         increment()
         {
-            this.qty++;
+           if(this.qty < 10)
+           {
+                this.qty++;
+           }
+       
         },
         decrement()
         {
@@ -201,6 +211,13 @@ export default {
         carouselActive(id)
         {
             this.active = id;
+        },
+        updateQty()
+        {
+           if(this.qty > 10)
+           {
+                toastr.error('Quantity will be less than or equal 10!');
+           }
         }
     },
     created()
@@ -210,6 +227,9 @@ export default {
         .then(res=>{
             console.log(res);
             this.product = res.product;
+            this.variations = res.variations;
+            
+
         })
         .catch(err=>{
             console.log(err);

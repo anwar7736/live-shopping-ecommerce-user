@@ -44,11 +44,14 @@
 </section>
    <!-- Checkout modal  -->
    <checkout :cartItems="cartItems"></checkout>
+   <!--checkout logo -->
+    <buy/> 
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
 import checkout from './layouts/CheckoutModal';
+import buy from './layouts/BuyModal';
 export default {
     mixins: [mixins],
     computed: {
@@ -66,7 +69,8 @@ export default {
         }
     },
     components: {
-        checkout
+        checkout,
+        buy
     },
 }
 </script>

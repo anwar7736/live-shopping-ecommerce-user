@@ -19,7 +19,7 @@
                                  
                                   <div class="price-field">
                                     <input @change="rangeChange"  type="range"  min="0" max="2500"  id="lower" v-model="rangeFrom">
-                                    <input @change="rangeChange"  type="range" min="0" max="2500" id="upper" v-model="rangeTo">
+                                    <input @change="rangeChange"  type="range" min="0" max="2500" id="upper" v-model="rangeTo"><br>
                                      
                                   </div>
                                    <div class="price-wrap">
@@ -344,6 +344,8 @@
         </section>
         <!-- Checkout modal  -->
         <checkout :cartItems="cartItems"></checkout>
+        <!--checkout logo -->
+        <buy/>    
     </div>
 </template>
 <script>
@@ -351,6 +353,7 @@ import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
 import checkout from './layouts/CheckoutModal';
 import loading from './layouts/LoadingComp';
+import buy from './layouts/BuyModal';
 export default {
     mixins: [mixins],
     data(){
@@ -368,7 +371,8 @@ export default {
     components: {
         quickView,
         checkout,
-        loading
+        loading,
+        buy
     },
     methods: {
         showHide()
@@ -428,7 +432,7 @@ export default {
         },
         categoryItems()
         {
-            return this.$store.getters.Get_Category_Items;
+            return this.products ?? this.$store.getters.Get_Category_Items;
         },
     },
     created()

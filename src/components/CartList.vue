@@ -123,18 +123,23 @@
                 </div>
             </div>
         </section>
+        <!--checkout modal -->
         <checkout :cartItems="cartItems"></checkout>
+        <!--checkout logo -->
+        <buy/> 
+        
     </div>
 </template>
 <script>
 // import toastr from 'toastr';
 import mixins from '../Mixins';
 import checkout from './layouts/CheckoutModal';
-
+import buy from './layouts/BuyModal';
 export default {
     mixins: [mixins],
     components: {
-        checkout
+        checkout,
+        buy
     },
     data(){
         return {

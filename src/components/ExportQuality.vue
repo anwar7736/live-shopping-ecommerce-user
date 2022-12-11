@@ -13,11 +13,11 @@
                                 <div class="global-single-item" >
                                     <div class="global-single-sec-text col-lg-7 col-md-12">
                                         <h2>
-                                            Export Quality
+                                            {{image.title}}
                                         </h2>
-                                        <a href="#">Read More</a>
+                                        <router-link to="/shop">Read More</router-link>
                                     </div>
-                                    <div class="img" style="background-image: url(assets/images/categories-img/PREMIUM-EXPORTS-300x450.jpg);">
+                                    <div class="img" :style="{ 'background-image': 'url(' + image.image + ')' }">
 
                                     </div>
                                 
@@ -190,6 +190,7 @@ export default {
     data(){
         return {
             products: [],
+            image: {},
             product_info: {},
             variations: {},
             seen: true,
@@ -221,7 +222,12 @@ export default {
         },
     },
     mounted(){
-        
+        this.$store.dispatch("Category_Image", "EXPORT")
+        .then(res=>{
+            this.image = res;
+            this.seen = false;
+            
+        });    
         this.$store.dispatch("ExportQuality")
         .then(res=>{
             this.products = res;

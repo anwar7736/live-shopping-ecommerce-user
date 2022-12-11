@@ -88,30 +88,27 @@
                     </div>
                 </div>
             </div>
-            <div class="fixed-cart-bottom"  data-bs-toggle="modal" data-bs-target="#buy-to-cart" >
-        <span>
-        <i class="fas fa-shopping-cart"></i>
-        </span>
-        <span class="badge bg-secondary">{{cartItemCount}}</span>
-        </div>
-        <button class="fixed-scroll-bottom" id="scroll-top" style="display: none;">
-        <span>
-            <i class="fas fa-angle-up"></i>
-        </span>
-        </button>
+        
+
+        
         </section>
         <!-- Checkout modal  -->
         <checkout :cartItems="cartItems"></checkout>
+        <!--checkout logo -->
+        <buy/>  
+        
 </div>
 </template>
 <script>
 import mixins from '../Mixins';
 import checkout from './layouts/CheckoutModal';
 import loading from './layouts/LoadingComp';
+import buy from './layouts/BuyModal';
 export default {
     components: {
         checkout,
-        loading
+        loading,
+        buy
     },
     data(){
         return {

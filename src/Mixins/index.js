@@ -13,6 +13,27 @@ export default{
             {
                 toastr.error('Product size is required!');
             }
+            else if(qty > 10)
+            {
+                toastr.error('Quantity will be less than or equal 10!');
+            }
+            else if(item.type === 'variable' && size !== '' && type != '')
+            {
+                let product_id = item.id;
+                store.dispatch("GetStockQty", {product_id, size})
+                .then(res=>{
+                    if(res.qty < qty)
+                    {
+                        toastr.error('Product stock '+Math.round(res.qty)+ ' pcs available!');
+                    }
+                    else {
+                        store.dispatch("AddToCart", {item, variations, size, qty});
+                        toastr.success('Item added to cart list');
+                    }
+                })
+                .catch();
+                
+            }
 
             else {
                 store.dispatch("AddToCart", {item, variations, size, qty});
@@ -45,7 +66,13 @@ export default{
         },
         updateQty(item)
         {
-            store.dispatch("UpdateQty", item);
+            if(item.qty > 10)
+            {
+                toastr.error('Quantity will be less than or equal 10!');
+            }   
+           else {
+                store.dispatch("UpdateQty", item);
+           }
         },
         removeItem(id)
         {

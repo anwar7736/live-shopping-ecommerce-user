@@ -108,12 +108,15 @@
 </section>
    <!-- Checkout modal  -->
    <checkout :cartItems="cartItems"></checkout>
-    </div>
+   <!--checkout logo -->
+   <buy/> 
+</div>
 </template>
 <script>
 import mixins from '../Mixins';
 import quickView from './layouts/QuickViewModal';
 import checkout from './layouts/CheckoutModal';
+import buy from './layouts/BuyModal';
 export default {
     data(){
         return {
@@ -123,7 +126,8 @@ export default {
     },
     components: {
         quickView,
-        checkout
+        checkout,
+        buy
     },
     mixins: [mixins],
     computed: {

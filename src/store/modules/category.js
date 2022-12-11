@@ -15,6 +15,19 @@ export const category =  {
                     reject(err);
                 })
             });
-        }
+        },
+        Category_Image(context, type)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/category_image/"+type)
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },
+
     },
 };

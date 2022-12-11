@@ -18,7 +18,7 @@
                 <img class="mb-2" :src="item.item.image_url" @error="item.item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80"/>
                 <div class="align-item-center ps-3 quantity-buy" >
                     <p><b>
-                        {{item.product}}
+                        {{item.item.product}}
                     </b></p>
                     <div class="quantity">
                         <button class="cart-qty-minus btn" id="dec" type="button" value="-" @click="decreaseQty(item.item.id)">-</button>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="d-flex justify-content-between" v-if="item.item.variations">
                                 <div class="" v-for="v in item.item.variations" :key="v.id">
-                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" v-model="size" class="size" :checked="v.id === item.size" /> {{v.name}}</label>
+                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" v-model="size" class="size" :checked="v.id === item.size" :name="item[v.id]"/> {{v.name}}</label>
                                 </div>
                             </div>
 
@@ -102,14 +102,38 @@ export default {
                         toastr.error('Size is required');
                     }
                     else{
-                        this.status++;
+                        let product_id = item.item.id;
+                        let size = item.size;
+                        let product = item.item.product;
+                        let qty = item.qty;
+                        this.$store.dispatch("GetStockQty", {product_id, size})
+                        .then(res=>{
+                            if(res.qty < qty)
+                            {
+                                toastr.error(product+' ('+Math.round(res.qty)+ ') pcs available!');
+                            }
+                            else {
+                                this.status++;
+                                let total = this.cartItems.filter(item=>{
+                                    return item.item.type === 'variable';
+                                });
+
+
+                            if(this.status == total.length)
+                            {
+                                this.finalCheckout();
+                            }
+                            }
+                        })
+                        .catch();
                     }
                 }
             });
-
-           if(this.status !== 0)
-           {
-                this.$store.dispatch("Checkout", this.customer)
+           
+        },
+        finalCheckout()
+        {
+            this.$store.dispatch("Checkout", this.customer)
                 .then((res)=>{
                     console.log(res);
                     this.customer = {
@@ -120,6 +144,7 @@ export default {
                 if(res.success)
                 {
                     toastr.success(res.success);
+                    location.reload();
                 }
                 else if(res.error)
                 {
@@ -129,16 +154,16 @@ export default {
                 .catch(err=>{
                     console.log(err);
                 })
-           }
-           
-        },
+           },
+
         changeSize(id, size)
         {
             this.$store.dispatch("UpdateSize", {id, size});
         }
+    }
+    }
 
-    },
-}
+
 </script>
 <style>
     

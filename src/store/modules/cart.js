@@ -42,6 +42,19 @@ export const cart =  {
             context.commit("RemoveItem", id);
         },
 
+        GetStockQty(context, item)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get('get_stock_qty/'+item.product_id+"/"+item.size)
+                .then(res=>{
+                    resolve(res.data);
+                    })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+          
+        },
         Checkout(context, customerData)
         {
             return new Promise((resolve, reject)=>{
@@ -96,7 +109,11 @@ export const cart =  {
         {
             let cartItems = state.cartItems;
             let index = cartItems.findIndex(data=> data.item.id == id);
-            cartItems[index]['qty'] += 1;
+            if(cartItems[index]['qty'] < 10)
+            {
+                cartItems[index]['qty'] += 1;
+            }
+   
 
         },
         DecreaseQty(state, id)
@@ -112,7 +129,9 @@ export const cart =  {
         {
             let cartItems = state.cartItems;
             let index = cartItems.findIndex(data=> data.item.id == item.item.id);
-            cartItems[index]['qty'] = Number(item.qty);
+            let newQty = Number(item.qty);
+            cartItems[index]['qty'] = newQty;
+            
         },
         UpdateSize(state, item)
         {

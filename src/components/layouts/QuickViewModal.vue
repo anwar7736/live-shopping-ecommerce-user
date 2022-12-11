@@ -33,7 +33,7 @@
                                         <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
                                 </div>                             
                                 <div v-if="product.images == ''">
-                                    <div class="col-md-3 mt-1" v-for="image in 3" :key="image">
+                                    <div class="col-md-3 mt-1" v-for="image in 1" :key="image">
                                         <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                     </div> 
                                 </div>                                                       
@@ -41,7 +41,7 @@
                                         <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
-                                </div>
+                            </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
@@ -76,7 +76,7 @@
                         <div class="quantity-buy d-flex">
                             <div class="quantity">
                                 <button class="cart-qty-minus" type="button" value="-" @click="decreaseQty">-</button>
-                                <input type="number" min="1" v-model="quantity" class="input-text qty" />
+                                <input type="number" min="1" max="10" v-model="quantity" class="input-text qty" style="width:32% !important" />
                                 <button class="cart-qty-plus" type="button" value="+" @click="increaseQty">+</button>
                                 
                             </div>
@@ -111,7 +111,10 @@ export default {
     methods: {
         increaseQty()
         {
+           if(this.quantity < 10)
+           {
             this.quantity +=1;
+           }
         },
          decreaseQty()
         {
