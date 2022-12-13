@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body product-popup">
                 
-                <div class="row">
+                <div class="row" v-if="product">
                     <div class="modal-product-image col-6">
                         <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
                             <div class="carousel-inner" role="listbox">                               
@@ -76,7 +76,7 @@
                         <div class="quantity-buy d-flex">
                             <div class="quantity">
                                 <button class="cart-qty-minus" type="button" value="-" @click="decreaseQty">-</button>
-                                <input type="number" min="1" max="10" v-model="quantity" class="input-text qty" style="width:32% !important" />
+                                <input type="number" min="1" max="10" v-model="quantity" class="input-text qty" style="width:32% !important" @blur="updateQty({product, qty:quantity})"/>
                                 <button class="cart-qty-plus" type="button" value="+" @click="increaseQty">+</button>
                                 
                             </div>
@@ -123,7 +123,7 @@ export default {
                 this.quantity -=1;
             }
         }
-    },
+    }
     
 
 }

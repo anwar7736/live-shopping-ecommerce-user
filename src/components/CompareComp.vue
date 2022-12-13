@@ -32,11 +32,7 @@
                         <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(item)">Buy</button>
                     </div>
                     <p v-html="item.description"></p>
-                    <p>Contact us at any time:</p>
-                    <p>+8801 403 111 999</p>
                     <p>SKU: {{item.sku}}</p>
-                    <p v-if="item.enable_stock == 1">In Stock</p>
-                    <p v-else class="text-danger">Out of Stock</p>
             </div>
         </div>
         

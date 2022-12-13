@@ -191,6 +191,10 @@ const routes = [
 const router = new createRouter({
     routes,
     history: createWebHistory(),
+    scrollBehavior() {
+        // always scroll to top
+        return { top: 0 }
+      },
 });
 
 const auth_status = store.getters.GET_AUTH_STATUS;

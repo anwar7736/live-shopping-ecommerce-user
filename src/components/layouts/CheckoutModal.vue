@@ -39,7 +39,7 @@
                                 </div>
                             </div>
 
-                </strong><br/>
+                </strong>
                 </div>
                 <p class="price text-end">
                     <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.item.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
@@ -65,7 +65,7 @@
                 <label for="address">Your Address <sup class="text-danger">*</sup></label>
                 <input type="text" class="form-control" id="address" name="address" v-model="customer.address" required>
             </div>
-            <button>Place Order <span><i class="fas fa-arrow-right"></i></span></button>
+            <button :disabled="isDisabled">{{btnText}}<span><i class="fas fa-arrow-right"></i></span></button>
         </form>
       </div>
     </div>
@@ -80,7 +80,9 @@ export default {
     {
         return{ 
             size: '',
-            status: 0,
+            validatedArray: [],
+            isDisabled: false,
+            btnText: 'Place Order',
             customer:{
                 name: '',
                 phone: '',
@@ -94,12 +96,13 @@ export default {
     methods: {
         checkout()
         {
-            this.cartItems.map(item=> {
+            this.cartItems.every(item=> {
                 if(item.item.type === 'variable')
                 {
                     if(item.size === '')
                     {
-                        toastr.error('Size is required');
+                        toastr.options.positionClass = 'toast-top-center';
+                        toastr.error('Product Size is required');
                     }
                     else{
                         let product_id = item.item.id;
@@ -110,30 +113,54 @@ export default {
                         .then(res=>{
                             if(res.qty < qty)
                             {
+                                toastr.options.positionClass = 'toast-top-center';
                                 toastr.error(product+' ('+Math.round(res.qty)+ ') pcs available!');
                             }
-                            else {
-                                this.status++;
-                                let total = this.cartItems.filter(item=>{
-                                    return item.item.type === 'variable';
-                                });
+                            else if(res.qty >= qty){
 
+                                this.validatedArray.push(product_id);
+                                
 
-                            if(this.status == total.length)
-                            {
                                 this.finalCheckout();
-                            }
+                            
                             }
                         })
                         .catch();
                     }
+                }
+                else {
+                        let product_id = item.item.id;
+                        let product = item.item.product;
+                        let qty = item.qty;
+                        this.$store.dispatch("GetStockQty", {product_id, size:''})
+                        .then(res=>{
+                            if(res.qty < qty)
+                            {
+                                toastr.options.positionClass = 'toast-top-center';
+                                toastr.error(product+' ('+Math.round(res.qty)+ ') pcs available!');
+                            }
+                            else if(res.qty >= qty){
+
+                                this.validatedArray.push(product_id);
+                                
+                                
+                                this.finalCheckout();
+                            }
+                        })
+                        .catch();
                 }
             });
            
         },
         finalCheckout()
         {
-            this.$store.dispatch("Checkout", this.customer)
+            let status = this.cartItems.every(item => this.validatedArray.includes(item.item.id));
+            //alert(this.validatedArray);
+            if(status)
+            {
+                this.isDisabled = true;
+                this.btnText = 'Please Wait....';
+                this.$store.dispatch("Checkout", this.customer)
                 .then((res)=>{
                     console.log(res);
                     this.customer = {
@@ -143,17 +170,25 @@ export default {
                 };
                 if(res.success)
                 {
+                    this.isDisabled = false;
+                    this.btnText = 'Place Order';
                     toastr.success(res.success);
                     location.reload();
                 }
                 else if(res.error)
                 {
+                    this.isDisabled = false;
+                    this.btnText = 'Place Order';
                     toastr.error(res.error);
                 }
                 })
                 .catch(err=>{
+                    this.isDisabled = false;
+                    this.btnText = 'Place Order';
                     console.log(err);
                 })
+            }
+           
            },
 
         changeSize(id, size)

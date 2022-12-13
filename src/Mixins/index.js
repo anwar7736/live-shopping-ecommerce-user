@@ -15,6 +15,7 @@ export default{
             }
             else if(qty > 10)
             {
+                toastr.options.positionClass = 'toast-top-center';
                 toastr.error('Quantity will be less than or equal 10!');
             }
             else if(item.type === 'variable' && size !== '' && type != '')
@@ -24,7 +25,33 @@ export default{
                 .then(res=>{
                     if(res.qty < qty)
                     {
+                        toastr.options.positionClass = 'toast-top-center';
                         toastr.error('Product stock '+Math.round(res.qty)+ ' pcs available!');
+                    }
+                    else {
+                        store.dispatch("AddToCart", {item, variations, size, qty});
+                        toastr.success('Item added to cart list');
+                    }
+                })
+                .catch();
+                
+            }
+            else if(item.type === 'single')
+            {
+                let product_id = item.id;
+                store.dispatch("GetStockQty", {product_id, size:''})
+                .then(res=>{
+                    if(res.qty < qty)
+                    {
+                        if(res.qty < 1)
+                        {
+                            toastr.options.positionClass = 'toast-top-center';
+                            toastr.error('Product out of stock!');
+                        }
+                        else {
+                            toastr.options.positionClass = 'toast-top-center';
+                            toastr.error('Product stock '+Math.round(res.qty)+ ' pcs available!');
+                        }
                     }
                     else {
                         store.dispatch("AddToCart", {item, variations, size, qty});
@@ -68,6 +95,7 @@ export default{
         {
             if(item.qty > 10)
             {
+                toastr.options.positionClass = 'toast-top-center';
                 toastr.error('Quantity will be less than or equal 10!');
             }   
            else {
