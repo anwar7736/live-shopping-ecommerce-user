@@ -15,7 +15,7 @@
                 </center>
             </div>
             <div class="cart-item cart1 d-flex justify-content-between" v-for="item in cartItems" :key="item.item.id">
-                <img class="mb-2" :src="item.item.image_url" @error="item.item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="80"/>
+                <img class="mb-2" :src="item.item.image_url" @error="item.item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="70" height="80"/>
                 <div class="align-item-center ps-3 quantity-buy" >
                     <p><b>
                         {{item.item.product}}
@@ -30,16 +30,22 @@
                             <span>Variations:</span>
                             <div class="d-flex justify-content-between" v-if="item.variations">
                                 <div class="" v-for="v in item.variations" :key="v.id">
-                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" v-model="size" class="size" :checked="v.id === item.size" /> {{v.name}}</label>
+                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" class="size" :checked="v.id === item.size" /> {{v.name}}</label>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between" v-if="item.item.variations">
                                 <div class="" v-for="v in item.item.variations" :key="v.id">
-                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" v-model="size" class="size" :checked="v.id === item.size" :name="item[v.id]"/> {{v.name}}</label>
+                                    <label><input type="radio" @click="changeSize(item.item.id, v.id)" :value="v.id" class="size" :checked="v.id === item.size" /> {{v.name}}</label>
                                 </div>
                             </div>
 
                 </strong>
+                <div class="text-danger" v-if="errors.some(e=>e.id === item.item.id)">
+                    <div v-for="error in errors.filter(err=> err.id === item.item.id)" :key="error">
+                        <h6 v-if="error.size">{{error.size}}</h6>
+                        <h6 v-if="error.qty">{{error.qty}}</h6>
+                    </div>
+                </div>
                 </div>
                 <p class="price text-end">
                     <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.item.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
@@ -79,14 +85,14 @@ export default {
     data()
     {
         return{ 
-            size: '',
             validatedArray: [],
+            errors: [],
             isDisabled: false,
             btnText: 'Place Order',
             customer:{
-                name: '',
-                phone: '',
-                address: '',
+                name: 'Abu bakkar',
+                phone: '01859544510',
+                address: 'Mohammadpur, Dhaka',
                
             },
         }
@@ -96,30 +102,52 @@ export default {
     methods: {
         checkout()
         {
-            this.cartItems.every(item=> {
+            this.isDisabled = true;
+            this.cartItems.map(item=> {
+                let product_id = item.item.id;
+                let size = item.size;
+                let qty = item.qty;
+                let errors = this.errors;
+                let errorIndex = errors.findIndex(e=> e.id === product_id);
+                let index = this.validatedArray.findIndex(item=> item === product_id);
                 if(item.item.type === 'variable')
                 {
                     if(item.size === '')
                     {
-                        toastr.options.positionClass = 'toast-top-center';
-                        toastr.error('Product Size is required');
+                        this.isDisabled = false;
+                        if(errorIndex > -1)
+                        {
+                            errors[errorIndex]["size"] = 'Size is required';
+                        }
+                       else errors.push({id:product_id, size:'Size is required'});
+                                   this.isDisabled = true;
                     }
-                    else{
-                        let product_id = item.item.id;
-                        let size = item.size;
-                        let product = item.item.product;
-                        let qty = item.qty;
+                    else if(item.size !== ''){
+                        errorIndex > -1 ? errors[errorIndex]["size"] = '' : '';
                         this.$store.dispatch("GetStockQty", {product_id, size})
                         .then(res=>{
                             if(res.qty < qty)
                             {
-                                toastr.options.positionClass = 'toast-top-center';
-                                toastr.error(product+' ('+Math.round(res.qty)+ ') pcs available!');
-                            }
-                            else if(res.qty >= qty){
+                                this.isDisabled = false;
+                                if(errorIndex > -1)
+                                {
+                                    errors[errorIndex]['qty'] = 'Stock ' + Math.round(res.qty)+ ' pcs available';
+                                }
 
-                                this.validatedArray.push(product_id);
-                                
+                                else errors.push({id:product_id,qty: 'Stock '+ Math.round(res.qty) +' pcs available'});
+
+                                if(index > -1)
+                                {
+                                    this.validatedArray.splice(index, 1);
+                                }
+                            }
+                            else{
+                                errorIndex > -1 ? errors[errorIndex]["qty"] = '' : '';
+                                let bool = this.validatedArray.some(item=> item === product_id);
+                                if(!bool)
+                                {
+                                    this.validatedArray.push(product_id);
+                                }
 
                                 this.finalCheckout();
                             
@@ -129,21 +157,31 @@ export default {
                     }
                 }
                 else {
-                        let product_id = item.item.id;
-                        let product = item.item.product;
-                        let qty = item.qty;
                         this.$store.dispatch("GetStockQty", {product_id, size:''})
                         .then(res=>{
                             if(res.qty < qty)
                             {
-                                toastr.options.positionClass = 'toast-top-center';
-                                toastr.error(product+' ('+Math.round(res.qty)+ ') pcs available!');
-                            }
-                            else if(res.qty >= qty){
+                                this.isDisabled = false;
+                                if(errorIndex > -1)
+                                {
+                                    errors[errorIndex]['qty'] = 'Stock ' + Math.round(res.qty)+ ' pcs available';
+                                }
 
-                                this.validatedArray.push(product_id);
-                                
-                                
+                                else errors.push({id:product_id,qty: 'Stock '+ Math.round(res.qty) +' pcs available'});
+
+                                if(index > -1)
+                                {
+                                    this.validatedArray.splice(index, 1);
+                                }
+                            }
+                            else{
+                                errorIndex > -1 ? errors[errorIndex]["qty"] = '' : '';
+                                let bool = this.validatedArray.some(item=> item === product_id);
+                                if(!bool)
+                                {
+                                    this.validatedArray.push(product_id);
+                                }
+
                                 this.finalCheckout();
                             }
                         })
@@ -155,10 +193,8 @@ export default {
         finalCheckout()
         {
             let status = this.cartItems.every(item => this.validatedArray.includes(item.item.id));
-            //alert(this.validatedArray);
             if(status)
             {
-                this.isDisabled = true;
                 this.btnText = 'Please Wait....';
                 this.$store.dispatch("Checkout", this.customer)
                 .then((res)=>{
@@ -170,7 +206,7 @@ export default {
                 };
                 if(res.success)
                 {
-                    this.isDisabled = false;
+                    this.isDisabled = true;
                     this.btnText = 'Place Order';
                     toastr.success(res.success);
                     location.reload();
