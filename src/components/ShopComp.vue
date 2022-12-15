@@ -41,49 +41,13 @@
                         <div class="sidebar-box filter-by-color mb-4">
                             <h5 class="title text-cap">Filter By Color</h5>
                             <div class="color-box">
-                                <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
+                                <a @click.prevent="productFilterByColorOrSize(color.id)" class="color d-flex justify-content-between text-decoration-none text-dark p-1" v-for="color in colors" :key="color.id">
                                     <div class="left d-flex">
-                                        <div class="color-bg" style="background-color: white;"></div>
-                                        <p>White</p>
+                                        <div class="color-bg" :style="'background-color:'+ color.name"></div>
+                                        <p>{{color.name}}</p>
                                     </div>
                                     <div class="product-items">
-                                        <span>3</span>
-                                    </div>
-                                </a>
-                                <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left d-flex">
-                                        <div class="color-bg" style="background-color: red;"></div>
-                                        <p>Red</p>
-                                    </div>
-                                    <div class="product-items">
-                                        <span>5</span>
-                                    </div>
-                                </a>
-                                <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left d-flex">
-                                        <div class="color-bg" style="background-color: black;"></div>
-                                        <p>Black</p>
-                                    </div>
-                                    <div class="product-items">
-                                        <span>3</span>
-                                    </div>
-                                </a>
-                                <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left d-flex">
-                                        <div class="color-bg" style="background-color: gray;"></div>
-                                        <p>Gray</p>
-                                    </div>
-                                    <div class="product-items">
-                                        <span>3</span>
-                                    </div>
-                                </a>
-                                <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left d-flex">
-                                        <div class="color-bg" style="background-color: purple;"></div>
-                                        <p>Purple</p>
-                                    </div>
-                                    <div class="product-items">
-                                        <span>3</span>
+                                        <span>{{color.total}}</span>
                                     </div>
                                 </a>
                             </div>
@@ -91,44 +55,13 @@
                         <div class="mb-3 filter-by-size sidebar-box">
                             <h5 class="title text-cap">Filter By Size</h5>
                             <div class="size-box">
-                                <a class="size d-flex justify-content-between text-decoration-none text-dark p-1">
+                                <a @click.prevent="productFilterByColorOrSize(size.id)" class="size d-flex justify-content-between text-decoration-none text-dark p-1" v-for="size in sizes" :key="size.id">
                                     <div class="left">
-                                        30
+                                        <div class="color-bg" :style="'background-color:'+ size.name"></div>
+                                        <p>{{size.name}}</p>
                                     </div>
                                     <div class="product-items">
-                                        <span>3</span>
-                                    </div>
-                                </a>
-                                <a class="size d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left">
-                                        32
-                                    </div>
-                                    <div class="product-items">
-                                        <span>5</span>
-                                    </div>
-                                </a>
-                                <a class="size d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left">
-                                        34
-                                    </div>
-                                    <div class="product-items">
-                                        <span>1</span>
-                                    </div>
-                                </a>
-                                <a class="size d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left">
-                                        36
-                                    </div>
-                                    <div class="product-items">
-                                        <span>6</span>
-                                    </div>
-                                </a>
-                                <a class="size d-flex justify-content-between text-decoration-none text-dark p-1">
-                                    <div class="left">
-                                        38
-                                    </div>
-                                    <div class="product-items">
-                                        <span>2</span>
+                                        <span>{{size.total}}</span>
                                     </div>
                                 </a>
                             </div>
@@ -143,10 +76,10 @@
                                 </ol>
                               </nav>
                             <nav class="navbar">
-                                <a href="#" class="nav-link me-3 font-lg d-none d-md-none d-lg-block" id="product-12">
+                                <a href="#" class="nav-link me-3 font-lg d-none d-md-none d-lg-block" id="" @click.prevent="changeGrid(12)">
                                     <i class="fas fa-bars"></i> 
                                 </a>
-                                <a href="#" class="nav-link me-3 ms-3 font-lg d-none d-md-none d-lg-block" id="product-3">
+                                <a href="#" class="nav-link me-3 ms-3 font-lg d-none d-md-none d-lg-block" id="" @click.prevent="changeGrid(3)">
                                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="19px" height="19px" viewBox="0 0 19 19" enable-background="new 0 0 19 19" xml:space="preserve">
                                         <rect width="4" height="4"></rect>
                                         <rect x="5" width="4" height="4"></rect>
@@ -166,8 +99,8 @@
                                         <rect x="15" y="10" width="4" height="4"></rect>
                                         </svg>
                                 </a>
-                                <a href="#" class="nav-link me-3 ms-3 font-lg" id="filter">
-                                    <i class="fas fa-sliders-h" @click.prevent="showHide"></i> Filter
+                                <a href="#" class="nav-link me-3 ms-3 font-lg" id="" @click.prevent="showHide">
+                                    <i class="fas fa-sliders-h" ></i> Filter
                                 </a>
                             </nav>
                         </div>
@@ -209,68 +142,15 @@
                                         18,750.00৳  - 25,000.00৳ 
                                     </a>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12 color-box">
-                                    <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
+                                <div class="col-lg-4 col-md-4 filter-by-color col-12 color-box">
+                                    <h5 class="title text-cap m-2">Filter By Color</h5>
+                                    <a @click.prevent="productFilterByColorOrSize(color.id)" class="color d-flex justify-content-between text-decoration-none text-dark p-1" v-for="color in colors" :key="color.id">
                                         <div class="left d-flex">
-                                            <div class="color-bg" style="background-color: white;"></div>
-                                            <p>White</p>
+                                            <div class="color-bg" :style="'background-color:'+ color.name"></div>
+                                            <p>{{color.name}}</p>
                                         </div>
                                         <div class="product-items">
-                                            <span>3</span>
-                                        </div>
-                                    </a>
-                                    <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                        <div class="left d-flex">
-                                            <div class="color-bg" style="background-color: red;"></div>
-                                            <p>Red</p>
-                                        </div>
-                                        <div class="product-items">
-                                            <span>5</span>
-                                        </div>
-                                    </a>
-                                    <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                        <div class="left d-flex">
-                                            <div class="color-bg" style="background-color: black;"></div>
-                                            <p>Black</p>
-                                        </div>
-                                        <div class="product-items">
-                                            <span>3</span>
-                                        </div>
-                                    </a>
-                                    <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                        <div class="left d-flex">
-                                            <div class="color-bg" style="background-color: gray;"></div>
-                                            <p>Gray</p>
-                                        </div>
-                                        <div class="product-items">
-                                            <span>3</span>
-                                        </div>
-                                    </a>
-                                    <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                        <div class="left d-flex">
-                                            <div class="color-bg" style="background-color: purple;"></div>
-                                            <p>Purple</p>
-                                        </div>
-                                        <div class="product-items">
-                                            <span>3</span>
-                                        </div>
-                                    </a>
-                                    <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                        <div class="left d-flex">
-                                            <div class="color-bg" style="background-color: purple;"></div>
-                                            <p>Purple</p>
-                                        </div>
-                                        <div class="product-items">
-                                            <span>3</span>
-                                        </div>
-                                    </a>
-                                    <a class="color d-flex justify-content-between text-decoration-none text-dark p-1">
-                                        <div class="left d-flex">
-                                            <div class="color-bg" style="background-color: purple;"></div>
-                                            <p>Purple</p>
-                                        </div>
-                                        <div class="product-items">
-                                            <span>3</span>
+                                            <span>{{color.total}}</span>
                                         </div>
                                     </a>
                                 </div>
@@ -356,10 +236,13 @@ import quickView from './layouts/QuickViewModal';
 import checkout from './layouts/CheckoutModal';
 import loading from './layouts/LoadingComp';
 import buy from './layouts/BuyModal';
+
 export default {
     mixins: [mixins],
     data(){
         return{
+            colors: {},
+            sizes: {},
             categories: {},
             products: {},
             product_info : {},
@@ -429,10 +312,24 @@ export default {
                 console.log(err);
             })
         },
+
+        productFilterByColorOrSize(id)
+        {
+            this.seen = true;
+            this.$store.dispatch("ProductFilterByColorOrSize", id)
+            .then(res=>{
+                this.products = res;
+                this.seen = false;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+            
+        },
         rangeChange()
         {
             this.productFilterByPrice(this.rangeFrom,this.rangeTo);
-        }
+        },
     },
     computed: {
         cartItemCount()
@@ -452,7 +349,7 @@ export default {
         })
         .catch(err=>{
             console.log(err);
-        })
+        });
         
         this.$store.dispatch("ShopProductList")
         .then(res=>{
@@ -461,7 +358,27 @@ export default {
         })
         .catch(err=>{
             console.log(err);
+        });
+        
+        this.$store.dispatch("productColors")
+        .then(res=>{
+            this.colors = res;
+            this.seen = false;
         })
+        .catch(err=>{
+            console.log(err);
+        });        
+        
+        this.$store.dispatch("productSizes")
+        .then(res=>{
+            this.sizes = res;
+            this.seen = false;
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+
+
 
     },
 

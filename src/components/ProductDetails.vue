@@ -88,6 +88,10 @@
                                 
                             </div>
                             <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product, variations, '', size, qty)">Buy</button>
+
+                            <button data-bs-toggle="modal" data-bs-target="#find-store-modal" style="margin-left:20px !important" class="btn bg-dark">
+                                Find In Store
+                            </button>
                         </div>
                          <!-- Checkout modal  -->
                          <checkout :cartItems="cartItems"></checkout>
@@ -162,6 +166,8 @@
                             </div>
                         </div>
                       </div>
+                        <!--Quickview Modal-->
+                        <FindStore :product="product" :variations="variations" :locations="locations"></FindStore>
                       <!--checkout logo -->
                       <buy/>  
         </section>
@@ -173,12 +179,14 @@ import mixins from '../Mixins';
 import { VueImageZoomer } from 'vue-image-zoomer'
 import 'vue-image-zoomer/dist/style.css';
 import checkout from './layouts/CheckoutModal';
+import FindStore from './layouts/FindStore';
 import toastr from 'toastr';
 import buy from './layouts/BuyModal';
 export default {
     components: {
         checkout,
         VueImageZoomer,
+        FindStore,
         buy
     },
     mixins: [mixins],
@@ -190,6 +198,7 @@ export default {
             qty: 1,
             size: '',
             active: 1,
+            locations: {},
         }
     },
     methods: {
@@ -233,9 +242,15 @@ export default {
         })
         .catch(err=>{
             console.log(err);
-        })
+        });
+        
 
-    },
+        this.$store.dispatch("LocationWiseStock", {product_id, size:''})
+            .then(res=>{
+                this.locations = res;
+            })
+        },
+
     computed: {
         cartItemCount()
         {

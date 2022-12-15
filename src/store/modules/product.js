@@ -135,6 +135,32 @@ export const product =  {
                     reject(err);
                 })
             });
+        },       
+        ProductFilterByColorOrSize(context, id)
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/product_filter_by_color_or_size/" + id)
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },        
+        LocationWiseStock(context, item)
+        {
+            let id = item.product_id;
+            let size_id = item.size;
+            return new Promise((resolve, reject)=>{
+                axios.get("/location_wise_stock/" + id + "/" + size_id)
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
         },
         productSortByType(context, type)
         {
@@ -159,7 +185,7 @@ export const product =  {
                     reject(err);
                 })
             });
-        }, 
+        },      
         productSearch(context, query)
         {
                 axios.get("/product_search/" + query)
@@ -170,6 +196,30 @@ export const product =  {
                     console.log(err);
                 })
         },
+        productColors()
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/product_colors")
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },          
+        productSizes()
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/product_sizes")
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },  
     },
     mutations: {
         productSearch(state, data)

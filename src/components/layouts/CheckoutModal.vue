@@ -102,7 +102,6 @@ export default {
     methods: {
         checkout()
         {
-            this.isDisabled = true;
             this.cartItems.map(item=> {
                 let product_id = item.item.id;
                 let size = item.size;
@@ -114,13 +113,11 @@ export default {
                 {
                     if(item.size === '')
                     {
-                        this.isDisabled = false;
                         if(errorIndex > -1)
                         {
                             errors[errorIndex]["size"] = 'Size is required';
                         }
                        else errors.push({id:product_id, size:'Size is required'});
-                                   this.isDisabled = true;
                     }
                     else if(item.size !== ''){
                         errorIndex > -1 ? errors[errorIndex]["size"] = '' : '';
@@ -128,7 +125,6 @@ export default {
                         .then(res=>{
                             if(res.qty < qty)
                             {
-                                this.isDisabled = false;
                                 if(errorIndex > -1)
                                 {
                                     errors[errorIndex]['qty'] = 'Stock ' + Math.round(res.qty)+ ' pcs available';
@@ -161,7 +157,6 @@ export default {
                         .then(res=>{
                             if(res.qty < qty)
                             {
-                                this.isDisabled = false;
                                 if(errorIndex > -1)
                                 {
                                     errors[errorIndex]['qty'] = 'Stock ' + Math.round(res.qty)+ ' pcs available';
@@ -195,6 +190,7 @@ export default {
             let status = this.cartItems.every(item => this.validatedArray.includes(item.item.id));
             if(status)
             {
+                this.isDisabled = true;
                 this.btnText = 'Please Wait....';
                 this.$store.dispatch("Checkout", this.customer)
                 .then((res)=>{
@@ -206,7 +202,6 @@ export default {
                 };
                 if(res.success)
                 {
-                    this.isDisabled = true;
                     this.btnText = 'Place Order';
                     toastr.success(res.success);
                     location.reload();

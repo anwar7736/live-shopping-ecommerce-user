@@ -1,5 +1,6 @@
 import toastr from 'toastr';
 import store from '../store';
+import $ from 'jquery';
 export default{
     methods: {
         AddToWishList(item)
@@ -112,6 +113,31 @@ export default{
         {
             store.dispatch("ProductFilterByCategory", id);
         },
+
+        changeGrid(grid)
+        {
+            if(grid === 3)
+            {
+                $(".product").removeClass("col-lg-3");
+                $(".product").removeClass("col-lg-12");
+                $(".product").removeClass("d-lg-flex");
+                $(".product .product-details").removeClass("text-start");
+                $(".product .product-details").removeClass("ps-2");
+                $(".product .product-details").addClass("text-center");
+                $(".product .product-details .product-details-p").fadeOut("fast");
+                $(".product .product-details a .button").addClass("m-auto");
+            }
+            else {
+                $(".product").addClass("col-lg-12");
+                $(".product").removeClass("col-lg-3");
+                $(".product").addClass("d-lg-flex");
+                $(".product .product-details").addClass("text-start");
+                $(".product .product-details").addClass("ps-3");
+                $(".product .product-details").removeClass("text-center");
+                $(".product .product-details .product-details-p").fadeIn("fast");
+                $(".product .product-details a .button").removeClass("m-auto");
+            }
+        }
 
         
     }
