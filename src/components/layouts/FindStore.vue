@@ -13,7 +13,7 @@
             <div class="modal-body product-popup">
                 
                 <div class="row" v-if="product">
-                    <div class="modal-product-image col-6">
+                    <div class="modal-product-image col-5">
                         <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
                             <div class="carousel-inner" role="listbox">                               
                                 <div class="carousel-item active" v-for="image in product.images" :key="image.id">
@@ -55,25 +55,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-product-details col-6 pt-3" v-if="details.length > 0">
+                    <div class="modal-product-details outofstock col-7 pt-3" v-if="details.length > 0">
                         <div class="row" v-for="row in details" :key="row">
                             <strong>{{row.location.name}}</strong>
                             <p>{{row.location.landmark}}</p>
-                            <strong class="bg-dark p-2 text-danger text-center" v-if="Number(row.qty_available) <=0 ">Product out of stock</strong>
+                            <strong class="bg-dark p-2 text-danger text-center" v-if="Number(row.qty_available) <=0 ">Out of stock</strong>
                             <p class="bg-dark p-2 text-white text-center" v-else>Only {{parseInt(row.qty_available)}} pcs available</p>                            
                         </div>                        
                         
                     </div>                    
-                    <div class="modal-product-details col-6 pt-3" v-else>
+                    <div class="modal-product-details outofstock col-6 pt-3" v-else>
                         <div class="row" v-for="row in locations" :key="row">
                             <strong>{{row.location.name}}</strong>
                             <p>{{row.location.landmark}}</p>
-                            <strong class="bg-dark p-2 text-danger text-center" v-if="Number(row.qty_available) <=0 ">Product out of stock</strong>
+                            <strong class="bg-dark p-2 text-danger text-center" v-if="Number(row.qty_available) <=0 ">Out of stock</strong>
                             <p class="bg-dark p-2 text-white text-center" v-else>Only {{parseInt(row.qty_available)}} pcs available</p>       
                         </div>                        
                         
                     </div>
                 </div>
+                
                 
             </div>
         </div>
@@ -114,5 +115,10 @@ export default {
         margin-left: -20%;
 }
 
+.outofstock{
+    max-height: 200px;
+    overflow: auto;
+    overflow-x: hidden;
+}
 
 </style>

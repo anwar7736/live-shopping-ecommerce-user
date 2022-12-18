@@ -28,17 +28,17 @@
                                         </iframe>
                                     </div> 
                                 </div>
-                                <div class="row mt-2">
+                                <div class="d-flex mt-2">
                                     <div v-if="product.images.length === 0">
-                                        <div class="col-md-3 mt-1" v-for="image in 1" :key="image">
+                                        <div class="col-md-3 col-3 mt-1" v-for="image in 1" :key="image">
                                             <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                         </div>  
                                     </div>      
-                                    <div @click="carouselActive(index)" class="col-md-3 mt-1" v-for="(image, index) in product.images" :key="image.id">
+                                    <div @click="carouselActive(index)" class="col-md-3 col-3 mt-1" v-for="(image, index) in product.images" :key="image.id">
                                         <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
                                     </div>    
 
-                                    <div class="col-md-3 mt-1" v-if="product.video">
+                                    <div class="col-md-3 col-3 mt-1" v-if="product.video">
                                         <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
