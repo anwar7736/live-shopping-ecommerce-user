@@ -144,8 +144,11 @@ export default {
     methods: {
         searchProduct()
         {
-            this.$router.push('/product-search?query='+this.query);
-            this.query = "";
+            if(this.query !== ''){
+                this.$store.dispatch("productSearch", this.query)
+                this.$router.push('/product-search?query='+this.query);
+                this.query = "";
+            }
         }
     }
 }
