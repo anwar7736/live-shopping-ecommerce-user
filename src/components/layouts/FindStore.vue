@@ -60,7 +60,7 @@
                             <strong>{{row.location.name}}</strong>
                             <p>{{row.location.landmark}}</p>
                             <strong class="bg-dark p-2 text-danger text-center" v-if="Number(row.qty_available) <=0 ">Out of stock</strong>
-                            <p class="bg-dark p-2 text-white text-center" v-else>Only {{parseInt(row.qty_available)}} pcs available</p>                            
+                            <p class="bg-dark p-2 text-white text-center" v-else>Only {{qtyCal(row.qty_available) }} pcs available</p>                            
                         </div>                        
                         
                     </div>                    
@@ -69,7 +69,7 @@
                             <strong>{{row.location.name}}</strong>
                             <p>{{row.location.landmark}}</p>
                             <strong class="bg-dark p-2 text-danger text-center" v-if="Number(row.qty_available) <=0 ">Out of stock</strong>
-                            <p class="bg-dark p-2 text-white text-center" v-else>Only {{parseInt(row.qty_available)}} pcs available</p>       
+                            <p class="bg-dark p-2 text-white text-center" v-else>Only {{qtyCal(row.qty_available)}} pcs available</p>       
                         </div>                        
                         
                     </div>
@@ -104,8 +104,19 @@ export default {
                 this.details = res;
                 console.log(res);
             })
+        },
+        qtyCal(qty)
+        {
+            let Qty = Math.round(qty);
+            if(Qty > 5)
+            {
+                return Math.round((Qty * 5 / 100) + 5);
+            }
+            else {
+                return Qty;
+            }
         }
-    }
+    },
     
 
 }
@@ -116,7 +127,7 @@ export default {
 }
 
 .outofstock{
-    max-height: 200px;
+    max-height: 400px;
     overflow: auto;
     overflow-x: hidden;
 }

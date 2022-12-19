@@ -1,3 +1,3 @@
-const baseURL = "https://advert.com.bd/new_pos/api";
+const baseURL = "https://advertbangladesh.com/testpos/api";
 
 export default baseURL;
