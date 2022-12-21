@@ -20,9 +20,16 @@
                                     <img :src="image.image" @error="image.image='assets/images/products/default-image.jpg'" alt="" class="col-12"/> 
                                 </div>  
                                 <div v-if="product.images == ''">
-                                    <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
-                                        <img src="assets/images/products/default-image.jpg" alt="Image" class="col-12"/>
-                                    </a>
+                                    <div v-if="product.image_url">
+                                        <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
+                                            <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
+                                        </a>
+                                        </div>
+                                    <div v-else>
+                                        <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
+                                            <img src="assets/images/products/default-image.jpg" alt="Image" class="col-12"/>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="carousel-item" v-if="product.video">
                                     <iframe width="100%" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>

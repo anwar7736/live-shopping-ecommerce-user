@@ -17,11 +17,18 @@
                                         <vue-image-zoomer>
                                             <img :src="image.image" alt="Image" class="w-100 d-block"/>
                                         </vue-image-zoomer>
-                                    </a>
+                                    </a>                                    
                                     <div v-if="product.images.length === 0">
+                                        <div v-if="product.image_url">
                                         <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
-                                            <img src="assets/images/products/default-image.jpg" alt="Image" class="w-100 d-block"/>
+                                            <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
+                                        </div>
+                                        <div v-else>
+                                            <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
+                                                <img src="assets/images/products/default-image.jpg" alt="Image" class="w-100 d-block"/>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video">
                                         <iframe width="100%" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
