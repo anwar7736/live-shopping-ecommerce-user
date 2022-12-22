@@ -90,9 +90,9 @@ export default {
             isDisabled: false,
             btnText: 'Place Order',
             customer:{
-                name: 'Abu bakkar',
-                phone: '01859544510',
-                address: 'Mohammadpur, Dhaka',
+                name: '',
+                phone: '',
+                address: '',
                
             },
         }
