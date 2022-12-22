@@ -20,33 +20,38 @@
                                     </a>                                    
                                     <div v-if="product.images.length === 0">
                                         <div v-if="product.image_url">
-                                        <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
+                                        <a href="#" class="carousel-item active">
                                             <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
                                         </div>
                                         <div v-else>
-                                            <a href="#" class="carousel-item active" v-for="image in 3" :key="image">
+                                            <a href="#" class="carousel-item active">
                                                 <img src="assets/images/products/default-image.jpg" alt="Image" class="w-100 d-block"/>
                                             </a>
                                         </div>
                                     </div>
-                                    <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video">
-                                        <iframe width="100%" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video_url">
+                                        <iframe width="100%" height="400" :src="product.video_url+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div> 
                                 </div>
                                 <div class="d-flex mt-2">
                                     <div v-if="product.images.length === 0">
-                                        <div class="col-md-3 col-3 mt-1" v-for="image in 1" :key="image">
-                                            <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
-                                        </div>  
+                                        <div v-if="product.image_url" class="col-md-3 mt-1">
+                                            <a href="#">
+                                                <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
+                                            </a>
+                                        </div>
+                                    <div v-else class="col-md-3 mt-1">
+                                        <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
+                                    </div> 
                                     </div>      
                                     <div @click="carouselActive(index)" class="col-md-3 col-3 mt-1" v-for="(image, index) in product.images" :key="image.id">
                                         <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
                                     </div>    
 
-                                    <div class="col-md-3 col-3 mt-1" v-if="product.video">
-                                        <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    <div class="col-md-3 col-3 mt-1" v-if="product.video_url">
+                                        <iframe width="60" height="60" :src="product.video_url+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
                                 </div>

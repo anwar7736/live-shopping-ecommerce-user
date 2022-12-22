@@ -211,8 +211,8 @@ router.beforeEach((to, from) => {
           path: '/',
         }
     }
-    // document.title = `${to.meta.title} - Live-Shopping`
-    document.title = `Live-Shopping`
+    // document.title = `${to.meta.title} - Live Shopping`;
+    document.title = `Live Shopping`;
 
   });
 
