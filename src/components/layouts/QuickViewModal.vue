@@ -41,10 +41,10 @@
                                 </div>                             
                                 <div v-if="product.images == ''">
                                     <div v-if="product.image_url" class="col-md-3 mt-1">
-                                        <a href="#">
+                                        
                                             <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
-                                        </a>
-                                        </div>
+                                        
+                                    </div>
                                     <div v-else class="col-md-3 mt-1">
                                         <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                     </div> 
@@ -63,7 +63,7 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <router-link :to="'/product-details?id='+ product.id" class="btn col-12">View Details</router-link>
+                        <router-link :to="'/product-details?id='+ product.id" class="btn col-12 d-none">View Details</router-link>
                     </div>
                     <div class="modal-product-details col-6 pt-3" v-if="product.variation">
                         <a href="#" class="text-decoration-none text-dark">

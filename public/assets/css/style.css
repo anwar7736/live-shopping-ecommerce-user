@@ -1161,10 +1161,10 @@ footer .row div form button{
   width: 50px;
   height: 50px;
   border: 0 solid rgb(231, 230, 230);
-  border-top-width: 1px;
+  border-top-width: 2px;
   border-bottom-width: 1px;
-  border-right-width: 1px;
-  border-left-width: 1px;
+  border-right-width: 2px;
+  border-left-width: 2px;
   margin: 0;
   padding: 10px;
 }

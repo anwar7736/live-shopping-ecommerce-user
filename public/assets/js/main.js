@@ -10,6 +10,11 @@
 // }
 
 $(document).ready(function () {
+  $(document).on("click", "ul li.nav-item a.nav-link", function(){
+    $(".mobile-sidebar").css("left", "-300px");
+    $(".overlay-sidebar").fadeOut("fast");
+  });
+  
   $(".menu-toggler").click(function () {
     $(".mobile-sidebar").css("left", "0");
     $(".overlay-sidebar").fadeIn("fast");
