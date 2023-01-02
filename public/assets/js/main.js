@@ -323,4 +323,22 @@ $(document).ready(function(){
   $("#account-dismiss").click(function(){
     $("#account-sidemenu").css("left", "-300px");
   });  
+  $(".carousel-control-next").click(function() {
+    
+  });
+
+  
 });
+
+
+
+$(document).on("click", ".carousel-control-prev", function(){
+    $('iframe').attr('src', $('iframe').attr('src'));
+})
+
+$(document).on("click", ".carousel-control-next", function(){
+  $('iframe').attr('src', $('iframe').attr('src'));
+})
+
+
+
