@@ -39,7 +39,12 @@
                                 <router-link :to="'/product-details?id='+ sale.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{sale.product}}
                                 </router-link>
                             </div>
-                            <div class="price">
+                            <div class="price" v-if="sale.variation.discount_price">
+                                <del class="text-muted">{{Number(sale.variation.default_sell_price).toFixed(2)}}৳
+                                </del>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(sale.variation.default_sell_price -  sale.variation.discount_price.price_inc_tax).toFixed(2)}}৳</span>
+                            </div>                            
+                            <div class="price" v-else>
                                 <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(sale.variation.default_sell_price).toFixed(2)}}৳</span>
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(sale)">

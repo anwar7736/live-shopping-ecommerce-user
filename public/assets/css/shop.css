@@ -307,7 +307,7 @@
   }
   .size-box .size{
     cursor: pointer;
-    margin: 10px 0;
+    margin: 10px 10px;
   }
   .size-box .size .product-items{
     height: 20px;

@@ -54,8 +54,35 @@
                         </div>
                         <div class="mb-3 filter-by-size sidebar-box">
                             <h5 class="title text-cap">Filter By Size</h5>
-                            <div class="size-box">
-                                <a @click.prevent="productFilterByColorOrSize(size.id)" class="size d-flex justify-content-between text-decoration-none text-dark p-1" v-for="size in sizes" :key="size.id">
+                            <div class="size-box ml-3">
+                                <div class="product-items row">
+                                        <span>T-SHIRT</span>
+                                        <a v-for="shirt in sizes.shirt_sizes" :key="shirt.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3">
+                                            <div class="product-items">
+                                                {{shirt.name}}
+                                            </div>
+                                        </a>
+                                    </div>  
+                                    <hr/>             
+                                    <div class="product-items row">
+                                        <span>PANT</span>
+                                        <a v-for="pant in sizes.pant_sizes" :key="pant.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3">
+                                            <div class="product-items">
+                                                {{pant.name}}
+                                            </div>
+                                        </a>
+                                    </div>   
+                                    <hr/>                                      
+                                    <div class="product-items row">
+                                        <span>BLAZER</span>
+                                        <a v-for="blazer in sizes.blazer_sizes" :key="blazer.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3">
+                                            <div class="product-items">
+                                                {{blazer.name}}
+                                            </div>
+                                        </a>
+                                    </div>
+                           
+                                <a @click.prevent="productFilterByColorOrSize(size.id)" class="size d-flex justify-content-between text-decoration-none text-dark p-1 d-none" v-for="size in sizes" :key="size.id">
                                     <div class="left">
                                         <div class="color-bg" :style="'background-color:'+ size.name"></div>
                                         <p>{{size.name}}</p>
@@ -194,9 +221,13 @@
                                     <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product}}
                                     </router-link>
                                   </div>
-
-                                    <div class="price">
-                                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
+                                  <div class="price" v-if="product.variation.discount_price">
+                                    <del class="text-muted">{{Number(product.variation.default_sell_price).toFixed(2)}}৳
+                                    </del>
+                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price -  product.variation.discount_price.price_inc_tax).toFixed(2)}}৳</span>
+                                    </div>                            
+                                    <div class="price" v-else>
+                                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
                                     </div>
                                     <p class="product-details-p" style="display: none;" v-html="product.description">
                                     </p>
