@@ -21,7 +21,7 @@
                 <router-link :to="'/product-details?id='+ item.id" class="text-decoration-none">
                     <img :src="item.image_url" @error="item.image_url='assets/images/products/default-image.jpg'" alt="Image"/> 
                     <div class="nav-link text-dark p-1">
-                        <b>{{item.product}}</b>
+                        <b>{{item.product ?? item.default_name}}</b>
                     </div>
                 </router-link>
                     <div class="price">

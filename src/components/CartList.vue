@@ -47,7 +47,7 @@
                                         <td>
                                             <div class="product-name">
                                                 <router-link :to="'/product-details?id='+ cart.item.id" class="text-decoration-none text-dark">
-                                                    {{cart.item.product}}
+                                                    {{cart.item.product ?? cart.item.default_name}}
                                                 </router-link>
                                             </div>
                                         </td>
@@ -107,7 +107,7 @@
                                             </td>
                                         </tr>
                                         <tr v-for="cart in cartItems" :key="cart.item.id">
-                                            <td>{{cart.item.product}}  × {{cart.qty}}</td>
+                                            <td>{{cart.item.product ?? cart.item.default_name}}  × {{cart.qty}}</td>
                                             <td class="text-end"> {{cart.qty * cart.item.variation.default_sell_price}}৳</td>
                                         </tr>
                                     </tbody>

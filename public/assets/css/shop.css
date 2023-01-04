@@ -317,10 +317,13 @@
     text-align: center;
     transition: 0.5s;
   }
-  .size-box .size:hover .product-items{
+  .size-box .size:hover .product-items, .selected-item{
     background: #FF7400;
     border-color: #FF7400;
     color: white;
+  }
+  .selected-category{
+    color: #FF7400;
   }
   .size-box .size .product-items span{
     padding: 5px;

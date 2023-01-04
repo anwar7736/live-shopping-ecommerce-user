@@ -9,7 +9,7 @@
                             <h5 class="text-cap">Product Categories</h5>
                             <ul>
                                 <li  v-for="cat in categories" :key="cat.id">
-                                    <router-link :to="'/product-category?id='+ cat.id" @click.prevent="categoryFilter(cat.id)">{{cat.name}}</router-link>
+                                    <router-link :to="'/product-category?id='+ cat.id" @click.prevent="categoryFilter(cat.id)"><span :class="selectedCategory === cat.id ? 'selected-category' : ''">{{cat.name}}</span></router-link>
                                 </li>
                             </ul>
                         </div>
@@ -40,13 +40,13 @@
 
                         <div class="sidebar-box filter-by-color mb-4">
                             <h5 class="title text-cap">Filter By Color</h5>
-                            <div class="color-box">
-                                <a @click.prevent="productFilterByColorOrSize(color.id)" class="color d-flex justify-content-between text-decoration-none text-dark p-1" v-for="color in colors" :key="color.id">
+                            <div class="color-box row">
+                                <a @click.prevent="productFilterByColorOrSize(color.id, 'color')" class="color d-flex justify-content-between text-decoration-none text-dark p-1 col-md-4" v-for="color in colors" :key="color.id">
                                     <div class="left d-flex">
-                                        <div class="color-bg" :style="'background-color:'+ color.name"></div>
+                                        <div class="color-bg" :class="selectedColor === color.id ? 'selected-item' : ''"></div>
                                         <p>{{color.name}}</p>
                                     </div>
-                                    <div class="product-items">
+                                    <div class="product-items d-none" >
                                         <span>{{color.total}}</span>
                                     </div>
                                 </a>
@@ -57,8 +57,8 @@
                             <div class="size-box ml-3">
                                 <div class="product-items row">
                                         <span>T-SHIRT</span>
-                                        <a v-for="shirt in sizes.shirt_sizes" :key="shirt.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3">
-                                            <div class="product-items">
+                                        <a v-for="shirt in sizes.shirt_sizes" :key="shirt.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3" @click.prevent="productFilterByColorOrSize(shirt.id, 'size')">
+                                            <div class="product-items" :class="selectedSize === shirt.id ? 'selected-item' : ''">
                                                 {{shirt.name}}
                                             </div>
                                         </a>
@@ -66,8 +66,8 @@
                                     <hr/>             
                                     <div class="product-items row">
                                         <span>PANT</span>
-                                        <a v-for="pant in sizes.pant_sizes" :key="pant.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3">
-                                            <div class="product-items">
+                                        <a v-for="pant in sizes.pant_sizes" :key="pant.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3" @click.prevent="productFilterByColorOrSize(pant.id, 'size')">
+                                            <div class="product-items" :class="selectedSize === pant.id ? 'selected-item' : ''">
                                                 {{pant.name}}
                                             </div>
                                         </a>
@@ -75,8 +75,8 @@
                                     <hr/>                                      
                                     <div class="product-items row">
                                         <span>BLAZER</span>
-                                        <a v-for="blazer in sizes.blazer_sizes" :key="blazer.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3">
-                                            <div class="product-items">
+                                        <a v-for="blazer in sizes.blazer_sizes" :key="blazer.id" class="size d-flex justify-content-between text-decoration-none text-dark p-1 col-md-3" @click.prevent="productFilterByColorOrSize(blazer.id, 'size')">
+                                            <div class="product-items" :class="selectedSize === blazer.id ? 'selected-item' : ''">
                                                 {{blazer.name}}
                                             </div>
                                         </a>
@@ -153,31 +153,31 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-12 price-filter pb-3">
                                     <h5>Price Filter</h5>
-                                    <a @click.prevent="productFilterByPrice()" href="#" class="nav-link text-dark pt-2 active">
+                                    <a @click.prevent="productFilter()" href="#" class="nav-link text-dark pt-2 active">
                                         All
                                     </a>
-                                    <a @click.prevent="productFilterByPrice(0, 6250)" href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilter(0, 6250)" href="#" class="nav-link text-dark pt-2">
                                         0.00৳  - 6,250.00৳ 
                                     </a>
-                                    <a @click.prevent="productFilterByPrice(6250, 12500)" href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilter(6250, 12500)" href="#" class="nav-link text-dark pt-2">
                                         6,250.00৳  - 12,500.00৳ 
                                     </a>
-                                    <a @click.prevent="productFilterByPrice(12500, 18750)" href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilter(12500, 18750)" href="#" class="nav-link text-dark pt-2">
                                         12,500.00৳  - 18,750.00৳ 
                                     </a>
-                                    <a @click.prevent="productFilterByPrice(18750, 25000)" href="#" class="nav-link text-dark pt-2">
+                                    <a @click.prevent="productFilter(18750, 25000)" href="#" class="nav-link text-dark pt-2">
                                         18,750.00৳  - 25,000.00৳ 
                                     </a>
                                 </div>
                                 <div class="col-lg-4 col-md-4 filter-by-color col-12 color-box">
                                     <h5 class="title text-cap m-2">Filter By Color</h5>
-                                    <a @click.prevent="productFilterByColorOrSize(color.id)" class="color d-flex justify-content-between text-decoration-none text-dark p-1" v-for="color in colors" :key="color.id">
+                                    <a @click.prevent="productFilterByColorOrSize(color.id,'color')" class="color d-flex justify-content-between text-decoration-none text-dark p-1 " v-for="color in colors" :key="color.id">
                                         <div class="left d-flex">
-                                            <div class="color-bg" :style="'background-color:'+ color.name"></div>
+                                            <div class="color-bg" :class="selectedColor === color.id ? 'selected-item' : ''"></div>
                                             <p>{{color.name}}</p>
                                         </div>
-                                        <div class="product-items">
-                                            <span>{{color.total}}</span>
+                                        <div class="product-items d-none">
+                                            <span>{{color.name}}</span>
                                         </div>
                                     </a>
                                 </div>
@@ -218,7 +218,7 @@
                                 <div class="product-details text-center pt-2 ps-2">
 
                                   <div class="product_name">
-                                    <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product}}
+                                    <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product ?? product.default_name}}
                                     </router-link>
                                   </div>
                                   <div class="price" v-if="product.variation.discount_price">
@@ -279,9 +279,12 @@ export default {
             product_info : {},
             variations : {},
             rangeFrom: 0,
-            rangeTo: 2500,
+            rangeTo: 0,
             seen: true,
             active: false,
+            selectedCategory: '',
+            selectedColor: '',
+            selectedSize: '',
         }
     },
     components: {
@@ -301,6 +304,7 @@ export default {
         },
         categoryFilter(id)
         {
+            this.selectedCategory = id;
 
             this.$store.dispatch("ProductFilterByCategory", id)
             .then(res=>{
@@ -331,10 +335,14 @@ export default {
             })
         },
         
-        productFilterByPrice(from = '', to = '')
+        productFilter()
         {
+            let color = this.selectedColor == '' ? 0 : this.selectedColor;
+            let size = this.selectedSize == '' ? 0 : this.selectedSize;
+            let amount = {from: this.rangeFrom, to: this.rangeTo};
+
             this.seen = true;
-            this.$store.dispatch("productFilterByPrice",{from, to})
+            this.$store.dispatch("productFilter",{color, size, amount})
             .then(res=>{
                 this.products = res;
                 this.seen = false;
@@ -344,22 +352,31 @@ export default {
             })
         },
 
-        productFilterByColorOrSize(id)
+        productFilterByColorOrSize(id, type)
         {
-            this.seen = true;
-            this.$store.dispatch("ProductFilterByColorOrSize", id)
-            .then(res=>{
-                this.products = res;
-                this.seen = false;
-            })
-            .catch(err=>{
-                console.log(err);
-            })
+            if(type === 'color')
+            {
+                this.selectedColor = id;
+            }
+            else if(type === 'size')
+            {
+                this.selectedSize = id;
+            }
+            this.productFilter();
+            // this.seen = true;
+            // this.$store.dispatch("ProductFilterByColorOrSize", id)
+            // .then(res=>{
+            //     this.products = res;
+            //     this.seen = false;
+            // })
+            // .catch(err=>{
+            //     console.log(err);
+            // })
             
         },
         rangeChange()
         {
-            this.productFilterByPrice(this.rangeFrom,this.rangeTo);
+            this.productFilter();
         },
     },
     computed: {
@@ -374,6 +391,15 @@ export default {
     },
     created()
     {
+        
+        this.$store.dispatch("MAX_PRICE")
+        .then(res=>{
+            this.rangeTo = res;
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+
         this.$store.dispatch("CATEGORY_LIST")
         .then(res=>{
             this.categories = res.categories;
@@ -389,20 +415,12 @@ export default {
         })
         .catch(err=>{
             console.log(err);
-        });
+        });     
         
-        this.$store.dispatch("productColors")
-        .then(res=>{
-            this.colors = res;
-            this.seen = false;
-        })
-        .catch(err=>{
-            console.log(err);
-        });        
-        
-        this.$store.dispatch("productSizes")
+        this.$store.dispatch("productSizesAndColors")
         .then(res=>{
             this.sizes = res;
+            this.colors = res.colors;
             this.seen = false;
         })
         .catch(err=>{

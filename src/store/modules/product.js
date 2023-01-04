@@ -30,6 +30,18 @@ export const product =  {
                 })
             });
         },
+        MAX_PRICE()
+        {
+            return new Promise((resolve, reject)=>{
+                axios.get("/max_product_price")
+                .then(res=>{
+                    resolve(res.data);
+                })
+                .catch(err=>{
+                    reject(err);
+                })
+            });
+        },
         SummerTrendy()
         {
             return new Promise((resolve, reject)=>{
@@ -174,10 +186,10 @@ export const product =  {
                 })
             });
         },
-        productFilterByPrice(context, data)
+        productFilter(context, data)
         {
             return new Promise((resolve, reject)=>{
-                axios.get("/product_filter_by_price/" + data.from + "/" + data.to)
+                axios.get("/product_filter/" + data.color + "/" + data.size + "/" + data.amount.from + "/" + data.amount.to)
                 .then(res=>{
                     resolve(res.data);
                 })
@@ -208,10 +220,10 @@ export const product =  {
                 })
             });
         },          
-        productSizes()
+        productSizesAndColors()
         {
             return new Promise((resolve, reject)=>{
-                axios.get("/product_sizes")
+                axios.get("/product_sizes_and_colors")
                 .then(res=>{
                     resolve(res.data);
                 })

@@ -4,7 +4,7 @@
             <div class="container mt-5 mb-5">
                 <h3 class="text-center">All Searching Products</h3><hr/>
                 
-               
+                <center v-if="searchItems.length == 0" class="text-danger">No Product Found!</center>
                 <div class="row deal-day-row">
                     <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="item in searchItems" :key="item.id">
                         <div class="discount-tag d-none">
@@ -38,7 +38,7 @@
                         <div class="product-details text-center pt-2">
                             
                             <div class="product_name">
-                                <router-link :to="'/product-details?id='+ item.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{item.product}}
+                                <router-link :to="'/product-details?id='+ item.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{item.product ?? item.default_name}}
                                 </router-link>
                             </div>
                             <div class="price">

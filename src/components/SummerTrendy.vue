@@ -69,7 +69,7 @@
                         <div class="product-details text-center pt-2">
                             
                             <div class="product_name">
-                                <router-link :to="'/product-details?id='+ hot.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product}}
+                                <router-link :to="'/product-details?id='+ hot.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product ?? hot.default_name}}
                                 </router-link>
                             </div>
                             <div class="price">
@@ -132,7 +132,7 @@
                         <div class="product-details text-center pt-2">
                             
                             <div class="product_name">
-                                <router-link :to="'/product-details?id='+ prod.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product}}
+                                <router-link :to="'/product-details?id='+ prod.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product ?? prod.default_name}}
                                 </router-link>
                             </div>
                             <div class="price">

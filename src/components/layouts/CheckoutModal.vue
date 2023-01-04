@@ -18,7 +18,7 @@
                 <img class="mb-2" :src="item.item.image_url" @error="item.item.image_url='assets/images/products/default-image.jpg'" alt="Image" width="70" height="80"/>
                 <div class="align-item-center ps-3 quantity-buy" >
                     <p><b>
-                        {{item.item.product}}
+                        {{item.item.product ?? item.item.default_name}}
                     </b></p>
                     <div class="quantity">
                         <button class="cart-qty-minus btn" id="dec" type="button" value="-" @click="decreaseQty(item.item.id)">-</button>

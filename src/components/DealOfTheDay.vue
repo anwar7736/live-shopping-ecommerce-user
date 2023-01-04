@@ -41,7 +41,7 @@
                             <div class="product-details text-center pt-2">
                                
                                 <div class="product_name">
-                                    <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product}}
+                                    <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product ?? product.default_name}}
                                     </router-link>
                                 </div>
                                 <div class="price">
@@ -130,7 +130,7 @@
                     <div class="modal-product-details col-6 pt-3" v-if="product.variation">
                         <a href="#" class="text-decoration-none text-dark">
                             
-                            <h3>{{product.product}}</h3>
+                            <h3>{{product.product ?? product.default_name}}</h3>
                         </a>
                         <h6 class="price pt-3">
                             <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>

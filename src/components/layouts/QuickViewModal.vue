@@ -68,7 +68,7 @@
                     <div class="modal-product-details col-6 pt-3" v-if="product.variation">
                         <a href="#" class="text-decoration-none text-dark">
                             
-                            <h3>{{product.product}}</h3>
+                            <h3>{{product.product ?? product.default_name}}</h3>
                         </a>
                         <h6 class="price pt-3">
                             <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>

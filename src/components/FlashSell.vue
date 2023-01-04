@@ -36,7 +36,7 @@
                         <div class="product-details text-center pt-2">
                             
                             <div class="product_name">
-                                <router-link :to="'/product-details?id='+ sale.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{sale.product}}
+                                <router-link :to="'/product-details?id='+ sale.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{sale.product ?? sale.default_name}}
                                 </router-link>
                             </div>
                             <div class="price" v-if="sale.variation.discount_price">

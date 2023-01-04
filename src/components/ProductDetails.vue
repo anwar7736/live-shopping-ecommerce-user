@@ -74,11 +74,11 @@
                             <ol class="breadcrumb">
                               <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
                               <li class="breadcrumb-item"><a href="#">{{product.category}}</a></li>
-                              <li class="breadcrumb-item active" aria-current="page">{{product.product}}</li>
+                              <li class="breadcrumb-item active" aria-current="page">{{product.product ?? product.default_name}}</li>
                             </ol>
                           </nav>
                         <a href="#" class="text-decoration-none text-dark">
-                            <h3>{{product.product}}</h3>
+                            <h3>{{product.product ?? product.default_name}}</h3>
                         </a>
                         
                         <h6 class="price pt-3">
