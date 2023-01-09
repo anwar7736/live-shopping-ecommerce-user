@@ -13,7 +13,7 @@
                 
                 <div class="row" v-if="product">
                     <div class="modal-product-image col-6">
-                        <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
+                        <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true" data-bs-interval="50000">
                             <div class="carousel-inner" role="listbox">                               
                                 <div class="carousel-item active" v-for="image in product.images" :key="image.id">
                                     <img :src="image.image" @error="image.image='assets/images/products/default-image.jpg'" alt="" class="col-12"/> 
@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="carousel-item" v-if="product.video_url">
-                                    <iframe width="100%" height="400" :src="product.video_url+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>                           
                             </div>
@@ -50,7 +50,7 @@
                                     </div> 
                                 </div>                                                       
                                     <div class="col-md-3 mt-1" v-if="product.video_url">
-                                        <iframe width="60" height="60" :src="product.video_url+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        <iframe width="60" height="60" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
                             </div>

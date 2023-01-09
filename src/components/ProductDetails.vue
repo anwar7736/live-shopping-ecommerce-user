@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                     <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video_url">
-                                        <iframe width="100%" height="400" :src="product.video_url" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div> 
                                 </div>
@@ -51,7 +51,7 @@
                                     </div>    
 
                                     <div class="col-md-3 col-3 mt-1" v-if="product.video_url">
-                                        <iframe width="60" height="60" :src="product.video_url" title="YouTube video player" autoplay="true" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        <iframe width="60" height="60" :src="product.video_url" title="" autoplay="true" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
                                 </div>

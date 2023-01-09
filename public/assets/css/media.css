@@ -167,6 +167,10 @@
     .border-lg-start{
       border-left: 1px solid rgba(128, 128, 128, 0.171);
     }
+
+    .all-products-widget .filter-dropdown .row{
+      margin: 0;
+    }
   }
   
   /* Extra Extra large devices (large desktops, 1200px and up)*/
@@ -192,5 +196,9 @@
     .wrapper{
       width: 90% !important;
       margin: 0 auto !important;
+    }
+
+    .all-products-widget .filter-dropdown .row{
+      margin: 0;
     }
   }

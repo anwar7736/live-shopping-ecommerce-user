@@ -255,7 +255,7 @@
     overflow-x: hidden;
   }
   .color-box{
-    max-height: 15rem;
+    max-height: 18rem;
     overflow: auto;
     overflow-x: hidden;
   }
@@ -301,7 +301,7 @@
     padding: 5px;
   }
   .size-box{
-    max-height: 20rem;
+    max-height: 12rem;
     overflow: auto;
     overflow-x: hidden;
   }
