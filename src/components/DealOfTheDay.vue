@@ -10,9 +10,14 @@
                 <div class="all-products" v-if="seen == false">
                     <div class="row deal-day-row">
                         <div class="col-lg-2 col-md-3 col-6 product p-2" v-for="product in products" :key="product.id">
-                            <div class="discount-tag d-none">
-                                -48%
-                            </div>
+                            <div class="discount-tag" v-if="product.discount">
+                                <span v-if="product.discount.type == 'fixed'">
+                                    {{parseInt(product.discount.discount_amount)}}TK OFF
+                                </span>
+                                <span v-else>
+                                    {{parseInt(product.discount.discount)}}% OFF
+                                </span>
+                            </div> 
                             <div class="options-pannel2">
                                 <ul>
                                     <li class="d-lg-block d-md-block d-none" title="compare">
@@ -44,8 +49,13 @@
                                     <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product ?? product.default_name}}
                                     </router-link>
                                 </div>
-                                <div class="price">
-                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
+                                    <div class="price" v-if="product.discount">
+                                    <del class="text-muted">{{Number(product.regular_price).toFixed(2)}}৳
+                                    </del>
+                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.discount.price_after_discount).toFixed(2)}}৳</span>
+                                </div>                            
+                                <div class="price" v-else>
+                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
                                 </div>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product)">
                                     <div class="button m-auto text-light">
@@ -97,7 +107,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="carousel-item" v-if="product.video">
+                                <div class="carousel-item d-none" v-if="product.video">
                                     <iframe width="100%" height="400" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>                           
@@ -111,7 +121,7 @@
                                         <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                     </div> 
                                 </div>                                                       
-                                    <div class="col-md-3 mt-1" v-if="product.video">
+                                    <div class="col-md-3 mt-1 d-none" v-if="product.video">
                                         <iframe width="60" height="60" :src="product.video+'?autoplay=1'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
@@ -133,7 +143,14 @@
                             <h3>{{product.product ?? product.default_name}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
+                            <div class="price" v-if="product.discount">
+                                <del class="text-muted">{{Number(product.regular_price).toFixed(2)}}৳
+                                </del>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.discount.price_after_discount).toFixed(2)}}৳</span>
+                            </div>                            
+                            <div class="price" v-else>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
+                            </div>
                         </h6>
                         <p class="text-sm" v-html="product.description">
                         </p>                        

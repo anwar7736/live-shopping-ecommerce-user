@@ -47,14 +47,16 @@
                     </div>
                 </div>
                 </div>
-                <p class="price text-end">
-                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.item.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
+                    <div class="price" v-if="item.item.discount">
+                        <del class="text-muted">{{Number(item.item.regular_price).toFixed(2)}}৳
+                        </del>
+                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.item.discount.price_after_discount).toFixed(2)}}৳</span>
+                    </div>                            
+                    <div class="price" v-else>
+                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.item.regular_price).toFixed(2)}}৳</span>
+                    </div>
                     <button class="btn"><i class="fas fa-trash-alt" @click="removeItem(item.item.id)"></i></button>
-                </p>
-                <p>
                     
-                
-            </p>
             </div>
         </div>
         <hr>

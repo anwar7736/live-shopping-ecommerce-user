@@ -24,9 +24,14 @@
                         <b>{{item.product ?? item.default_name}}</b>
                     </div>
                 </router-link>
-                    <div class="price">
-                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
-                    </div>
+                <div class="price" v-if="item.discount">
+                    <del class="text-muted">{{Number(item.regular_price).toFixed(2)}}৳
+                    </del>
+                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.discount.price_after_discount).toFixed(2)}}৳</span>
+                </div>                            
+                <div class="price" v-else>
+                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.regular_price).toFixed(2)}}৳</span>
+                </div>
                     <div class="quantity-buy p-1 ps-0">
                         
                         <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(item)">Buy</button>

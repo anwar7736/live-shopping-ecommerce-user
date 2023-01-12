@@ -3,4 +3,9 @@ import App from './App.vue'
 import router from './routes/routes';
 import store from './store';
 
-createApp(App).use(router).use(store).mount('#app');
+
+const app = createApp(App);
+
+app.use(router);
+app.use(store);
+app.mount('#app');

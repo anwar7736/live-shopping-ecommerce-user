@@ -2,7 +2,7 @@
     <div>
      <!-- Main content start  -->
         <section>
-            <div class="container">
+            <div class="container-fluid">
                 <div id="cover-slide" class="carousel slide carousel-fade " data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#cover-slide" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"><div></div></button>

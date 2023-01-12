@@ -30,7 +30,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="carousel-item" v-if="product.video_url">
+                                <div class="carousel-item d-none" v-if="product.video_url">
                                     <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>                           
@@ -49,7 +49,7 @@
                                         <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                     </div> 
                                 </div>                                                       
-                                    <div class="col-md-3 mt-1" v-if="product.video_url">
+                                    <div class="col-md-3 mt-1 d-none" v-if="product.video_url">
                                         <iframe width="60" height="60" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
@@ -71,7 +71,14 @@
                             <h3>{{product.product ?? product.default_name}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
+                            <div class="price" v-if="product.discount">
+                                <del class="text-muted">{{Number(product.regular_price).toFixed(2)}}৳
+                                </del>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.discount.price_after_discount).toFixed(2)}}৳</span>
+                            </div>                            
+                            <div class="price" v-else>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
+                            </div>
                         </h6>
                         <p class="text-sm" v-html="product.description">
                         </p>                        

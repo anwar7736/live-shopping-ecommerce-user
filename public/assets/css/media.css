@@ -40,9 +40,7 @@
     .tab-container  .product-items{
       height: 390px;
     }
-    .tab-container .product-items .product, .deal-day-row .product{
-      height: 390px;
-    }
+    
     .deal-day-row .product.wishlist-product{
       height: auto;
     }
@@ -61,6 +59,10 @@
       z-index: 1090;
       top: 0;
     }
+    .single-product-row .row > *{
+      padding-right: 0;
+    }
+    
   }
   
   /* Small devices (landscape phones, 576px and up)*/
@@ -87,9 +89,7 @@
     .tab-container  .product-items{
       height: 390px;
     }
-    .tab-container .product-items .product, .deal-day-row .product{
-      height: 390px;
-    }
+    
     .deal-day-row .product.wishlist-product{
       height: auto;
     }
@@ -129,9 +129,7 @@
     .tab-container .product-items{
       height: 390px;
     }
-    .tab-container .product-items .product{
-      height: 390px;
-    }
+   
     .shop-filter-sidebar{
       display: none;
     }
@@ -171,6 +169,10 @@
     .all-products-widget .filter-dropdown .row{
       margin: 0;
     }
+    .flash-sell .product .images img{
+      height: 270px;  
+    }
+    
   }
   
   /* Extra Extra large devices (large desktops, 1200px and up)*/
@@ -201,4 +203,19 @@
     .all-products-widget .filter-dropdown .row{
       margin: 0;
     }
+    .flash-sell .product .images img{
+      height: 280px;  
+    }
+  }
+
+  @media (max-width: 400px) {
+    .find-in-store{
+      margin-top: 15px;
+    }
+  }
+  @media (max-width: 360px){
+    .product-items div > .images img, .deal-day-row .product .images img{
+      height: 180px;
+    }
+    
   }

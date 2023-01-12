@@ -7,9 +7,14 @@
                 <center v-if="searchItems.length == 0" class="text-danger">No Product Found!</center>
                 <div class="row deal-day-row">
                     <div class="col-lg-3 col-md-4 col-6 product p-2" v-for="item in searchItems" :key="item.id">
-                        <div class="discount-tag d-none">
-                            -48%
-                        </div>
+                        <div class="discount-tag" v-if="item.discount">
+                            <span v-if="item.discount.type == 'fixed'">
+                                    {{parseInt(item.discount.discount_amount)}}TK OFF
+                                </span>
+                                <span v-else>
+                                    {{parseInt(item.discount.discount)}}% OFF
+                                </span>
+                        </div> 
                         <div class="options-pannel2">
                             <ul>
                                 <li class="d-lg-block d-md-block d-none" title="compare">
@@ -42,7 +47,14 @@
                                 </router-link>
                             </div>
                             <div class="price">
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
+                                <div class="price" v-if="item.discount">
+                                <del class="text-muted">{{Number(item.regular_price).toFixed(2)}}৳
+                                </del>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.discount.price_after_discount).toFixed(2)}}৳</span>
+                            </div>                            
+                            <div class="price" v-else>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.regular_price).toFixed(2)}}৳</span>
+                            </div>
                             </div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(item)">
                                 <div class="button m-auto text-light">

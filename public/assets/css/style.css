@@ -817,10 +817,13 @@ body {
    max-height: 300px;
   overflow: hidden;
   position: relative;
+  border-radius: 15px;
 }
 
 .product-items div > .images img, .deal-day-row .product .images img{
 width: 100%;
+height: 210px;
+border-radius: 15px;
 }
 .product-items div > .images .main-image, .deal-day-row .product .images .main-image{
   transition: 0.5s ease-in-out;
@@ -843,6 +846,9 @@ width: 100%;
 .product:hover > .images .main-image{
   transition: 2s ease-in-out;
   transform: scale(1.5);
+}
+.find-in-store{
+  height: 50px;
 }
 @keyframes product-without-zoom {
   0%{

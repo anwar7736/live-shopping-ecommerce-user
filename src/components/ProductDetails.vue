@@ -3,14 +3,19 @@
         <section>
             <link rel="stylesheet" href="assets/lightbox/magnific-popup.css"/>
             <link rel="stylesheet" href="assets/css/product.css"/>
-            <div class="container mt-4">
+            <div class="container mt-4 single-product-row">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12 product-image-col row pt-3">
                         <div class="image single-product-images">
-                            <div class="discount-tag d-none">
-                                -48%
-                            </div>
-                            <div id="product-single" class="carousel slide" data-bs-ride="carousel" data-bs-interval="50000">
+                            <div class="discount-tag" v-if="product.discount">
+                                <span v-if="product.discount.type == 'fixed'">
+                                    {{parseInt(product.discount.discount_amount)}}TK OFF
+                                </span>
+                                <span v-else>
+                                    {{parseInt(product.discount.discount)}}% OFF
+                                </span>
+                            </div> 
+                            <div id="product-single" class="carousel slide" data-bs-ride="carousel">
                             
                                 <div class="carousel-inner" role="listbox">
                                     <a href="#" :class="index === activeID ? 'carousel-item active' : 'carousel-item active'" v-for="(image, index) in product.images" :key="image.id">
@@ -20,7 +25,7 @@
                                     </a>                                    
                                     <div v-if="product.images.length === 0">
                                         <div v-if="product.image_url">
-                                        <a href="#" class="carousel-item active">
+                                        <a href="#" class="carousel-item active" v-for="n in 3" :key="n">
                                             <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
                                         </div>
@@ -30,7 +35,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video_url">
+                                    <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video_url" class="d-none">
                                         <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div> 
@@ -50,7 +55,7 @@
                                         <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
                                     </div>    
 
-                                    <div class="col-md-3 col-3 mt-1" v-if="product.video_url">
+                                    <div class="col-md-3 col-3 mt-1 d-none" v-if="product.video_url">
                                         <iframe width="60" height="60" :src="product.video_url" title="" autoplay="true" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
                                     </div>
@@ -69,30 +74,36 @@
 
                         
                     </div>
-                    <div class="modal-product-details col-lg-7 col-md-6 col-12 pt-3">
-                        <nav aria-label="breadcrumb" class="pt-0">
+                    <div class="modal-product-details col-lg-8 col-md-6 col-12 pt-3 row">
+                        <div class="col-lg-7 col-md-12">
+                            <nav aria-label="breadcrumb" class="pt-0">
                             <ol class="breadcrumb">
                               <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-                              <li class="breadcrumb-item"><a href="#">{{product.category}}</a></li>
+                              <li class="breadcrumb-item">
+                                <a href="#">{{product.category}}</a>
+                                <router-link :to="'/product-category?id='+ product.category">{{product.category}}</router-link>
+                            </li>
+                              
                               <li class="breadcrumb-item active" aria-current="page">{{product.product ?? product.default_name}}</li>
                             </ol>
                           </nav>
                         <a href="#" class="text-decoration-none text-dark">
                             <h3>{{product.product ?? product.default_name}}</h3>
                         </a>
-                        
                         <h6 class="price pt-3">
-                            <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.sell_price_inc_tax).toFixed(2)}}৳</span>
+                            <div class="price" v-if="product.discount">
+                                <del class="text-muted">{{Number(product.regular_price).toFixed(2)}}৳
+                                </del>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.discount.price_after_discount).toFixed(2)}}৳</span>
+                            </div>                            
+                            <div class="price" v-else>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
+                            </div>
                         </h6>
-                        <p class="text-sm" v-html="product.description">
+                        <p class="text-sm d-none" v-html="product.description">
                         </p>
-                        <p class="text-sm pt-4">
-                            
-                        </p>
-                        <p class="text-sm pt-2">
-                            
-                        </p>
-                        <div class="quantity-buy d-flex">
+                        <div class="d-flex" style="flex-wrap: wrap;">
+                            <div class="quantity-buy d-flex me-3 mb-3">
                             <div class="quantity">
                                 <button class="cart-qty-minus" id="dec" @click="decrement" type="button" value="-">-</button>
                                 <input type="text" name="qty" id="qty" min="1" @blur="updateQty" v-model="qty" class="input-text qty" />
@@ -101,13 +112,16 @@
                             </div>
                             <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product, variations, '', size, qty)">Buy</button>
 
-                            <button data-bs-toggle="modal" data-bs-target="#find-store-modal" style="margin-left:20px !important" class="btn bg-dark">
-                                Find In Store
+                        </div>
+                            <div class="h-100">
+                                <button data-bs-toggle="modal" data-bs-target="#find-store-modal" class="btn bg-dark rounded-0 text-light find-in-store">
+                                Find Store
                             </button>
+                            </div>
                         </div>
                          <!-- Checkout modal  -->
                          <checkout :cartItems="cartItems"></checkout>
-                        <div class="products-options mt-4 d-lg-flex">
+                        <div class="products-options mt-4 d-flex" style="flex-wrap: wrap;">
                             <a href="#" class="text-decoration-none text-dark me-3" @click.prevent="addToCompareList(product)">
                                 <b><i class="fas fa-random"></i> Compare</b>
                             </a>
@@ -121,7 +135,7 @@
                         <hr/>
                         <p><b>SKU:</b> {{product.sku}}</p>
                         <p><b>Category: </b> {{product.category}}</p>
-                        <p><b>Tags: </b>  </p>
+                        <p class="d-none"><b>Tags: </b>  </p>
                         <p class="d-none"><b>Share: </b> 
                             <a href="#" class="text-dark text-sm p-2 text-decoration-none">
                             <i class="fab fa-facebook-f"></i>
@@ -140,6 +154,13 @@
                             </a> 
                         </p>
                         
+                        </div>
+                        <div class="col-lg-5 col-md-12">
+                            <div class="d-lg-block d-md-none d-none">
+                                <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,6 +168,10 @@
             <div id="actab4" class="tab-content text-start container">
                         <div class="row justify-content-center align-items-center g-2">
                             <div class="col-lg-6 col-12">
+                                <div class="d-lg-none d-md-block d-block col-7 ">
+                                    <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                                 <h5 class="title"><b>
                                     DELIVERY & SHIPPING PROCESS
                                 </b></h5>

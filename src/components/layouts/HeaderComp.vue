@@ -23,7 +23,7 @@
             <!-- topbar end  -->
             <!-- navbar start  -->
             <div class="manubar">
-                <div class="container">
+                <div class="container-fluid">
                     <ul class="navbar-inner col-12 mb-0">
                         <li class="menu-bar d-block d-md-block d-lg-none">
                             <button id="menu-toggler" class="menu-toggler">
@@ -70,7 +70,7 @@
             </div>
             <!-- navbar end  -->
             <div class="search-bar">
-                <div class="container">
+                <div class="container-fluid">
                     <ul class="searchbar-inner col-12">
                         <li class="dpdown cat-dp-main d-none d-md-none d-lg-block">
                             <button class="cat-dp">
