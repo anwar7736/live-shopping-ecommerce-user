@@ -194,8 +194,8 @@
     .border-lg-start{
       border-left: 1px solid rgba(128, 128, 128, 0.171);
     }
-    .wrapper{
-      width: 90% !important;
+    .wrapper {
+      width: 100% !important;
       margin: 0 auto !important;
     }
 

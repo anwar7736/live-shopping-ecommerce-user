@@ -17,7 +17,7 @@
                         <div class="slide-img-1 slide-img" :style="{ 'background-image': 'url(' + slider.background_image + ')' }">
                             <h3></h3>
                             <img :src="slider.image" alt="Slider">
-                            <button>Buy Now</button>
+                            <button @click="$router.push('/shop')">Buy Now</button>
                         </div>
                       </div>
                        </div>

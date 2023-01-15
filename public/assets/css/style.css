@@ -521,19 +521,19 @@ body {
                    margin-left: 0;
                   }
                }
-                .carousel-main .slide .slide-img-1 button{
+                .carousel-main .slide .slide-img-1 button {
                   margin-top: 3rem !important;
                   padding: 10px 15px;
                   display: block;
                   text-align: center;
                   margin: 0 auto;
                   background: transparent;
-                  border: 2px solid rgba(255, 255, 255, 0.507);
-                  color: white;
+                  border: 2px solid rgb(237 108 0);
+                  color: #ed6c00;
                   text-transform: uppercase;
                   font-family: hind-semi;
                   transition: 0.5s;
-                }
+              }
                 .carousel-main .slide-1 .slide-img-1 button:hover{
                   border: 2px solid white;
                 }

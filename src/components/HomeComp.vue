@@ -4,7 +4,7 @@
         <SummerTrendy></SummerTrendy>
         <BestDeal :products="bestdeal"></BestDeal>
         <ExportQuality></ExportQuality>
-        <PremiumExports></PremiumExports>
+        <PremiumExports class="d-none"></PremiumExports>
         <DealOfTheDay></DealOfTheDay>
         <br/><br/>
     </div>
