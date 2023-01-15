@@ -74,7 +74,6 @@
                             <ol class="breadcrumb">
                               <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
                               <li class="breadcrumb-item">
-                                <a href="#">{{product.category}}</a>
                                 <router-link :to="'/product-category?id='+ product.category">{{product.category}}</router-link>
                             </li>
                               
