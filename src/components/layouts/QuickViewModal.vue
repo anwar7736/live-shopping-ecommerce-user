@@ -30,9 +30,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="carousel-item d-none" v-if="product.video_url">
-                                    <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                    </iframe>
+                                <div class="carousel-item d-none">
                                 </div>                           
                             </div>
                             <div class="row mt-2">
@@ -49,9 +47,8 @@
                                         <img style="cursor:pointer" src="assets/images/products/default-image.jpg" alt="" height="60" width="60">
                                     </div> 
                                 </div>                                                       
-                                    <div class="col-md-3 mt-1 d-none" v-if="product.video_url">
-                                        <iframe width="60" height="60" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                        </iframe>
+                                    <div class="col-md-3 mt-1 d-none">
+
                                     </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="prev">

@@ -32,9 +32,8 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" v-if="product.video_url" class="d-none">
-                                        <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                        </iframe>
+                                    <div :class="activeID == product.id ? 'carousel-item active' : 'carousel-item'" class="d-none">
+                                        
                                     </div> 
                                 </div>
                                 <div class="d-flex mt-2">
@@ -52,9 +51,8 @@
                                         <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
                                     </div>    
 
-                                    <div class="col-md-3 col-3 mt-1 d-none" v-if="product.video_url">
-                                        <iframe width="60" height="60" :src="product.video_url" title="" autoplay="true" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                        </iframe>
+                                    <div class="col-md-3 col-3 mt-1 d-none">
+                                        
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#product-single" data-bs-slide="prev">
