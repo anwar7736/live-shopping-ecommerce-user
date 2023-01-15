@@ -52,14 +52,11 @@
                         </center>
                     </div>
                     <div class="col-lg-12 col-md-6 col-12 product wishlist-product p-2 d-lg-flex"  v-for="item in wishlistItems" :key="item.id">
-                        <div class="discount-tag" v-if="item.discount">
-                            <span v-if="item.discount.type == 'fixed'">
-                                    {{parseInt(item.discount.discount_amount)}}TK OFF
+                        <div class="discount-tag" v-if="item.regular_price > 0 && calculateDiscount(item) > 0">
+                            <span>
+                            {{calculateDiscount(item)}}% OFF
                             </span>
-                            <span v-else>
-                                    {{parseInt(item.discount.discount)}}% OFF
-                            </span>
-                        </div>  
+                        </div> 
                         
                         <div class="images">
                             <router-link :to="'/product-details?id='+ item.id">
@@ -85,13 +82,13 @@
     
                             <router-link :to="'/product-details?id='+ item.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{item.product ?? item.default_name}}
                             </router-link>
-                            <div class="price" v-if="item.discount">
-                                <del class="text-muted">{{Number(item.regular_price).toFixed(2)}}৳
+                           <div class="price" v-if="item.regular_price > 0">
+                                <del class="text-muted">{{ Number(item.variation.default_sell_price).toFixed(2)}}৳
                                 </del>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.discount.price_after_discount).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.regular_price).toFixed(2)}}৳</span>
                             </div>                            
                             <div class="price" v-else>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.regular_price).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(item.variation.default_sell_price).toFixed(2)}}৳</span>
                             </div>
                             <p class="product-details-p" v-html="item.description">
                             </p>

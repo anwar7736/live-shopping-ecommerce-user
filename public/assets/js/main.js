@@ -40,7 +40,7 @@ $(document).ready(function () {
     $(".search-cat-dp").slideToggle("fast");
   });
   $(".cat-dp-main").hover(function () {
-    $(".search-cat-dp-hover").slideToggle("fast");
+    $(".search-cat-dp-hover").stop().slideToggle("fast");
   });
 
   

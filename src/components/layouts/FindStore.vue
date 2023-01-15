@@ -42,14 +42,14 @@
                                     <strong>{{product.product ?? product.default_name}}</strong>
                                 </a>
                                 <h6 class="price pt-3">
-                                    <div class="price" v-if="product.discount">
-                                        <del class="text-muted">{{Number(product.regular_price).toFixed(2)}}৳
-                                        </del>
-                                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.discount.price_after_discount).toFixed(2)}}৳</span>
-                                    </div>                            
-                                    <div class="price" v-else>
-                                        <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
-                                    </div>
+                                    <div class="price" v-if="product.regular_price > 0">
+                                <del class="text-muted">{{ Number(product.variation.default_sell_price).toFixed(2)}}৳
+                                </del>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
+                                </div>                            
+                                <div class="price" v-else>
+                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
+                                </div>
                                 </h6>
                                 <p class="text-sm" v-html="product.description">
                                 </p>                        

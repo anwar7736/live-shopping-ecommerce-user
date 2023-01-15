@@ -822,7 +822,7 @@ body {
 
 .product-items div > .images img, .deal-day-row .product .images img{
 width: 100%;
-height: 210px;
+height: 190px;
 border-radius: 15px;
 }
 .product-items div > .images .main-image, .deal-day-row .product .images .main-image{
@@ -1025,6 +1025,21 @@ border-radius: 15px;
   border-right-width: 1px;
   border-bottom-width: 1px;
 }
+.home-slider-product .product .images{
+  min-height: 160px;
+}
+.home-slider-product .carousel{
+  padding: 0;
+}
+.carousel__pagination{
+  margin: 0 !important;
+}
+.carousel__pagination-button{
+  display: none !important;
+}
+.home-slider-product .product .images img{
+  height: 170px;
+}
 .options-pannel2{
   width: 40px;
   position: absolute;
@@ -1161,11 +1176,13 @@ footer .row div form button{
   font-weight: bold;
 }
 .quantity-buy .quantity{
-  width: 200px;
+  width: 130px;
+  display: flex;
+  align-items: center;
 }
 .quantity-buy .quantity input{
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: 0 solid rgb(231, 230, 230);
   border-top-width: 2px;
   border-bottom-width: 1px;
@@ -1174,13 +1191,17 @@ footer .row div form button{
   margin: 0;
   padding: 10px;
 }
+.find-in-store{
+  height: 40px;
+}
 .quantity-buy .quantity button{
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background: transparent;
   text-align: center;
   padding: 5px;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: bold;
   margin: 0;
   border: 1px solid rgb(231, 230, 230);
   color: black;

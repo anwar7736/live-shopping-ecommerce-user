@@ -35,16 +35,13 @@
                            </div>
                  
                            <loading v-if="seen"/>
-                              <div class="row row deal-day-row" v-if="seen == false">
+                              <div class="row row deal-day-row home-slider-product" v-if="seen == false">
                                <carousel :items-to-show="5" v-if="export_hot">
                                <slide  v-for="hot in products.hot" :key="hot.id">
                                <div class=" product p-2">
-                                <div class="discount-tag" v-if="hot.discount">
-                                    <span v-if="hot.discount.type == 'fixed'">
-                                    {{parseInt(hot.discount.discount_amount)}}TK OFF
-                                    </span>
-                                    <span v-else>
-                                        {{parseInt(hot.discount.discount)}}% OFF
+                                <div class="discount-tag" v-if="hot.regular_price > 0 && calculateDiscount(hot) > 0">
+                                    <span>
+                                    {{calculateDiscount(hot)}}% OFF
                                     </span>
                                 </div> 
                                <div class="options-pannel2">
@@ -78,14 +75,14 @@
                                <router-link :to="'/product-details?id='+ hot.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product ?? hot.default_name}}
                                </router-link>
                            </div>
-                           <div class="price" v-if="hot.discount">
-                                <del class="text-muted">{{Number(hot.regular_price).toFixed(2)}}৳
+                           <div class="price" v-if="hot.regular_price > 0">
+                                <del class="text-muted">{{ Number(hot.variation.default_sell_price).toFixed(2)}}৳
                                 </del>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(hot.discount.price_after_discount).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(hot.regular_price).toFixed(2)}}৳</span>
                             </div>                            
                             <div class="price" v-else>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(hot.regular_price).toFixed(2)}}৳</span>
-                            </div> 
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(hot.variation.default_sell_price).toFixed(2)}}৳</span>
+                            </div>
                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
                                <div class="button m-auto text-light">
                                    <p><b>
@@ -110,12 +107,9 @@
                                <carousel :items-to-show="5" v-if="export_new">
                                <slide  v-for="prod in products.new" :key="prod.id">
                                <div class=" product p-2">
-                                <div class="discount-tag" v-if="prod.discount">
-                                    <span v-if="prod.discount.type == 'fixed'">
-                                    {{parseInt(prod.discount.discount_amount)}}TK OFF
-                                    </span>
-                                    <span v-else>
-                                        {{parseInt(prod.discount.discount)}}% OFF
+                                <div class="discount-tag" v-if="prod.regular_price > 0 && calculateDiscount(prod) > 0">
+                                    <span>
+                                    {{calculateDiscount(prod)}}% OFF
                                     </span>
                                 </div> 
                                <div class="options-pannel2">
@@ -149,13 +143,13 @@
                                <router-link :to="'/product-details?id='+ prod.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product ?? prod.default_name}}
                                </router-link>
                            </div>
-                           <div class="price" v-if="prod.discount">
-                                <del class="text-muted">{{Number(prod.regular_price).toFixed(2)}}৳
+                           <div class="price" v-if="prod.regular_price > 0">
+                                <del class="text-muted">{{ Number(prod.variation.default_sell_price).toFixed(2)}}৳
                                 </del>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.discount.price_after_discount).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.regular_price).toFixed(2)}}৳</span>
                             </div>                            
                             <div class="price" v-else>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.regular_price).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.variation.default_sell_price).toFixed(2)}}৳</span>
                             </div> 
                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
                                <div class="button m-auto text-light">
@@ -252,14 +246,14 @@
                             <h3>{{product.product}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <div class="price" v-if="product.discount">
-                                <del class="text-muted">{{Number(product.regular_price).toFixed(2)}}৳
+                            <div class="price" v-if="product.regular_price > 0">
+                                <del class="text-muted">{{ Number(product.variation.default_sell_price).toFixed(2)}}৳
                                 </del>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.discount.price_after_discount).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
                             </div>                            
                             <div class="price" v-else>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.regular_price).toFixed(2)}}৳</span>
-                            </div> 
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
+                            </div>
                         </h6>
                         <p class="text-sm" v-html="product.description">
                         </p>                        

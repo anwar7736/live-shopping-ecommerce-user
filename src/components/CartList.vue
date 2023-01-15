@@ -52,13 +52,13 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="price" v-if="cart.item.discount">
-                                                <del class="text-muted">{{Number(cart.item.regular_price).toFixed(2)}}৳
+                                            <div class="price" v-if="cart.item.regular_price > 0">
+                                                <del class="text-muted">{{Number(cart.item.variation.default_sell_price).toFixed(2)}}৳
                                                 </del>
-                                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(cart.item.discount.price_after_discount).toFixed(2)}}৳</span>
+                                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(cart.item.regular_price).toFixed(2)}}৳</span>
                                             </div>                            
                                             <div class="price" v-else>
-                                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(cart.item.regular_price).toFixed(2)}}৳</span>
+                                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(cart.item.variation.default_sell_price).toFixed(2)}}৳</span>
                                             </div>
                                         </td>                                        
                                         <td>
@@ -77,11 +77,11 @@
                                         </td>
                                         <td>
                                             <div class="subtotal" title="subtotal" >
-                                                <p class="main-color" v-if="cart.item.discount">
-                                                    {{cart.qty * Number(cart.item.discount.price_after_discount).toFixed(2)}}৳
+                                                <p class="main-color" v-if="cart.item.regular_price > 0">
+                                                    {{cart.qty * Number(cart.item.regular_price).toFixed(2)}}৳
                                                 </p> 
                                                 <p class="main-color" v-else>
-                                                    {{cart.qty * Number(cart.item.regular_price).toFixed(2)}}৳
+                                                    {{cart.qty * Number(cart.item.variation.default_sell_price).toFixed(2)}}৳
                                                 </p>
                                             </div>
                                         </td>
@@ -116,8 +116,8 @@
                                         </tr>
                                         <tr v-for="cart in cartItems" :key="cart.item.id">
                                             <td>{{cart.item.product ?? cart.item.default_name}}  × {{cart.qty}}</td>
-                                            <td v-if="cart.item.discount" class="text-end"> {{cart.qty * Number(cart.item.discount.price_after_discount).toFixed(2)}}৳</td>                                        
-                                            <td v-else class="text-end"> {{cart.qty * Number(cart.item.regular_price).toFixed(2)}}৳</td>
+                                            <td v-if="cart.item.regular_price > 0" class="text-end"> {{cart.qty * Number(cart.item.regular_price).toFixed(2)}}৳</td>                                        
+                                            <td v-else class="text-end"> {{cart.qty * Number(cart.item.variation.default_sell_price).toFixed(2)}}৳</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -3,16 +3,13 @@
         <section>
             <link rel="stylesheet" href="assets/lightbox/magnific-popup.css"/>
             <link rel="stylesheet" href="assets/css/product.css"/>
-            <div class="container mt-4 single-product-row">
+            <div class="container mt-lg-3 mt-1 single-product-row">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12 product-image-col row pt-3">
+                    <div class="col-lg-4 col-md-6 col-12 product-image-col row pt-2 pt-lg-3">
                         <div class="image single-product-images">
-                            <div class="discount-tag" v-if="product.discount">
-                                <span v-if="product.discount.type == 'fixed'">
-                                    {{parseInt(product.discount.discount_amount)}}TK OFF
-                                </span>
-                                <span v-else>
-                                    {{parseInt(product.discount.discount)}}% OFF
+                            <div class="discount-tag" v-if="product.regular_price > 0 && calculateDiscount(product) > 0">
+                                <span>
+                                    {{calculateDiscount(product)}}% OFF
                                 </span>
                             </div> 
                             <div id="product-single" class="carousel slide" data-bs-ride="carousel">
@@ -70,9 +67,6 @@
                                 </button>
                             </div>
                         </div>
-                        
-
-                        
                     </div>
                     <div class="modal-product-details col-lg-8 col-md-6 col-12 pt-3 row">
                         <div class="col-lg-7 col-md-12">
@@ -91,13 +85,13 @@
                             <h3>{{product.product ?? product.default_name}}</h3>
                         </a>
                         <h6 class="price pt-3">
-                            <div class="price" v-if="product.discount">
-                                <del class="text-muted">{{Number(product.regular_price).toFixed(2)}}৳
+                            <div class="price" v-if="product.regular_price > 0">
+                                <del class="text-muted">{{ Number(product.variation.default_sell_price).toFixed(2)}}৳
                                 </del>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.discount.price_after_discount).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
                             </div>                            
                             <div class="price" v-else>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
+                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
                             </div>
                         </h6>
                         <p class="text-sm d-none" v-html="product.description">
@@ -155,7 +149,7 @@
                         </p>
                         
                         </div>
-                        <div class="col-lg-5 col-md-12">
+                        <div class="col-lg-5 col-md-12" v-if="product.video_url">
                             <div class="d-lg-block d-md-none d-none">
                                 <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
@@ -165,10 +159,10 @@
                 </div>
             </div>
             <hr/>
-            <div id="actab4" class="tab-content text-start container">
+            <div id="actab4" class="tab-content text-start container mb-2">
                         <div class="row justify-content-center align-items-center g-2">
                             <div class="col-lg-6 col-12">
-                                <div class="d-lg-none d-md-block d-block col-7 ">
+                                <div class="d-lg-none d-md-block d-block col-8 m-auto" v-if="product.video_url">
                                     <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>
@@ -195,10 +189,10 @@
                                     We know you don't like to wait, right? Don't worry, you don't need to wait more than 48 hours for Dhaka and 72 hours across the country.
                                 </p>
                             </div>
-                            <div class="col-lg-3 col-12">
+                            <div class="col-lg-3 col-12 col-md-6">
                                 <img src="assets/images/others/redx_courier_logo-400x195.png" alt="" class="col-12">
                             </div>
-                            <div class="col-lg-3 col-12">
+                            <div class="col-lg-3 col-12 col-md-6">
                                 <img src="assets/images/others/sundarban_courier_logo-300x300.png" alt="" class="col-12">
                             </div>
                         </div>

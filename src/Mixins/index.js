@@ -137,8 +137,12 @@ export default{
                 $(".product .product-details .product-details-p").fadeIn("fast");
                 $(".product .product-details a .button").removeClass("m-auto");
             }
-        }
+        },
 
+        calculateDiscount(product)
+        {
+            return parseInt(((product.variation.default_sell_price - product.regular_price)/product.variation.default_sell_price)*100);
+        }
         
     }
 }
