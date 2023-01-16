@@ -16,13 +16,14 @@
                             
                                 <div class="carousel-inner" role="listbox">
                                     <a href="#" :class="index === activeID ? 'carousel-item active' : 'carousel-item active'" v-for="(image, index) in product.images" :key="image.id">
-                                        <vue-image-zoomer>
+                                        <!-- <vue-image-zoomer>
                                             <img :src="image.image" alt="Image" class="w-100 d-block"/>
-                                        </vue-image-zoomer>
+                                        </vue-image-zoomer> -->
+                                        <img :src="image.image" alt="Image" class="w-100 d-block"/>
                                     </a>                                    
                                     <div v-if="product.images.length === 0">
                                         <div v-if="product.image_url">
-                                        <a href="#" class="carousel-item active" v-for="n in 3" :key="n">
+                                        <a href="#" class="carousel-item active">
                                             <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
                                         </div>
@@ -111,7 +112,7 @@
                             </div>
                         </div>
                          <!-- Checkout modal  -->
-                         <checkout :cartItems="cartItems"></checkout>
+                         <checkout-view :cartItems="cartItems"/>
                         <div class="products-options mt-4 d-flex" style="flex-wrap: wrap;">
                             <a href="#" class="text-decoration-none text-dark me-3" @click.prevent="addToCompareList(product)">
                                 <b><i class="fas fa-random"></i> Compare</b>
@@ -146,12 +147,14 @@
                         </p>
                         
                         </div>
-                        <div class="col-lg-5 col-md-12" v-if="product.video_url">
+
+                        <div class="col-lg-5 col-md-12" v-if="product.video">
                             <div class="d-lg-block d-md-none d-none">
-                                <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video+'?autoplay=1'" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -159,10 +162,12 @@
             <div id="actab4" class="tab-content text-start container mb-2">
                         <div class="row justify-content-center align-items-center g-2">
                             <div class="col-lg-6 col-12">
-                                <div class="d-lg-none d-md-block d-block col-8 m-auto" v-if="product.video_url">
-                                    <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                
+                                <div class="d-lg-none d-md-block d-block col-8 m-auto" v-if="product.video">
+                                    <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video+'?autoplay=1'" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>
+
                                 <h5 class="title"><b>
                                     DELIVERY & SHIPPING PROCESS
                                 </b></h5>
@@ -195,27 +200,24 @@
                         </div>
                       </div>
                         <!--Quickview Modal-->
-                        <FindStore :product="product" :variations="variations" :locations="locations"></FindStore>
+                        <FindStore :product="product" :variations="variations" :locations="locations"/>
                       <!--checkout logo -->
-                      <buy/>  
+                      <buy-view/>  
         </section>
 
 </div>
 </template>
 <script>
 import mixins from '../Mixins';
-import { VueImageZoomer } from 'vue-image-zoomer'
+// import { VueImageZoomer } from 'vue-image-zoomer'
 import 'vue-image-zoomer/dist/style.css';
-import checkout from './layouts/CheckoutModal';
 import FindStore from './layouts/FindStore';
 import toastr from 'toastr';
-import buy from './layouts/BuyModal';
 export default {
+
     components: {
-        checkout,
-        VueImageZoomer,
+        // VueImageZoomer,
         FindStore,
-        buy
     },
     mixins: [mixins],
     data()
@@ -257,15 +259,31 @@ export default {
            }
         }
     },
+    // breforeCreate(){
+    //     this.$destroy();
+    // },    
+    // breforeMount(){
+    //     this.$destroy();
+    // },    
+    // breforeUnmount(){
+    //     this.$destroy();
+    // },    
+    // unmounted(){
+    //     this.$destroy();
+    // },
+    deactivated() {
+        this.$destroy();
+    },
     created()
     {
+        
         let product_id = this.$route.query.id;
         this.$store.dispatch("ProductFilterById", product_id)
         .then(res=>{
             console.log(res);
             this.product = res.product;
             this.variations = res.variations;
-            
+            console.log(this.product);
 
         })
         .catch(err=>{
@@ -278,7 +296,7 @@ export default {
                 this.locations = res;
             })
         },
-
+        
     computed: {
         cartItemCount()
         {
@@ -293,6 +311,9 @@ export default {
             return this.active;
         }
     },
+
+    
+    
 
 }
 </script>

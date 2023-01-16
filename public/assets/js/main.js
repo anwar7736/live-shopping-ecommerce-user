@@ -323,9 +323,6 @@ $(document).ready(function(){
   $("#account-dismiss").click(function(){
     $("#account-sidemenu").css("left", "-300px");
   });  
-  $(".carousel-control-next").click(function() {
-    
-  });
 
   
 });
