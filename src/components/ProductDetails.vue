@@ -148,8 +148,8 @@
                         
                         </div>
 
-                        <div class="col-lg-5 col-md-12" v-if="product.video">
-                            <div class="d-lg-block d-md-none d-none">
+                        <div class="col-lg-5 col-md-12 col-10 m-auto" v-if="product.video">
+                            <div class="">
                                 <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video+'?autoplay=1'" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
                             </div>
@@ -163,10 +163,6 @@
                         <div class="row justify-content-center align-items-center g-2">
                             <div class="col-lg-6 col-12">
                                 
-                                <div class="d-lg-none d-md-block d-block col-8 m-auto" v-if="product.video">
-                                    <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video" title="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                    </iframe>
-                                </div>
 
                                 <h5 class="title"><b>
                                     DELIVERY & SHIPPING PROCESS
