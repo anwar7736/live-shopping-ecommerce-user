@@ -164,7 +164,7 @@
                             <div class="col-lg-6 col-12">
                                 
                                 <div class="d-lg-none d-md-block d-block col-8 m-auto" v-if="product.video">
-                                    <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video+'?autoplay=1'" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video" title="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>
 
