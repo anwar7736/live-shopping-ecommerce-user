@@ -216,73 +216,9 @@
                                 </div>
                             </div>
                         </div>
-                        <loading v-if="seen"/>
+                        <loading-view v-if="seen"/>
                         <div class="all-products row deal-day-row" v-if="seen == false">
-                            <div class="col-lg-3 col-md-3 col-6 product p-2" v-for="product in products" :key="product.id">
-                                <div class="discount-tag" v-if="product.regular_price > 0 && calculateDiscount(product) > 0">
-                                <span>
-                                    {{calculateDiscount(product)}}% OFF
-                                </span>
-                                </div> 
-                                
-                                <div class="images">
-                                    <router-link :to="'/product-details?id='+ product.id">
-                                        <img :src="product.image_url" @error="product.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
-                                    </router-link>
-                                    <div class="options-pannel2">
-                                        <ul>
-                                            <li class="d-lg-block d-md-block d-none" title="compare">
-                                                <a href="#" class="compare" @click.prevent="addToCompareList(product)">
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                                <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(product.id)">
-                                                    <i class="fas fa-search"></i>
-                                                </a>
-                                            </li>
-                                            <li title="Add To Wishlist">
-                                                <a href="#" class="compare" @click.prevent="AddToWishList(product)">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-details text-center pt-2 ps-2">
-
-                                  <div class="product_name">
-                                    <router-link :to="'/product-details?id='+ product.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{product.product ?? product.default_name}}
-                                    </router-link>
-                                  </div>
-                                  <div class="price" v-if="product.regular_price > 0">
-                                    <del class="text-muted">{{ Number(product.variation.default_sell_price).toFixed(2)}}৳
-                                    </del>
-                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.regular_price).toFixed(2)}}৳</span>
-                                    </div>                            
-                                    <div class="price" v-else>
-                                    <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
-                                    </div>
-                                    <p class="product-details-p" style="display: none;" v-html="product.description">
-                                    </p>
-                                    <!--Quickview Modal-->
-                                    <quickView :product="product_info" :variations="variations"></quickView>
-                                    
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product)">
-                                        <div class="button m-auto text-light">
-                                            <p><b>
-                                                BUY NOW
-                                            </b></p>
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        
-                                        </div>
-                                    </a>
-                                   
-                                </div>
-                            </div>
+                            <product-view v-for="product in products" :key="product.id" :product="product"/>
                         </div>
                     </div>
                 </div>
@@ -290,18 +226,14 @@
            
         </section>
         <!-- Checkout modal  -->
-        <checkout :cartItems="cartItems"></checkout>
+        <checkout-view :cartItems="cartItems"/>
         <!--checkout logo -->
-        <buy/>   
+        <buy-view/>   
 
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
-import quickView from './layouts/QuickViewModal';
-import checkout from './layouts/CheckoutModal';
-import loading from './layouts/LoadingComp';
-import buy from './layouts/BuyModal';
 
 export default {
     mixins: [mixins],
@@ -323,10 +255,7 @@ export default {
         }
     },
     components: {
-        quickView,
-        checkout,
-        loading,
-        buy
+
     },
     methods: {
         showHide()

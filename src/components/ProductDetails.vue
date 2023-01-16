@@ -148,7 +148,7 @@
                         </div>
                         <div class="col-lg-5 col-md-12" v-if="product.video_url">
                             <div class="d-lg-block d-md-none d-none">
-                                <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                         <div class="row justify-content-center align-items-center g-2">
                             <div class="col-lg-6 col-12">
                                 <div class="d-lg-none d-md-block d-block col-8 m-auto" v-if="product.video_url">
-                                    <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    <iframe width="100%" height="400" :src="product.video_url" title="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                                 </div>
                                 <h5 class="title"><b>

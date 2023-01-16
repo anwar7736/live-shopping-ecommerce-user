@@ -33,172 +33,27 @@
                                 </div>
                             </div>
                   
-                            <loading class="d-none"/>
+                            <loading-view class="d-none"/>
                                <div class="row row deal-day-row home-slider-product" v-if="seen == false">
-                                <carousel :items-to-show="5" v-if="summer_hot">
-                                <slide  v-for="hot in products.hot" :key="hot.id">
-                                <div class=" product p-2">
-                                    <div class="discount-tag" v-if="hot.regular_price > 0 && calculateDiscount(hot) > 0">
-                                    <span>
-                                    {{calculateDiscount(hot)}}% OFF
-                                    </span>
-                                </div> 
-                                <div class="options-pannel2">
-                            <ul>
-                                <li class="d-lg-block d-md-block d-none" title="compare">
-                                    <a href="#" class="compare" @click.prevent="addToCompareList(hot)">
-                                        <i class="fas fa-random"></i>
-                                    </a>
-                                </li>
-                                <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(hot.id)">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </li>
-                                <li title="Add To Wishlist">
-                                    <a href="#" class="compare" @click.prevent="AddToWishList(hot)">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="images">
-                            <router-link :to="'/product-details?id='+ hot.id">
-                                <img :src="hot.image_url" @error="hot.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
-                            </router-link>
-                        </div>
-                        
-                        <div class="product-details text-center pt-2">
-                            
-                            <div class="product_name">
-                                <router-link :to="'/product-details?id='+ hot.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{hot.product ?? hot.default_name}}
-                                </router-link>
-                            </div>
-                           <div class="price" v-if="hot.regular_price > 0">
-                                <del class="text-muted">{{ Number(hot.variation.default_sell_price).toFixed(2)}}৳
-                                </del>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(hot.regular_price).toFixed(2)}}৳</span>
-                            </div>                            
-                            <div class="price" v-else>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(hot.variation.default_sell_price).toFixed(2)}}৳</span>
-                            </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(hot)">
-                                <div class="button m-auto text-light">
-                                    <p><b>
-                                        BUY NOW
-                                    </b></p>
-                                    <span>
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </span>
-                                
-                            </div>
-                            </a>
-                            </div>
-                                </div>  
-                                </slide>
-
-                                <template #addons>
-                                <navigation />
-                                <pagination />
-                                </template>
-                            </carousel>
-                            <div class="" v-if="seen == false">
-                                <carousel :items-to-show="5" v-if="summer_new">
-                                <slide  v-for="prod in products.new" :key="prod.id">
-                                <div class=" product p-2">
-                                    <div class="discount-tag" v-if="prod.regular_price > 0 && calculateDiscount(prod) > 0">
-                                    <span>
-                                    {{calculateDiscount(prod)}}% OFF
-                                    </span>
-                                </div> 
-                                <div class="options-pannel2">
-                            <ul>
-                                <li class="d-lg-block d-md-block d-none" title="compare">
-                                    <a href="#" class="compare" @click.prevent="addToCompareList(prod)">
-                                        <i class="fas fa-random"></i>
-                                    </a>
-                                </li>
-                                <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                    <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal" @click.prevent="productInfo(prod.id)">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </li>
-                                <li title="Add To Wishlist">
-                                    <a href="#" class="compare" @click.prevent="AddToWishList(prod)">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="images">
-                            <router-link :to="'/product-details?id='+ prod.id">
-                                <img :src="prod.image_url" @error="prod.image_url='assets/images/products/default-image.jpg'" alt="Image" class="main-image" /> 
-                            </router-link>
-                        </div>
-                        
-                        <div class="product-details text-center pt-2">
-                            
-                            <div class="product_name">
-                                <router-link :to="'/product-details?id='+ prod.id" class="text-dark" style="text-decoration: none; font-weight: 600;">{{prod.product ?? prod.default_name}}
-                                </router-link>
-                            </div>
-                           <div class="price" v-if="prod.regular_price > 0">
-                                <del class="text-muted">{{ Number(prod.variation.default_sell_price).toFixed(2)}}৳
-                                </del>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.regular_price).toFixed(2)}}৳</span>
-                            </div>                            
-                            <div class="price" v-else>
-                                <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(prod.variation.default_sell_price).toFixed(2)}}৳</span>
-                            </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(prod)">
-                                <div class="button m-auto text-light">
-                                    <p><b>
-                                        BUY NOW
-                                    </b></p>
-                                    <span>
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </span>
-                                
-                            </div>
-                            </a>
-                            </div>
-                                </div>  
-                                </slide>
-
-                                <template #addons>
-                                <navigation />
-                                <pagination />
-                                </template>
-                            </carousel>
-             
-                          
-                            </div>
-                        </div>
+                                    <slider-view v-if="summer_hot" :products="products.hot"/>
+                                    <div class="" v-if="seen == false">
+                                        <slider-view v-if="summer_new" :products="products.new"/>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--Quickview Modal-->
-            <quickView :product="product_info" :variations="variations"></quickView>
         </section>
         <!-- SUMMER TRENDY section end  -->
     </div>
 
 </template>
 <script>
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import mixins from '../Mixins';
-import quickView from './layouts/QuickViewModal';
-import loading from './layouts/LoadingComp';
 export default {  
     components: {
-        quickView,
-        loading,
-        Carousel,
-        Slide,
-        Pagination,
-        Navigation,
+
     },
     mixins: [mixins],
     data(){
@@ -215,13 +70,6 @@ export default {
         }
     },
     methods: {
-        productInfo(id){
-            this.$store.dispatch("ProductFilterById", id)
-            .then(res=>{
-                this.product_info = res.product;
-                this.variations = res.variations;
-            })
-        },
         summerHot(){
             this.summer_hot = true;
             this.summer_new = false;

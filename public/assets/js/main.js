@@ -332,13 +332,5 @@ $(document).ready(function(){
 
 
 
-// $(document).on("click", ".carousel-control-prev", function(){
-//     $('iframe').attr('src', $('iframe').attr('src'));
-// })
-
-// $(document).on("click", ".carousel-control-next", function(){
-//   $('iframe').attr('src', $('iframe').attr('src'));
-// })
-
 
 
