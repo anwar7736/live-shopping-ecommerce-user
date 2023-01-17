@@ -55,7 +55,7 @@
                     <div class="col-lg-12 col-md-6 col-12 product wishlist-product p-2 d-lg-flex"  v-for="item in wishlistItems" :key="item.id">
                         <div class="discount-tag" v-if="item.regular_price > 0 && calculateDiscount(item) > 0">
                             <span>
-                            {{calculateDiscount(item)}}% OFF
+                            - {{calculateDiscount(item)}}%
                             </span>
                         </div> 
                         

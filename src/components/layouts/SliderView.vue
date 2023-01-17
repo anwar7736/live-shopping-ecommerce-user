@@ -4,7 +4,7 @@
             <div class=" product p-2">
                 <div class="discount-tag" v-if="product.regular_price > 0 && calculateDiscount(product) > 0">
                 <span>
-                {{calculateDiscount(product)}}% OFF
+                - {{calculateDiscount(product)}}%
                 </span>
             </div> 
             <div class="options-pannel2">

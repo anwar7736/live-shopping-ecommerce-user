@@ -69,6 +69,9 @@ export default {
     }
 }
 </script>
-<style>
-    
+<style scoped>
+    .deal-day-row{
+        max-height: 100vh;
+        overflow: scroll;
+    }
 </style>

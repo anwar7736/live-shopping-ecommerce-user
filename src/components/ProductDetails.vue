@@ -10,7 +10,7 @@
                         <div class="image single-product-images">
                             <div class="discount-tag" v-if="product.regular_price > 0 && calculateDiscount(product) > 0">
                                 <span>
-                                    {{calculateDiscount(product)}}% OFF
+                                    - {{calculateDiscount(product)}}%
                                 </span>
                             </div> 
                             <div id="product-single" class="carousel slide" data-bs-ride="carousel">
@@ -24,7 +24,7 @@
                                     </a>                                    
                                     <div v-if="product.images.length === 0">
                                         <div v-if="product.image_url">
-                                        <a href="#" class="carousel-item">
+                                        <a href="#" class="carousel-item active">
                                             <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
                                         </div>
@@ -93,8 +93,7 @@
                                 <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
                             </div>
                         </h6>
-                        <p class="text-sm d-none" v-html="product.description">
-                        </p>
+                        
                         <div class="d-flex" style="flex-wrap: wrap;">
                             <div class="quantity-buy d-flex me-3 mb-3">
                             <div class="quantity">
@@ -126,6 +125,7 @@
                         <hr/>
                         <p><b>SKU:</b> {{product.sku}}</p>
                         <p><b>Category: </b> {{product.category}}</p>
+                        <p class="text-sm" v-html="product.description"></p>
                         <p class="d-none"><b>Tags: </b>  </p>
                         <p class="d-none"><b>Share: </b> 
                             <a href="#" class="text-dark text-sm p-2 text-decoration-none">
@@ -149,7 +149,7 @@
 
                         <div class="col-lg-5 col-md-12 col-10 m-auto" v-if="product.video">
                             <div class="">
-                                <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video+'?autoplay=1'" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                <iframe width="100%" height="400" :src="'https://www.youtube.com/embed/'+product.video" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
                             </div>
                         </div>
@@ -317,5 +317,16 @@ export default {
 }
 </script>
 <style scoped>
-
+    .discount-tag{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 5px;
+  top: 0;
+  padding: 2px 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: var(--main-color);
+  z-index: 999;
+}
 </style>

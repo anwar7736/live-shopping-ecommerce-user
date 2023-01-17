@@ -861,7 +861,8 @@ border-radius: 15px;
 .discount-tag{
   position: absolute;
   margin-top: 20px;
-  margin-left: 10px;
+  margin-left: 5px;
+  top: 120px;
   padding: 2px 10px;
   color: white;
   font-weight: bold;

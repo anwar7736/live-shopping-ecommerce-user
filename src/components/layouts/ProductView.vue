@@ -2,7 +2,7 @@
     <div :class="grid">
         <div class="discount-tag" v-if="product.regular_price > 0 && calculateDiscount(product) > 0">
             <span>
-                {{calculateDiscount(product)}}% OFF
+                - {{calculateDiscount(product)}}%
             </span>
         </div>                        
         <div class="options-pannel2">
@@ -122,6 +122,17 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.discount-tag{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 5px;
+  top: 120px;
+  padding: 2px 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: var(--main-color);
+  z-index: 999;
+}
 </style>

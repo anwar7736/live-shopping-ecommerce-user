@@ -16,7 +16,7 @@
                         <div class="carousel-item active slide" v-for="slider in sliders" :key="slider.id">
                         <div class="slide-img-1 slide-img" :style="{ 'background-image': 'url(' + slider.background_image + ')' }">
                             <h3></h3>
-                            <img :src="slider.image" alt="Slider">
+                            <img :src="slider.image" alt="" v-if="slider.image != ''" >
                             <button @click="$router.push('/shop')">Buy Now</button>
                         </div>
                       </div>
