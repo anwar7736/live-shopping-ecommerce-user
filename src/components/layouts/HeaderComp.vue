@@ -87,7 +87,7 @@
                         <!-- dropdown  -->
                         </li>
                         <li class="search-box ps-lg-3">
-                            <input type="text" class="search-input" v-model="query" @keyup.enter="searchProduct" placeholder="Search product here">
+                            <input type="text" class="search-input" v-model="query" @keyup.enter="searchProduct" placeholder="Product search here...">
                             <div class="dpdown d-none d-md-none d-lg-block">
                                 <button class="search-dp ps-3 pe-3">
                                     <span class="pe-3">SELECT CATEGORY</span> <i class="fas fa-angle-down"></i>
@@ -116,7 +116,7 @@
                 <div class="m-row">
                     <div class="mobile-sidebar collapsed-left-open">
                         <form action="javascript: void(0)" class="mobile-sidebar-form">
-                            <input type="text" class="msf-input" v-model="query" @keyup.enter="searchProduct"  placeholder="Search product here">
+                            <input type="text" class="msf-input" v-model="query" @keyup.enter="searchProduct"  placeholder="Product search here...">
                             <button type="submit" @click.prevent="searchProduct"><i class="fas fa-search"></i></button>
                         </form>
                         <div class="m-sidebar-tab-container col-12">

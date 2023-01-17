@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="fixed-cart-bottom"  data-bs-toggle="modal" data-bs-target="#buy-to-cart" >
+    <div class="fixed-cart-bottom" @click="$emit('change')">
         <span>
         <i class="fas fa-shopping-cart"></i>
         </span>
@@ -21,6 +21,9 @@ export default {
         {
             return this.$store.getters.Total_Cart_Items;
         },
+        methods: {
+            
+        }
     },
 }
 </script>

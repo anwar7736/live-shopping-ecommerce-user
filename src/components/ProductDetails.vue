@@ -3,7 +3,8 @@
         <section>
             <link rel="stylesheet" href="assets/lightbox/magnific-popup.css"/>
             <link rel="stylesheet" href="assets/css/product.css"/>
-            <div class="container mt-lg-3 mt-1 single-product-row">
+            <loading-view v-if="loading"/>
+            <div class="container mt-lg-3 mt-1 single-product-row" v-else>
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12 product-image-col row pt-2 pt-lg-3">
                         <div class="image single-product-images">
@@ -23,7 +24,7 @@
                                     </a>                                    
                                     <div v-if="product.images.length === 0">
                                         <div v-if="product.image_url">
-                                        <a href="#" class="carousel-item active">
+                                        <a href="#" class="carousel-item">
                                             <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
                                         </div>
@@ -102,7 +103,7 @@
                                 <button class="cart-qty-plus" type="button" @click="increment" id="inc" value="+">+</button>
                                 
                             </div>
-                            <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(product, variations, '', size, qty)">Buy</button>
+                            <button class="btn" @click="AddToCart(product, variations, '', size, qty), show = true">Buy</button>
 
                         </div>
                             <div class="h-100">
@@ -111,8 +112,6 @@
                             </button>
                             </div>
                         </div>
-                         <!-- Checkout modal  -->
-                         <checkout-view :cartItems="cartItems"/>
                         <div class="products-options mt-4 d-flex" style="flex-wrap: wrap;">
                             <a href="#" class="text-decoration-none text-dark me-3" @click.prevent="addToCompareList(product)">
                                 <b><i class="fas fa-random"></i> Compare</b>
@@ -195,10 +194,11 @@
                             </div>
                         </div>
                       </div>
-                        <!--Quickview Modal-->
-                        <FindStore :product="product" :variations="variations" :locations="locations"/>
-                      <!--checkout logo -->
-                      <buy-view/>  
+
+                <!-- Checkout modal  -->
+                <checkout-view v-model="show"/>
+                <!--Quickview Modal-->
+                <FindStore :product="product" :variations="variations" :locations="locations"/>
         </section>
 
 </div>
@@ -225,6 +225,8 @@ export default {
             size: '',
             active: 1,
             locations: {},
+            show: false,
+            loading: true,
         }
     },
     methods: {
@@ -280,6 +282,7 @@ export default {
             this.product = res.product;
             this.variations = res.variations;
             console.log(this.product);
+            this.loading = false;
 
         })
         .catch(err=>{

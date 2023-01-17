@@ -3,7 +3,8 @@
         <link rel="stylesheet" href="assets/css/dashboard.css">
 
 <section>
-    <div class="container-fluid mt-4">
+    <loading-view v-if="loading"/>
+    <div class="container-fluid mt-4" v-else>
         <div class="row">
             <div class="col-lg-3 col-md-4 col-10 account-menu p-3 d-md-block d-lg-block" id="account-sidemenu">
                 <div class="col-12 dismiss-box">
@@ -66,11 +67,11 @@
                                 <ul>
                                     <li class="d-lg-block d-md-block d-none" title="compare" @click.prevent="addToCompareList(item)">
                                         <a href="#" class="compare" >
-                                            <i class="fas fa-random"></i>
+                                            <i class="fas fa-random" :class="{'text-warning': isCompareListItem(item)}"></i>
                                         </a>
                                     </li>
                                     <li title="Quick View" class="d-lg-block d-md-block d-none">
-                                        <a href="#" class="compare" data-bs-toggle="modal" data-bs-target="#product-modal"  @click.prevent="productInfo(item.id)" >
+                                        <a href="#" class="compare"  @click.prevent="productInfo(item.id)" >
                                             <i class="fas fa-search"></i>
                                         </a>
                                     </li>
@@ -92,7 +93,7 @@
                             </div>
                             <p class="product-details-p" v-html="item.description">
                             </p>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(item)">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(item), show = true">
                                 <div class="button text-light">
                                     <p><b>
                                         BUY NOW
@@ -109,32 +110,29 @@
                 </div>
             </div>
             <!--Quickview Modal-->
-            <quickView :product="product_info" :variations="variations"></quickView>
+            <quick-view :product="product_info" :variations="variations"/>
         </div>
     </div>
 </section>
    <!-- Checkout modal  -->
-   <checkout :cartItems="cartItems"></checkout>
-   <!--checkout logo -->
-   <buy/> 
+   <checkout-view v-model="show"/>
+   <quick-view v-model="show" :product="product_info" :variations="variations"/>
 </div>
 </template>
 <script>
 import mixins from '../Mixins';
-import quickView from './layouts/QuickViewModal';
-import checkout from './layouts/CheckoutModal';
-import buy from './layouts/BuyModal';
+
 export default {
     data(){
         return {
             product_info : {},
             variations : {},
+            show:false,
+            loading: true,
         }
     },
     components: {
-        quickView,
-        checkout,
-        buy
+
     },
     mixins: [mixins],
     computed: {
@@ -157,8 +155,15 @@ export default {
             .then(res=>{
                 this.product_info = res.product;
                 this.variations = res.variations;
+                this.show = true;
             })
         },
+       
+    },
+    mounted(){
+        setTimeout(()=>{
+            this.loading = false;
+        },500);
     }
 }
 </script>

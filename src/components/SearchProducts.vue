@@ -1,7 +1,8 @@
 <template lang="">
     <div>
         <section>
-            <div class="container mt-5 mb-5">
+            <loading-view v-if="loading"/>
+            <div class="container mt-5 mb-5" v-else>
                 <h3 class="text-center">All Searching Products</h3><hr/>
                 
                 <center v-if="searchItems.length == 0" class="text-danger">No Product Found!</center>
@@ -32,6 +33,7 @@ export default {
             product_info : {},
             variations : {},
             seen: true,
+            loading:true,
         }
     },
     methods: {
@@ -62,6 +64,11 @@ export default {
     },
     components: {
 
+    },
+    created(){
+        setTimeout(()=>{
+            this.loading = false;
+        },500);
     },
 }
 </script>

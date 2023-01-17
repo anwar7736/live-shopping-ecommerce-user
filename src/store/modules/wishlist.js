@@ -31,10 +31,12 @@ export const wishlist =  {
         AddToWishList(state, item)
         {
             let wishlistItems = state.wishlistItems;
-            let bool = wishlistItems.some(data=> data.id == item.id);
-            if(bool)
+            let index = wishlistItems.findIndex(data=> data.id == item.id);
+            if(index > -1)
             {
-                toastr.error('Item already added to wishlist');
+                // toastr.error('Item already added to wishlist');
+                toastr.error('Item remove from wishlist');
+                wishlistItems.splice(index, 1);
             }
             else{
                 wishlistItems.push({...item});

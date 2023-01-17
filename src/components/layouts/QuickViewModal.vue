@@ -274,7 +274,7 @@ export default {
 
 }
 </script>
-<style>
+<style scoped>
     div#player {
         margin-left: -20%;
 }

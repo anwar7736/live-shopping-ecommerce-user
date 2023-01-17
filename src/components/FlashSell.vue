@@ -4,14 +4,12 @@
             <div class="container mt-5 mb-5">
                 <loading-view v-if="seen"/>
                 <div class="row deal-day-row flash-sell" v-if="seen == false">
-                    <product-view :product="sale" v-for="sale in flashSell" :key="sale.id"/>
+                    <product-view :product="sale" v-for="sale in flashSell" :key="sale.id" grid="col-lg-2 col-md-3 col-6 product p-2"/>
                  </div>
             </div>
         </section>
         
-        <checkout-view :cartItems="cartItems"/>    
-        <!--checkout logo -->
-        <buy-view/>  
+
     </div>
 </template>
 <script>
@@ -22,6 +20,7 @@ export default {
         return{
             flashSell: {},
             seen: true,
+            show: false,
         }
     },
     methods: {

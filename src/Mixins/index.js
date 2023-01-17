@@ -8,6 +8,7 @@ export default{
             store.dispatch("AddToWishList", item)
            
         },
+        
         AddToCart(item, variations = '', type = '', size = '', qty = 1)
         {
             if(item.type === 'variable' && size === '' && type != '')
@@ -142,6 +143,15 @@ export default{
         calculateDiscount(product)
         {
             return parseInt(((product.variation.default_sell_price - product.regular_price)/product.variation.default_sell_price)*100);
+        },
+
+        isWishListItem(product){
+            return store.getters.Get_Wishlist_Items.find(item=> item.id == product.id);
+        },
+
+        isCompareListItem(product)
+        {
+            return store.getters.Get_Compare_Items.find(item=> item.id == product.id);
         }
         
     }

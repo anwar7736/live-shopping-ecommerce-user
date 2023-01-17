@@ -11,7 +11,7 @@
         <ul>
             <li class="d-lg-block d-md-block d-none" title="compare">
                 <a href="#" class="compare" @click.prevent="addToCompareList(product)">
-                    <i class="fas fa-random"></i>
+                    <i class="fas fa-random" :class="{'text-warning': isCompareListItem(product)}"></i>
                 </a>
             </li>
             <li title="Quick View" class="d-lg-block d-md-block d-none">
@@ -21,7 +21,7 @@
             </li>
             <li title="Add To Wishlist">
                 <a href="#" class="compare" @click.prevent="AddToWishList(product)">
-                    <i class="far fa-heart"></i>
+                    <i class="far fa-heart" :class="{'fa fa-heart text-warning': isWishListItem(product)}"></i>
                 </a>
             </li>
         </ul>
@@ -46,7 +46,7 @@
         <div class="price" v-else>
             <span class="ps-1" style="color: #ff7400; font-weight: bold;">{{Number(product.variation.default_sell_price).toFixed(2)}}৳</span>
         </div>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product)">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" @click.prevent="AddToCart(product), isVisible=true">
             <div class="button m-auto text-light">
                 <p><b>
                     BUY NOW
@@ -66,6 +66,7 @@
             <pagination />
             </template>
     </carousel>
+    <checkout-view v-model="isVisible"/>  
     <quick-view v-model="show" :product="product_info" :variations="variations"/>
 </template>
 
@@ -79,6 +80,7 @@ export default {
             product_info : {},
             variations : {},
             show : false,
+            isVisible:false,
 
         }
     },

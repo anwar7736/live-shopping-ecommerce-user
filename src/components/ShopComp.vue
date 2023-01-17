@@ -225,10 +225,6 @@
             </div>
            
         </section>
-        <!-- Checkout modal  -->
-        <checkout-view :cartItems="cartItems"/>
-        <!--checkout logo -->
-        <buy-view/>   
 
     </div>
 </template>

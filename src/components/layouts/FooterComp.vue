@@ -25,9 +25,9 @@
                         <div class="col-4 footer-menu-col">
                             <ul>
                                 <li>
-                                    <router-link to="/my-account"><b>MY ACCOUNT</b></router-link>
+                                    <router-link to="#"><b>MY ACCOUNT</b></router-link>
                                 </li>
-                                <li><router-link to="/dashboard">Dashboard</router-link></li>
+                                <li><router-link to="#">Dashboard</router-link></li>
                                 <li><router-link to="/wishlist">Wishlist</router-link></li>
                                 <li><router-link to="/special-products">Special Products</router-link></li>
                                 <li><router-link to="/gift-voucher">Gift Voucher</router-link></li>
@@ -53,7 +53,7 @@
                     <div class="footer-menu-col mt-5">
                         <form action="javascript: void(0)" >
                             <div class="input-group d-flex">
-                                <input type="text" placeholder="Search...."
+                                <input type="text" placeholder="Product search here..."
                                 v-model="query" @keyup.enter="searchProduct">
                                 <button @click.prevent="searchProduct" class="text-center p-1"><i class="fas fa-arrow-right"></i></button>
                             </div>

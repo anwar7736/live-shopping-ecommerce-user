@@ -2,7 +2,8 @@
     <div>
         <section>
             <link rel="stylesheet" href="assets/css/cart.css">
-            <div class="container mt-5 mb-5">
+            <loading-view v-if="loading"/>
+            <div class="container mt-5 mb-5" v-else>
                 <div class="row">
                     <div class="col-lg-8 col-md-12 col-12 cart-items">
                         <div class="table-responsive">
@@ -121,8 +122,8 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn text-center d-block">
-                                    <button class="text-cap">Proceed to Checkout <span><i class="fas fa-arrow-right"></i></span></button>
+                                <a href="#" class="btn text-center d-block">
+                                    <button @click="show = true" class="text-cap">Proceed to Checkout <span><i class="fas fa-arrow-right"></i></span></button>
                                 </a>
     
                             </div>
@@ -132,29 +133,25 @@
                 </div>
             </div>
         </section>
-        <!--checkout modal -->
-        <checkout :cartItems="cartItems"></checkout>
+        <checkout-view v-model="show"/>
         <!--checkout logo -->
-        <buy/> 
-        
     </div>
 </template>
 <script>
 // import toastr from 'toastr';
 import mixins from '../Mixins';
-import checkout from './layouts/CheckoutModal';
-import buy from './layouts/BuyModal';
 export default {
     mixins: [mixins],
     components: {
-        checkout,
-        buy
+
     },
     data(){
         return {
            item: {
             qty: '',
-           }
+           },
+           show: false,
+           loading:true,
         }
     },
     computed: {
@@ -163,7 +160,11 @@ export default {
             return this.$store.getters.Get_Cart_Items;
         }
     },
-
+    mounted(){
+        setTimeout(()=>{
+            this.loading = false;
+        },500);
+    },
     methods: {
         // checkout()
         // {

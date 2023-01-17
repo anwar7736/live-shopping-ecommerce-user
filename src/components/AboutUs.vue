@@ -1,7 +1,8 @@
 <template>
     <div>
         <section>
-            <div class="container about mt-5 mb-5">
+            <loading-view v-if="loading"/>
+            <div class="container about mt-5 mb-5" v-else>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                         <img src="assets/images/others/about-us-3-image-1.jpg" alt="About Us" class="col-12">
@@ -47,7 +48,16 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return {
+            loading: true,
+        }
+    },
+    mounted(){
+        setTimeout(()=>{
+            this.loading = false;
+        },500);
+    },
 }
 </script>
 <style>

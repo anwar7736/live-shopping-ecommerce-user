@@ -3,7 +3,8 @@
         <link rel="stylesheet" href="assets/css/compare.css">
 
 <section>
-    <div class="container mt-5 mb-5">
+    <loading-view v-if="loading"/>
+    <div class="container mt-5 mb-5" v-else>
         <h4><b>Compare Products</b></h4>
         <div v-if="compareItems.length < 1">
             <center>
@@ -34,7 +35,7 @@
                 </div>
                     <div class="quantity-buy p-1 ps-0">
                         
-                        <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(item)">Buy</button>
+                        <button data-bs-toggle="modal" data-bs-target="#buy-to-cart" class="btn" @click="AddToCart(item), show=true">Buy</button>
                     </div>
                     <p v-html="item.description"></p>
                     <p>SKU: {{item.sku}}</p>
@@ -44,16 +45,21 @@
     </div>
 </section>
    <!-- Checkout modal  -->
-   <checkout :cartItems="cartItems"></checkout>
+   <checkout-view v-model="show"/>
    <!--checkout logo -->
-    <buy/> 
+    <buy-view @change="show = true"/> 
     </div>
 </template>
 <script>
 import mixins from '../Mixins';
-import checkout from './layouts/CheckoutModal';
-import buy from './layouts/BuyModal';
+
 export default {
+    data(){
+        return {
+            show:false,
+            loading:true,
+        }
+    },
     mixins: [mixins],
     computed: {
         compareItems()
@@ -70,9 +76,13 @@ export default {
         }
     },
     components: {
-        checkout,
-        buy
+
     },
+    mounted(){
+        setTimeout(()=>{
+            this.loading = false;
+        },500);
+    }
 }
 </script>
 <style lang="">

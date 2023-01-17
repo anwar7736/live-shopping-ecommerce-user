@@ -31,10 +31,12 @@ export const compare =  {
         AddToCompareList(state, item)
         {
             let compareItems = state.compareItems;
-            let bool = compareItems.some(data=> data.id == item.id);
-            if(bool)
+            let index = compareItems.findIndex(data=> data.id == item.id);
+            if(index > -1)
             {
-                toastr.error('Item already added to compare list');
+                // toastr.error('Item already added to compare list');
+                compareItems.splice(index, 1);
+                toastr.error('Item remove from compare list');
             }
             else{
                 compareItems.push({...item});
