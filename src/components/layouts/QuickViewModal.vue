@@ -131,11 +131,11 @@
                         <div id="modal-product-image-inner" class="carousel slide" data-bs-ride="carousel"  data-bs-touch="true">
                             <div class="carousel-inner" role="listbox">                               
                                 <div class="carousel-item active" v-for="image in product.images" :key="image.id">
-                                    <img :src="image.image" @error="image.image='assets/images/products/default-image.jpg'" alt="" class="col-12"/> 
+                                    <img :src="image.image" alt="" class="col-12"/> 
                                 </div>  
                                 <div v-if="product.images == ''">
                                     <div v-if="product.image_url">
-                                        <a href="#" class="carousel-item active">
+                                        <a href="#" class="carousel-item active" :data-bs-interval="!isInterval">
                                             <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
                                         </div>
@@ -153,7 +153,7 @@
                                         <img style="cursor:pointer" :src="image.image" alt="" height="60" width="60">
                                 </div>                             
                                 <div v-if="product.images == ''">
-                                    <div v-if="product.image_url" class="col-md-3 mt-1">
+                                    <div v-if="product.image_url" class="col-md-3 mt-1" :data-bs-interval="!isInterval">
                                         
                                             <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
                                         
@@ -166,11 +166,11 @@
 
                                     </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="prev">
+                            <button :class="{'d-none': isInterval}" class="carousel-control-prev" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="next">
+                            <button :class="{'d-none': isInterval}" class="carousel-control-next" type="button" data-bs-target="#modal-product-image-inner" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
@@ -245,6 +245,11 @@ export default {
         modelValue: {
             type: Boolean,
             default: false
+        }
+    },
+    computed: {
+        isInterval(){
+            return this.product.images == '';
         }
     },
     mixins: [mixins],

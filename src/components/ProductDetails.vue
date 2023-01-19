@@ -24,7 +24,7 @@
                                     </a>                                    
                                     <div v-if="product.images.length === 0">
                                         <div v-if="product.image_url">
-                                        <a href="#" class="carousel-item active">
+                                        <a href="#" class="carousel-item active" :data-bs-interval="!isInterval">
                                             <img :src="product.image_url" alt="Image" class="w-100 d-block"/>
                                         </a>
                                         </div>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="d-flex mt-2">
                                     <div v-if="product.images.length === 0">
-                                        <div v-if="product.image_url" class="col-md-3 mt-1">
+                                        <div v-if="product.image_url" class="col-md-3 mt-1" :data-bs-interval="!isInterval">
                                             <a href="#">
                                                 <img style="cursor:pointer" :src="product.image_url" alt="" height="60" width="60">
                                             </a>
@@ -57,11 +57,11 @@
                                         
                                     </div>
                                 </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#product-single" data-bs-slide="prev">
+                                <button :class="{'d-none': isInterval}" class="carousel-control-prev" type="button" data-bs-target="#product-single" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#product-single" data-bs-slide="next">
+                                <button :class="{'d-none': isInterval}" class="carousel-control-next" type="button" data-bs-target="#product-single" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
@@ -308,6 +308,9 @@ export default {
         activeID()
         {
             return this.active;
+        },
+        isInterval(){
+            return this.product.images.length < 2;
         }
     },
 

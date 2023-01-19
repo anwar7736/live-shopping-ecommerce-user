@@ -84,7 +84,7 @@ export default {
         },
     },
     created(){
-        this.$store.dispatch("Category_Image", "SUMMER")
+        this.$store.dispatch("Category_Image", "WINTER")
         .then(res=>{
             this.image = res;
             this.seen = false;
