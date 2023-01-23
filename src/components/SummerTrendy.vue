@@ -83,7 +83,12 @@ export default {
             this.newClass = 'active';
         },
     },
+    mounted(){
+        this.summerNew();
+    },
     created(){
+        // this.summerNew();
+        
         this.$store.dispatch("Category_Image", "WINTER")
         .then(res=>{
             this.image = res;
