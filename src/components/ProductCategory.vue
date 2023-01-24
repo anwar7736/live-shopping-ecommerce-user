@@ -361,7 +361,7 @@ export default {
         },
         categoryItems()
         {
-            return this.products ?? this.$store.getters.Get_Category_Items;
+            return this.$store.getters.Get_Category_Items ?? this.products;
         },
         selectedCat()
         {
@@ -380,7 +380,7 @@ export default {
 
         this.selectedCategory = this.$route.query.id;
 
-        this.categoryFilter(this.$route.query.id);
+        // this.categoryFilter(this.$route.query.id);
         
         this.$store.dispatch("CATEGORY_LIST")
         .then(res=>{

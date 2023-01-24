@@ -1,5 +1,5 @@
 <template>
-    <carousel :per-page="2">
+    <carousel :items-to-show="1.5">
             <slide  v-for="product in products" :key="product.id">
             <div class=" product p-2">
                 <div class="discount-tag" v-if="product.regular_price > 0 && calculateDiscount(product) > 0">
